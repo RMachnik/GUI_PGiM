@@ -1,6 +1,6 @@
 package cw1;
 
-import add.Picture;
+import common.Picture;
 
 import java.awt.*;
 import java.awt.color.ColorSpace;

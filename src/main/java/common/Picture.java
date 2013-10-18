@@ -1,13 +1,13 @@
-package add; /*************************************************************************
- *  Compilation:  javac add.Picture.java
- *  Execution:    java add.Picture imagename
+package common; /*************************************************************************
+ *  Compilation:  javac common.Picture.java
+ *  Execution:    java common.Picture imagename
  *
  *  Data type for manipulating individual pixels of an image. The original
  *  image can be read from a file in jpg, gif, or png format, or the
  *  user can create a blank image of a given size. Includes methods for
  *  displaying the image in a window on the screen or saving to a file.
  *
- *  % java add.Picture mandrill.jpg
+ *  % java common.Picture mandrill.jpg
  *
  *  Remarks
  *  -------
@@ -145,7 +145,7 @@ public final class Picture implements ActionListener {
     }
 
     /**
-     * Return a JLabel containing this add.Picture, for embedding in a JPanel,
+     * Return a JLabel containing this common.Picture, for embedding in a JPanel,
      * JFrame or other GUI widget.
      */
     public JLabel getJLabel(Image customImage) {
@@ -245,7 +245,7 @@ public final class Picture implements ActionListener {
     }
 
     /**
-     * Is this add.Picture equal to obj?
+     * Is this common.Picture equal to obj?
      */
     public boolean equals(Object obj) {
         if (obj == this) return true;

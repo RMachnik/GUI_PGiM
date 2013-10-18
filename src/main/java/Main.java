@@ -1,4 +1,4 @@
-import add.Picture;
+import common.Picture;
 
 /**
  * Created by SG0219139 on 10/13/13.

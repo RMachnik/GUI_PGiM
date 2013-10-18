@@ -1,4 +1,4 @@
-package add;
+package common;
 
 import cw1.Cw1;
 

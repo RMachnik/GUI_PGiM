@@ -1,6 +1,6 @@
 package cw1;
 
-import add.PictureCustoms;
+import common.PictureCustoms;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

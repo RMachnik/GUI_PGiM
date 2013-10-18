@@ -1,7 +1,7 @@
 package cw1;
 
-import add.Picture;
-import add.PictureCustoms;
+import common.Picture;
+import common.PictureCustoms;
 
 import javax.swing.*;
 import java.awt.*;
