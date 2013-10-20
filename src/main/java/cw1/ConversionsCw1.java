@@ -1,5 +1,6 @@
 package cw1;
 
+import common.ConversionsCommon;
 import common.Picture;
 
 import java.awt.*;
@@ -14,9 +15,10 @@ import java.io.IOException;
 /**
  * Created by SG0219139 on 10/13/13.
  */
-public class Conversions
+public class ConversionsCw1
 {
-    public static BufferedImage rgb(BufferedImage original, String fileName, int color)
+    private ConversionsCommon conversionsCommon = new ConversionsCommon();
+    public  BufferedImage rgb(BufferedImage original, String fileName, int color)
     {
 
         int red, green, blue;
@@ -42,7 +44,7 @@ public class Conversions
                 int newval = pixel[color];
 
                 newPixelTab[color] = newval;
-                newPixel = colorToRGB(newPixelTab[0], newPixelTab[1], newPixelTab[2]);
+                newPixel = conversionsCommon.colorToRGB(newPixelTab[0], newPixelTab[1], newPixelTab[2]);
 
                 rgb.setRGB(i, j, newPixel);
             }
@@ -54,23 +56,8 @@ public class Conversions
 
     }
 
-    // Convert R, G, B, Alpha to standard 8 bit
-    private static int colorToRGB(double red, double green, double blue)
-    {
 
-        int newPixel = 0;
-        newPixel = newPixel << 8;
-        newPixel += red;
-        newPixel = newPixel << 8;
-        newPixel += green;
-        newPixel = newPixel << 8;
-        newPixel += blue;
-
-        return newPixel;
-
-    }
-
-    public static BufferedImage toGrayScale(Picture picture)
+    public  BufferedImage toGrayScale(Picture picture)
     {
 
         ColorSpace cs = ColorSpace.getInstance(ColorSpace.CS_GRAY);
@@ -80,7 +67,7 @@ public class Conversions
         return filtered;
     }
 
-    private static void writeToFile(BufferedWriter writer, int[] data) throws IOException
+    private  void writeToFile(BufferedWriter writer, int[] data) throws IOException
     {
         StringBuffer stringBuffer = new StringBuffer();
         stringBuffer.append(data[0]).append(" ").append(data[1]).append(" ").append
@@ -91,7 +78,7 @@ public class Conversions
         writer.write(stringBuffer.toString());
     }
 
-    public static void pictureToTxt(BufferedImage filtered, String fileName)
+    public  void pictureToTxt(BufferedImage filtered, String fileName)
     {
         int red, green, blue;
 
@@ -122,7 +109,7 @@ public class Conversions
 
     }
 
-    public static BufferedImage createCheckerBoard(int sizeOfBoard, int sizeOfBlock)
+    public  BufferedImage createCheckerBoard(int sizeOfBoard, int sizeOfBlock)
     {
         BufferedImage rgb = new BufferedImage(sizeOfBoard, sizeOfBoard, BufferedImage.TYPE_INT_RGB);
         if (sizeOfBoard % sizeOfBlock != 0)
@@ -188,17 +175,17 @@ public class Conversions
         return rgb;
     }
 
-    private static int black()
+    private  int black()
     {
-        return colorToRGB(0, 0, 0);
+        return conversionsCommon.colorToRGB(0, 0, 0);
     }
 
-    private static int white()
+    private  int white()
     {
-        return colorToRGB(255, 255, 255);
+        return conversionsCommon.colorToRGB(255, 255, 255);
     }
 
-    public static BufferedImage transformRGBToVHS(BufferedImage original, double kr, double kb)
+    public  BufferedImage transformRGBToVHS(BufferedImage original, double kr, double kb)
     {
         BufferedImage vhs = new BufferedImage(original.getWidth(), original.getHeight(), original.getType());
         double y, cb, cr;
@@ -213,14 +200,14 @@ public class Conversions
                 y = kr * red + (1 - kr - kb) * green + kb * blue;
                 cb = (0.5) * (blue - y) / (1 - kb);
                 cr = (0.5) * (red - y) / (1 - kr);
-                int newPixel = colorToRGB(y, cb, cr);
+                int newPixel = conversionsCommon.colorToRGB(y, cb, cr);
                 vhs.setRGB(i, j, newPixel);
             }
         }
         return vhs;
     }
 
-    public static BufferedImage transformVHSToRgb(BufferedImage original, double kr, double kb)
+    public  BufferedImage transformVHSToRgb(BufferedImage original, double kr, double kb)
     {
         BufferedImage rgb = new BufferedImage(original.getWidth(), original.getHeight(), original.getType());
         double y, cb, cr;
@@ -235,7 +222,7 @@ public class Conversions
                 blue = (int) (2 * cb * (1 - kb) + y);
                 red = (int) (2 * cr * (1 - kr) + y);
                 green = (int) ((-(cr * red) - kb * blue) / (1 - kr - kb));
-                int newPixel = colorToRGB(red, green, blue);
+                int newPixel = conversionsCommon.colorToRGB(red, green, blue);
                 rgb.setRGB(i, j, newPixel);
             }
         }

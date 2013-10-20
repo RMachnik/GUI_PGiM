@@ -13,6 +13,7 @@ import java.awt.image.BufferedImage;
  * Created by SG0219139 on 10/13/13.
  */
 public class Cw1 {
+    private ConversionsCw1 conversions = new ConversionsCw1();
     public Cw1(Picture picture) {
         cw1(picture);
     }
@@ -32,51 +33,51 @@ public class Cw1 {
         r.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PictureCustoms.showImageInNewWindow(Conversions.rgb((BufferedImage) image, "red_scale.txt", 0));
+                PictureCustoms.showImageInNewWindow(conversions.rgb((BufferedImage) image, "red_scale.txt", 0));
 
             }
         });
         g.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PictureCustoms.showImageInNewWindow(Conversions.rgb((BufferedImage) image, "green_scale.txt", 1));
+                PictureCustoms.showImageInNewWindow(conversions.rgb((BufferedImage) image, "green_scale.txt", 1));
             }
         });
         b.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PictureCustoms.showImageInNewWindow(Conversions.rgb((BufferedImage) image, "blue_scale.txt", 2));
+                PictureCustoms.showImageInNewWindow(conversions.rgb((BufferedImage) image, "blue_scale.txt", 2));
             }
         });
         JMenuItem saveRGBTxt = new JMenuItem("save rgb to rgb.txt");
         saveRGBTxt.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Conversions.pictureToTxt(picture.getImage(), "rgb.txt");
+                conversions.pictureToTxt(picture.getImage(), "rgb.txt");
             }
         });
         grayScale.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PictureCustoms.showImageInNewWindow(Conversions.toGrayScale(picture));
+                PictureCustoms.showImageInNewWindow(conversions.toGrayScale(picture));
             }
         });
         createCheckerBoard.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PictureCustoms.showImageInNewWindow(Conversions.createCheckerBoard(500, 20));
+                PictureCustoms.showImageInNewWindow(conversions.createCheckerBoard(500, 20));
             }
         });
         transformToVHS.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PictureCustoms.showImageInNewWindow(Conversions.transformRGBToVHS(picture.getImage(), 0.111, 0.299));
+                PictureCustoms.showImageInNewWindow(conversions.transformRGBToVHS(picture.getImage(), 0.111, 0.299));
             }
         });
         transformVHSToRgb.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PictureCustoms.showImageInNewWindow(Conversions.transformVHSToRgb(Conversions.transformRGBToVHS
+                PictureCustoms.showImageInNewWindow(conversions.transformVHSToRgb(conversions.transformRGBToVHS
                         (picture.getImage(), 0.111, 0.299),
                         0.111, 0.299));
             }

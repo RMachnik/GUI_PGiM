@@ -16,6 +16,7 @@ public class CustomDialog extends JDialog implements ActionListener {
     private JButton noButton = null;
     private boolean answer = false;
     private JTextField textField = null;
+    private ConversionsCw1 conversions = new ConversionsCw1();
 
     public CustomDialog(JFrame frame, boolean modal, String myMessage) {
         super(frame, modal);
@@ -48,7 +49,7 @@ public class CustomDialog extends JDialog implements ActionListener {
             String[] size = textField.getText().split("X");
             if (size.length == 2) {
                 setVisible(false);
-                PictureCustoms.showImageInNewWindow(Conversions.createCheckerBoard(Integer.parseInt(size[0]), Integer.parseInt(size[1])));
+                PictureCustoms.showImageInNewWindow(conversions.createCheckerBoard(Integer.parseInt(size[0]), Integer.parseInt(size[1])));
             }
         } else if (noButton == e.getSource()) {
             System.err.println("User chose no.");
