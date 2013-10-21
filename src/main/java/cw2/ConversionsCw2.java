@@ -37,11 +37,18 @@ public class ConversionsCw2 {
         int red, green, blue, newPixel;
         for (int i = 0; i < src.getWidth(); i++) {
             for (int j = 0; j < src.getHeight(); j++) {
+            /*    int gray = src.getRGB(i,j) /3;
+                red = blue = green = gray;*/
                 red = new Color(src.getRGB(i, j)).getRed();
                 green = new Color(src.getRGB(i, j)).getGreen();
                 blue = new Color(src.getRGB(i, j)).getBlue();
                 red = red + 2 * W;
                 green = green + W;
+                blue -= 20;
+
+                // normalize if out of bounds
+                if (blue < 0) blue = 0;
+                if (blue > 255) blue = 255;
                 newPixel = conversionsCommon.colorToRGB(red, green, blue);
                 filtered.setRGB(i, j, newPixel);
             }
@@ -71,12 +78,25 @@ public class ConversionsCw2 {
     public BufferedImage transformUsingAngle(Picture picture, double angle) {
         BufferedImage src = picture.getImage();
         BufferedImage filtered = new BufferedImage(src.getWidth(), src.getHeight(), src.getType());
-        int x,y;
+        int x, y;
         for (int i = 0; i < src.getWidth(); i++) {
             for (int j = 0; j < src.getHeight(); j++) {
-                x = (int) (i*Math.cos(angle) -j*Math.sin(angle));//indexoutof bound
-                y = (int) (i*Math.sin(angle) + j*Math.cos(angle));
-                filtered.setRGB(x,y,src.getRGB(i,j));
+                x = (int) (i * Math.cos(angle) - j * Math.sin(angle));//indexoutof bound
+                y = (int) (i * Math.sin(angle) + j * Math.cos(angle));
+                filtered.setRGB(x, y, src.getRGB(i, j));
+            }
+        }
+        return filtered;
+    }
+
+    public BufferedImage movePicture(Picture picture, int move) {
+        BufferedImage src = picture.getImage();
+        BufferedImage filtered = new BufferedImage(src.getWidth(), src.getHeight(), src.getType());
+        int x, y;
+        for (int i = 0; i < src.getWidth(); i++) {
+            for (int j = 0; j < src.getHeight(); j++) {
+
+                filtered.setRGB((i + move) % src.getWidth(), j, src.getRGB(i, j));
             }
         }
         return filtered;

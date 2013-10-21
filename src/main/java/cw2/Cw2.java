@@ -97,6 +97,15 @@ public class Cw2 {
             }
         });
 
+        JMenuItem movePhoto = new JMenuItem("Move photo");
+        movePhoto.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                PassMovePhotoArg passMovePhotoArg = new PassMovePhotoArg(picture, false, "Pass move photo grg: ");
+                passMovePhotoArg.repaint();
+            }
+        });
+
 
         menuCw2.add(grayScale);
         menuCw2.add(negative);
@@ -106,5 +115,6 @@ public class Cw2 {
         menuCw2.add(multiply);
         menuCw2.add(division);
         menuCw2.add(transformUsingAngle);
+        menuCw2.add(movePhoto);
     }
 }
