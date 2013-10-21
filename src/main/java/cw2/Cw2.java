@@ -47,7 +47,8 @@ public class Cw2 {
         sepia.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PictureCustoms.showImageInNewWindow(conversions.sepia(picture, 40));
+                PassSepiaDepth passSepiaDepth = new PassSepiaDepth(picture, false, "Provide sepia depth: ");
+                passSepiaDepth.repaint();
             }
         });
 
@@ -91,7 +92,7 @@ public class Cw2 {
         transformUsingAngle.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               PassAngleDialog passAngleDialog = new PassAngleDialog(picture,false,"Provide your angle: ");
+                PassAngleDialog passAngleDialog = new PassAngleDialog(picture, false, "Provide your angle: ");
                 passAngleDialog.repaint();
             }
         });
