@@ -55,7 +55,7 @@ public class Cw2 {
         add.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PassArgDialog addingWindow = new PassArgDialog(picture, new ConversionsCw2.Increment(), picture.getFrame(), false, "Provide your argument: ");
+                PassArgDialog addingWindow = new PassArgDialog(picture, new ConversionsCw2.Increment(), false, "Provide your argument: ");
                 addingWindow.repaint();
             }
         });
@@ -64,26 +64,35 @@ public class Cw2 {
         dec.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PassArgDialog decrementWindow = new PassArgDialog(picture, new ConversionsCw2.Decrement(), picture.getFrame(), false, "Provide your argument: ");
+                PassArgDialog decrementWindow = new PassArgDialog(picture, new ConversionsCw2.Decrement(), false, "Provide your argument: ");
                 decrementWindow.repaint();
             }
         });
 
-        JMenuItem multip = new JMenuItem("Multiply");
-        dec.addActionListener(new ActionListener() {
+        JMenuItem multiply = new JMenuItem("Multiply");
+        multiply.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PassArgDialog multiWindow = new PassArgDialog(picture, new ConversionsCw2.Multiply(), picture.getFrame(), false, "Provide your argument: ");
+                PassArgDialog multiWindow = new PassArgDialog(picture, new ConversionsCw2.Multiply(), false, "Provide your argument: ");
                 multiWindow.repaint();
             }
         });
 
-        JMenuItem div = new JMenuItem("Division");
-        dec.addActionListener(new ActionListener() {
+        JMenuItem division = new JMenuItem("Division");
+        division.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PassArgDialog divisionWindow = new PassArgDialog(picture, new ConversionsCw2.Division(), picture.getFrame(), false, "Provide your argument: ");
+                PassArgDialog divisionWindow = new PassArgDialog(picture, new ConversionsCw2.Division(), false, "Provide your argument: ");
                 divisionWindow.repaint();
+            }
+        });
+
+        JMenuItem transformUsingAngle = new JMenuItem("Angle transformation");
+        transformUsingAngle.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               PassAngleDialog passAngleDialog = new PassAngleDialog(picture,false,"Provide your angle: ");
+                passAngleDialog.repaint();
             }
         });
 
@@ -93,7 +102,8 @@ public class Cw2 {
         menuCw2.add(sepia);
         menuCw2.add(add);
         menuCw2.add(dec);
-        menuCw2.add(multip);
-        menuCw2.add(div);
+        menuCw2.add(multiply);
+        menuCw2.add(division);
+        menuCw2.add(transformUsingAngle);
     }
 }

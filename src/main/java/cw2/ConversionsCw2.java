@@ -32,7 +32,7 @@ public class ConversionsCw2 {
     }
 
     public BufferedImage sepia(Picture picture, int W) {
-        BufferedImage src =  conversionsCw1.toGrayScale(picture);
+        BufferedImage src = conversionsCw1.toGrayScale(picture);
         BufferedImage filtered = new BufferedImage(src.getWidth(), src.getHeight(), src.getType());
         int red, green, blue, newPixel;
         for (int i = 0; i < src.getWidth(); i++) {
@@ -49,7 +49,7 @@ public class ConversionsCw2 {
         return filtered;
     }
 
-    public BufferedImage transformUsingFunction(Picture picture, Function<Pair<Integer,Integer>, Integer> function,int argument) {
+    public BufferedImage transformUsingFunction(Picture picture, Function<Pair<Integer, Integer>, Integer> function, int argument) {
         BufferedImage src = picture.getImage();
         BufferedImage filtered = new BufferedImage(src.getWidth(), src.getHeight(), src.getType());
         int red, green, blue, newPixel;
@@ -60,7 +60,7 @@ public class ConversionsCw2 {
                 blue = new Color(src.getRGB(i, j)).getBlue();
                 red = function.apply(new Pair(argument, red));
                 blue = function.apply(new Pair(argument, blue));
-                green = function.apply(new Pair(argument,green));
+                green = function.apply(new Pair(argument, green));
                 newPixel = conversionsCommon.colorToRGB(red, green, blue);
                 filtered.setRGB(i, j, newPixel);
             }
@@ -68,41 +68,52 @@ public class ConversionsCw2 {
         return filtered;
     }
 
+    public BufferedImage transformUsingAngle(Picture picture, double angle) {
+        BufferedImage src = picture.getImage();
+        BufferedImage filtered = new BufferedImage(src.getWidth(), src.getHeight(), src.getType());
+        int x,y;
+        for (int i = 0; i < src.getWidth(); i++) {
+            for (int j = 0; j < src.getHeight(); j++) {
+                x = (int) (i*Math.cos(angle) -j*Math.sin(angle));//indexoutof bound
+                y = (int) (i*Math.sin(angle) + j*Math.cos(angle));
+                filtered.setRGB(x,y,src.getRGB(i,j));
+            }
+        }
+        return filtered;
+    }
 
-
-
-
-    public static class Increment implements Function<Pair<Integer,Integer>, Integer> {
+    public static class Increment implements Function<Pair<Integer, Integer>, Integer> {
 
         public Increment() {
         }
 
         @Override
-        public Integer apply(Pair<Integer,Integer> pair) {
+        public Integer apply(Pair<Integer, Integer> pair) {
             return pair.getValue() + pair.getKey();
         }
     }
 
-    public static class Decrement implements Function<Pair<Integer,Integer>,Integer>{
+    public static class Decrement implements Function<Pair<Integer, Integer>, Integer> {
 
         @Override
-        public Integer apply(Pair<Integer,Integer> pair) {
+        public Integer apply(Pair<Integer, Integer> pair) {
             return pair.getValue() - pair.getKey();
         }
     }
 
-    public static class Multiply implements Function<Pair<Integer,Integer>,Integer>{
+    public static class Multiply implements Function<Pair<Integer, Integer>, Integer> {
 
         @Override
-        public Integer apply(Pair<Integer,Integer> pair) {
+        public Integer apply(Pair<Integer, Integer> pair) {
             return pair.getKey() * pair.getValue();
         }
     }
-    public static class Division implements Function<Pair<Integer,Integer>,Integer>{
+
+    public static class Division implements Function<Pair<Integer, Integer>, Integer> {
 
         @Override
-        public Integer apply(Pair<Integer,Integer> pair) {
-            return pair.getValue()/pair.getKey();
+        public Integer apply(Pair<Integer, Integer> pair) {
+            return pair.getValue() / pair.getKey();
         }
     }
 

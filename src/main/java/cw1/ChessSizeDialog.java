@@ -1,59 +1,35 @@
 package cw1;
 
+import common.CommonArgDialog;
+import common.Picture;
 import common.PictureCustoms;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * Created with IntelliJ IDEA.
  * User: SG0219139
  */
-public class ChessSizeDialog extends JDialog implements ActionListener {
-    private JPanel myPanel = null;
-    private JButton yesButton = null;
-    private JButton noButton = null;
-    private boolean answer = false;
-    private JTextField textField = null;
-    private ConversionsCw1 conversions = new ConversionsCw1();
+public class ChessSizeDialog extends CommonArgDialog {
 
-    public ChessSizeDialog(JFrame frame, boolean modal, String myMessage) {
-        super(frame, modal);
 
-        myPanel = new JPanel();
+    public ChessSizeDialog(Picture picture, boolean modal, String myMessage) {
+        super(picture, modal, myMessage);
 
-        getContentPane().add(myPanel);
-        myPanel.add(new JLabel(myMessage));
-        textField = new JTextField();
-        textField.setColumns(5);
-        myPanel.add(textField);
-        yesButton = new JButton("OK");
-        yesButton.addActionListener(this);
-        myPanel.add(yesButton);
-        noButton = new JButton("Cancel");
-        noButton.addActionListener(this);
-        myPanel.add(noButton);
-
-        pack();
-        setLocationRelativeTo(frame);
-        setVisible(true);
     }
 
-    public boolean getAnswer() {
-        return answer;
-    }
-
+    @Override
     public void actionPerformed(ActionEvent e) {
-        if (yesButton == e.getSource()) {
-            String[] size = textField.getText().split("X");
+        if (getYesButton() == e.getSource()) {
+            String[] size = getTextField().getText().split("X");
             if (size.length == 2) {
                 setVisible(false);
-                PictureCustoms.showImageInNewWindow(conversions.createCheckerBoard(Integer.parseInt(size[0]), Integer.parseInt(size[1])));
+                ConversionsCw1 conversionsCw1 = new ConversionsCw1();
+                PictureCustoms.showImageInNewWindow(conversionsCw1.createCheckerBoard(Integer.parseInt(size[0]), Integer.parseInt(size[1])));
             }
-        } else if (noButton == e.getSource()) {
+        } else if (getNoButton() == e.getSource()) {
             System.err.println("User chose no.");
-            answer = false;
             setVisible(false);
         }
     }
