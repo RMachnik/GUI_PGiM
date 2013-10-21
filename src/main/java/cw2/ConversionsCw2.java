@@ -3,6 +3,7 @@ package cw2;
 import com.google.common.base.Function;
 import common.ConversionsCommon;
 import common.Picture;
+import cw1.ConversionsCw1;
 import javafx.util.Pair;
 
 import java.awt.*;
@@ -15,6 +16,7 @@ import java.awt.image.BufferedImage;
 public class ConversionsCw2 {
     private final int RGB_MAX = 255;
     private ConversionsCommon conversionsCommon = new ConversionsCommon();
+    private ConversionsCw1 conversionsCw1 = new ConversionsCw1();
 
     public BufferedImage negative(Picture picture) {
         BufferedImage src = picture.getImage();
@@ -30,14 +32,14 @@ public class ConversionsCw2 {
     }
 
     public BufferedImage sepia(Picture picture, int W) {
-        BufferedImage src = picture.getImage();
+        BufferedImage src =  conversionsCw1.toGrayScale(picture);
         BufferedImage filtered = new BufferedImage(src.getWidth(), src.getHeight(), src.getType());
         int red, green, blue, newPixel;
-        for (int i = 0; i < filtered.getWidth(); i++) {
-            for (int j = 0; j < filtered.getHeight(); j++) {
-                red = new Color(filtered.getRGB(i, j)).getRed();
-                green = new Color(filtered.getRGB(i, j)).getGreen();
-                blue = new Color(filtered.getRGB(i, j)).getBlue();
+        for (int i = 0; i < src.getWidth(); i++) {
+            for (int j = 0; j < src.getHeight(); j++) {
+                red = new Color(src.getRGB(i, j)).getRed();
+                green = new Color(src.getRGB(i, j)).getGreen();
+                blue = new Color(src.getRGB(i, j)).getBlue();
                 red = red + 2 * W;
                 green = green + W;
                 newPixel = conversionsCommon.colorToRGB(red, green, blue);
@@ -51,11 +53,11 @@ public class ConversionsCw2 {
         BufferedImage src = picture.getImage();
         BufferedImage filtered = new BufferedImage(src.getWidth(), src.getHeight(), src.getType());
         int red, green, blue, newPixel;
-        for (int i = 0; i < filtered.getWidth(); i++) {
-            for (int j = 0; j < filtered.getHeight(); j++) {
-                red = new Color(filtered.getRGB(i, j)).getRed();
-                green = new Color(filtered.getRGB(i, j)).getGreen();
-                blue = new Color(filtered.getRGB(i, j)).getBlue();
+        for (int i = 0; i < src.getWidth(); i++) {
+            for (int j = 0; j < src.getHeight(); j++) {
+                red = new Color(src.getRGB(i, j)).getRed();
+                green = new Color(src.getRGB(i, j)).getGreen();
+                blue = new Color(src.getRGB(i, j)).getBlue();
                 red = function.apply(new Pair(argument, red));
                 blue = function.apply(new Pair(argument, blue));
                 green = function.apply(new Pair(argument,green));
