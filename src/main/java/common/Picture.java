@@ -204,7 +204,7 @@ public final class Picture implements ActionListener {
             frame.setResizable(false);
             frame.pack();
             frame.setVisible(true);
-            PictureCustoms.customMenu(this);
+            /*PictureCustoms.customMenu(this);*/
         }
 
         // draw

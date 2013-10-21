@@ -87,7 +87,7 @@ public class Cw1 {
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                CustomDialog customDialog  = new CustomDialog(picture.getFrame(),true,"Please provide Checker size: sizeOfBoardXsizeOfBlock");
+                ChessSizeDialog customDialog  = new ChessSizeDialog(picture.getFrame(),true,"Please provide Checker size: sizeOfBoardXsizeOfBlock");
                 customDialog.repaint();
 
             }

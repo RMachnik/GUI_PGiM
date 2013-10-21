@@ -1,26 +1,32 @@
-package cw1;
+package cw2;
 
+import com.google.common.base.Function;
+import common.Picture;
 import common.PictureCustoms;
+import javafx.util.Pair;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * Created with IntelliJ IDEA.
  * User: SG0219139
+ * Date: 10/21/13
  */
-public class CustomDialog extends JDialog implements ActionListener {
+public class PassArgDialog extends JDialog implements ActionListener {
+    private Function<Pair<Integer, Integer>, Integer> function;
     private JPanel myPanel = null;
     private JButton yesButton = null;
     private JButton noButton = null;
     private boolean answer = false;
     private JTextField textField = null;
-    private ConversionsCw1 conversions = new ConversionsCw1();
+    private Picture picture;
+    private ConversionsCw2 conversions = new ConversionsCw2();
 
-    public CustomDialog(JFrame frame, boolean modal, String myMessage) {
+    public PassArgDialog(Picture pic, Function<Pair<Integer, Integer>, Integer> func, JFrame frame, boolean modal, String myMessage) {
         super(frame, modal);
-
+        picture = pic;
+        function = func;
         myPanel = new JPanel();
 
         getContentPane().add(myPanel);
@@ -40,22 +46,19 @@ public class CustomDialog extends JDialog implements ActionListener {
         setVisible(true);
     }
 
-    public boolean getAnswer() {
-        return answer;
-    }
-
+    @Override
     public void actionPerformed(ActionEvent e) {
         if (yesButton == e.getSource()) {
-            String[] size = textField.getText().split("X");
-            if (size.length == 2) {
-                setVisible(false);
-                PictureCustoms.showImageInNewWindow(conversions.createCheckerBoard(Integer.parseInt(size[0]), Integer.parseInt(size[1])));
-            }
+            Integer arg = Integer.parseInt(textField.getText());
+
+            setVisible(false);
+            PictureCustoms.showImageInNewWindow(conversions.transformUsingFunction(picture, function, arg));
+
         } else if (noButton == e.getSource()) {
             System.err.println("User chose no.");
             answer = false;
             setVisible(false);
         }
     }
-
 }
+
