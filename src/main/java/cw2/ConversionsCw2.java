@@ -77,12 +77,12 @@ public class ConversionsCw2 {
 
     public BufferedImage transformUsingAngle(Picture picture, double angle) {
         BufferedImage src = picture.getImage();
-        BufferedImage filtered = new BufferedImage(src.getWidth(), src.getHeight(), src.getType());
+        BufferedImage filtered = new BufferedImage(src.getWidth() * 2, src.getHeight() * 2, src.getType());
         int x, y;
         for (int i = 0; i < src.getWidth(); i++) {
             for (int j = 0; j < src.getHeight(); j++) {
-                x = (int) (i * Math.cos(angle) - j * Math.sin(angle));//indexoutof bound
-                y = (int) (i * Math.sin(angle) + j * Math.cos(angle));
+                x = Math.abs((int) (i * Math.cos(angle) - j * Math.sin(angle))) + 100;//indexoutof bound
+                y = Math.abs((int) (i * Math.sin(angle) + j * Math.cos(angle))) + 100;
                 filtered.setRGB(x, y, src.getRGB(i, j));
             }
         }
@@ -100,6 +100,44 @@ public class ConversionsCw2 {
             }
         }
         return filtered;
+    }
+
+    public BufferedImage resiziePhoto(Picture picture, int scale) {
+        BufferedImage src = picture.getImage();
+        BufferedImage filtered = new BufferedImage(src.getWidth(), src.getHeight(), src.getType());
+        BufferedImage small = new BufferedImage(src.getWidth() / scale + 100, src.getHeight() / scale + 100, src.getType());
+        int x_dim = src.getWidth() / scale;
+        int y_dim = src.getHeight() / scale;
+        int s_x, s_y;
+        s_x = s_y = 0;
+        int tmp[] = new int[scale];
+        for (int i = 0; i < src.getWidth(); i++) {
+            for (int j = 0; j < src.getHeight(); j++) {
+                tmp[j % scale] = src.getRGB(i, j);
+                if (j % scale == 0) {
+                    small.setRGB(s_x++, s_y++, getAvg(tmp));
+                    s_x = s_x % x_dim;
+                    s_y = s_y % y_dim;
+                    clearTab(tmp);
+                }
+
+            }
+        }
+        return small;
+    }
+
+    private void clearTab(int tab[]) {
+        for (int i = 0; i < tab.length; i++) {
+            tab[i] = 0;
+        }
+    }
+
+    private int getAvg(int tab[]) {
+        int sum = 0;
+        for (int i = 0; i < tab.length; i++) {
+            sum += tab[i];
+        }
+        return sum / tab.length;
     }
 
     public static class Increment implements Function<Pair<Integer, Integer>, Integer> {

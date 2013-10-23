@@ -106,6 +106,15 @@ public class Cw2 {
             }
         });
 
+        JMenuItem resize = new JMenuItem("Resize photo");
+        resize.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                   PassResizeScale passResizeScale = new PassResizeScale(picture,false,"Pass resize arg: ");
+                passResizeScale.repaint();
+            }
+        });
+
 
         menuCw2.add(grayScale);
         menuCw2.add(negative);
@@ -116,5 +125,6 @@ public class Cw2 {
         menuCw2.add(division);
         menuCw2.add(transformUsingAngle);
         menuCw2.add(movePhoto);
+        menuCw2.add(resize);
     }
 }
