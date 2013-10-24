@@ -102,35 +102,64 @@ public class ConversionsCw2 {
         return filtered;
     }
 
-    public BufferedImage resiziePhoto(Picture picture, int scale) {
-        BufferedImage src = picture.getImage();
-        BufferedImage filtered = new BufferedImage(src.getWidth(), src.getHeight(), src.getType());
-        BufferedImage small = new BufferedImage(src.getWidth() / scale + 100, src.getHeight() / scale + 100, src.getType());
-        int x_dim = src.getWidth() / scale;
-        int y_dim = src.getHeight() / scale;
-        int s_x, s_y;
-        s_x = s_y = 0;
-        int tmp[] = new int[scale];
-        for (int i = 0; i < src.getWidth(); i++) {
-            for (int j = 0; j < src.getHeight(); j++) {
-                tmp[j % scale] = src.getRGB(i, j);
-                if (j % scale == 0) {
-                    small.setRGB(s_x++, s_y++, getAvg(tmp));
-                    s_x = s_x % x_dim;
-                    s_y = s_y % y_dim;
-                    clearTab(tmp);
-                }
+    public BufferedImage resiziePhoto(Picture picture, int size) {
 
+        BufferedImage src = picture.getImage();
+        if (src.getWidth() % size != 0 || src.getHeight() % size != 0) {
+            throw new RuntimeException("Width or height mod size should be eq 0!");
+        }
+        int n_x = src.getWidth() / size;
+        int n_y = src.getHeight() / size;
+        int scale = (src.getHeight() * src.getWidth()) / ((src.getHeight() / size) * (src.getWidth() / size));
+        int h = (int) Math.sqrt(scale);
+        if(src.getHeight()% h!=0 || src.getWidth()%h!=0){
+            throw new RuntimeException("Width or height mod size should be eq 0!");
+        }
+        int x, y;
+        x = y = 0;
+        int r[] = new int[scale];
+        int g[] = new int[scale];
+        int b[] = new int[scale];
+
+        BufferedImage small = new BufferedImage(n_x, n_y, src.getType());
+
+        int red, green, blue;
+        for (int i = 0; i < small.getWidth(); i++) {
+
+            for (int j = 0; j < small.getHeight(); j++) {
+                int k = 0;
+                for (int w = x; w < x + h; w++) {
+                    for (int s = y; s < y + h; s++) {
+                        red = new Color(src.getRGB(w, s)).getRed();
+                        green = new Color(src.getRGB(w, s)).getGreen();
+                        blue = new Color(src.getRGB(w, s)).getBlue();
+                        r[k] = red;
+                        g[k] = green;
+                        b[k++] = blue;
+                    }
+                }
+                y+=h;
+                small.setRGB(i,j,conversionsCommon.colorToRGB(getAvg(r),getAvg(g),getAvg(b)));
+            }
+            x += h;
+            y=0;
+        }
+        return multipleImage(small,size);
+    }
+
+    private BufferedImage multipleImage(BufferedImage src,int scale){
+        int w =  src.getWidth()*scale;
+        int h =  src.getHeight()*scale;
+        BufferedImage big = new BufferedImage(w,h,src.getType());
+        for(int i =0;i<w;i++){
+            for(int j=0;j<h;j++){
+                big.setRGB(i,j,src.getRGB(i%src.getWidth(),j%src.getHeight()));
             }
         }
-        return small;
+        return big;
+
     }
 
-    private void clearTab(int tab[]) {
-        for (int i = 0; i < tab.length; i++) {
-            tab[i] = 0;
-        }
-    }
 
     private int getAvg(int tab[]) {
         int sum = 0;
@@ -143,6 +172,7 @@ public class ConversionsCw2 {
     public static class Increment implements Function<Pair<Integer, Integer>, Integer> {
 
         public Increment() {
+
         }
 
         @Override

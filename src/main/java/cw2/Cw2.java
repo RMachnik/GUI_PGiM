@@ -110,8 +110,9 @@ public class Cw2 {
         resize.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                   PassResizeScale passResizeScale = new PassResizeScale(picture,false,"Pass resize arg: ");
+                   PassResizeScale passResizeScale = new PassResizeScale(picture,false,"Resize arg mod width or height should eq 0: ");
                 passResizeScale.repaint();
+
             }
         });
 
