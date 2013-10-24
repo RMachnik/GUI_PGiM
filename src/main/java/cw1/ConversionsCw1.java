@@ -220,4 +220,19 @@ public class ConversionsCw1
         }
         return rgb;
     }
+
+    public BufferedImage blackWhite(Picture picture){
+        BufferedImage src = picture.getImage();
+        BufferedImage filtered = new BufferedImage(src.getWidth(),src.getHeight(),src.getType());
+        int red,green,blue;
+        for(int i=0;i<src.getWidth();i++){
+            for(int j=0;j<src.getHeight();j++){
+                red = new Color(src.getRGB(i, j)).getRed();
+                green = new Color(src.getRGB(i, j)).getGreen();
+                blue = new Color(src.getRGB(i, j)).getBlue();
+                filtered.setRGB(i,j,conversionsCommon.colorToRGB(0.2*red,0.7*green,0.1*blue));
+            }
+        }
+        return filtered;
+    }
 }
