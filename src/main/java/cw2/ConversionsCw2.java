@@ -14,6 +14,7 @@ import java.awt.image.BufferedImage;
  * Date: 10/20/13
  */
 public class ConversionsCw2 {
+    private final int B = 8;
     private final int RGB_MAX = 255;
     private ConversionsCommon conversionsCommon = new ConversionsCommon();
     private ConversionsCw1 conversionsCw1 = new ConversionsCw1();
@@ -32,7 +33,7 @@ public class ConversionsCw2 {
     }
 
     public BufferedImage sepia(Picture picture, int W) {
-        BufferedImage src = conversionsCw1.toGrayScale(picture);
+        BufferedImage src = conversionsCommon.toGrayScale(picture);
         BufferedImage filtered = new BufferedImage(src.getWidth(), src.getHeight(), src.getType());
         int red, green, blue, newPixel;
         for (int i = 0; i < src.getWidth(); i++) {
@@ -112,7 +113,7 @@ public class ConversionsCw2 {
         int n_y = src.getHeight() / size;
         int scale = (src.getHeight() * src.getWidth()) / ((src.getHeight() / size) * (src.getWidth() / size));
         int h = (int) Math.sqrt(scale);
-        if(src.getHeight()% h!=0 || src.getWidth()%h!=0){
+        if (src.getHeight() % h != 0 || src.getWidth() % h != 0) {
             throw new RuntimeException("Width or height mod size should be eq 0!");
         }
         int x, y;
@@ -138,28 +139,42 @@ public class ConversionsCw2 {
                         b[k++] = blue;
                     }
                 }
-                y+=h;
-                small.setRGB(i,j,conversionsCommon.colorToRGB(getAvg(r),getAvg(g),getAvg(b)));
+                y += h;
+                small.setRGB(i, j, conversionsCommon.colorToRGB(getAvg(r), getAvg(g), getAvg(b)));
             }
             x += h;
-            y=0;
+            y = 0;
         }
-        return multipleImage(small,size);
+        return multipleImage(small, size);
     }
 
-    private BufferedImage multipleImage(BufferedImage src,int scale){
-        int w =  src.getWidth()*scale;
-        int h =  src.getHeight()*scale;
-        BufferedImage big = new BufferedImage(w,h,src.getType());
-        for(int i =0;i<w;i++){
-            for(int j=0;j<h;j++){
-                big.setRGB(i,j,src.getRGB(i%src.getWidth(),j%src.getHeight()));
+    public BufferedImage diffGrayImage(Picture picture, int arg) {
+        BufferedImage src = conversionsCommon.toGrayScale(picture);
+        BufferedImage filtered = new BufferedImage(src.getWidth(), src.getHeight(), src.getType());
+        int delta = (int) ((int) Math.pow(2, B) / Math.pow(2, arg));
+        int newPixel;
+        for (int i = 0; i < src.getWidth(); i++) {
+            for (int j = 0; j < src.getHeight(); j++) {
+                newPixel = Math.max((((delta / 2) - src.getRGB(i, j)) - 1) / delta, 0) * delta + (delta / 2 - 1);
+                filtered.setRGB(i, j, newPixel);
+            }
+
+        }
+        return filtered;
+    }
+
+    private BufferedImage multipleImage(BufferedImage src, int scale) {
+        int w = src.getWidth() * scale;
+        int h = src.getHeight() * scale;
+        BufferedImage big = new BufferedImage(w, h, src.getType());
+        for (int i = 0; i < w; i++) {
+            for (int j = 0; j < h; j++) {
+                big.setRGB(i, j, src.getRGB(i % src.getWidth(), j % src.getHeight()));
             }
         }
         return big;
 
     }
-
 
     private int getAvg(int tab[]) {
         int sum = 0;

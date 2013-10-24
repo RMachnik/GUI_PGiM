@@ -57,15 +57,7 @@ public class ConversionsCw1
     }
 
 
-    public  BufferedImage toGrayScale(Picture picture)
-    {
 
-        ColorSpace cs = ColorSpace.getInstance(ColorSpace.CS_GRAY);
-        ColorConvertOp op = new ColorConvertOp(cs, null);
-        BufferedImage filtered = op.filter(picture.getImage(), null);
-        pictureToTxt(filtered, "gray_scale.txt");
-        return filtered;
-    }
 
     private  void writeToFile(BufferedWriter writer, int[] data) throws IOException
     {

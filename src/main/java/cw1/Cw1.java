@@ -1,5 +1,6 @@
 package cw1;
 
+import common.ConversionsCommon;
 import common.Picture;
 import common.PictureCustoms;
 
@@ -14,6 +15,7 @@ import java.awt.image.BufferedImage;
  */
 public class Cw1 {
     private ConversionsCw1 conversions = new ConversionsCw1();
+    private ConversionsCommon conversionsCommon = new ConversionsCommon();
     public Cw1(Picture picture) {
         cw1(picture);
     }
@@ -59,7 +61,7 @@ public class Cw1 {
         grayScale.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PictureCustoms.showImageInNewWindow(conversions.toGrayScale(picture));
+                PictureCustoms.showImageInNewWindow(conversionsCommon.toGrayScale(picture));
             }
         });
         createCheckerBoard.addActionListener(new ActionListener() {

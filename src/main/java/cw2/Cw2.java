@@ -1,5 +1,6 @@
 package cw2;
 
+import common.ConversionsCommon;
 import common.Picture;
 import common.PictureCustoms;
 import cw1.ConversionsCw1;
@@ -16,6 +17,7 @@ import java.awt.event.ActionListener;
 public class Cw2 {
     private ConversionsCw2 conversions = new ConversionsCw2();
     private ConversionsCw1 conversionsCw1 = new ConversionsCw1();
+    private ConversionsCommon conversionsCommon = new ConversionsCommon();
 
     public Cw2(Picture picture) {
         cw2(picture);
@@ -31,7 +33,7 @@ public class Cw2 {
         grayScale.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PictureCustoms.showImageInNewWindow(conversionsCw1.toGrayScale(picture));
+                PictureCustoms.showImageInNewWindow(conversionsCommon.toGrayScale(picture));
             }
         });
 
@@ -110,9 +112,18 @@ public class Cw2 {
         resize.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                   PassResizeScale passResizeScale = new PassResizeScale(picture,false,"Resize arg mod width or height should eq 0: ");
+                PassResizeScale passResizeScale = new PassResizeScale(picture, false, "Resize arg mod width or height should eq 0: ");
                 passResizeScale.repaint();
 
+            }
+        });
+
+        JMenuItem grayArg = new JMenuItem("Gray scaling");
+        grayArg.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                PassGrayB passGrayB = new PassGrayB(picture, false, "Pass gray parameter 1...8: ");
+                passGrayB.repaint();
             }
         });
 
@@ -127,5 +138,6 @@ public class Cw2 {
         menuCw2.add(transformUsingAngle);
         menuCw2.add(movePhoto);
         menuCw2.add(resize);
+        menuCw2.add(grayArg);
     }
 }
