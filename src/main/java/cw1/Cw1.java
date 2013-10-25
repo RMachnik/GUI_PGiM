@@ -16,6 +16,7 @@ import java.awt.image.BufferedImage;
 public class Cw1 {
     private ConversionsCw1 conversions = new ConversionsCw1();
     private ConversionsCommon conversionsCommon = new ConversionsCommon();
+
     public Cw1(Picture picture) {
         cw1(picture);
     }
@@ -73,23 +74,22 @@ public class Cw1 {
         transformToVHS.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PictureCustoms.showImageInNewWindow(conversions.transformRGBToVHS(picture.getImage(), 0.111, 0.299));
+                BufferedImage tab[] = conversions.transformRGBToVHS(picture.getImage(), 0.111, 0.299);
+                for (BufferedImage img : tab) {
+                    PictureCustoms.showImageInNewWindow(img);
+                }
             }
         });
         transformVHSToRgb.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PictureCustoms.showImageInNewWindow(conversions.transformVHSToRgb(conversions.transformRGBToVHS
-                        (picture.getImage(), 0.111, 0.299),
-                        0.111, 0.299));
+                PictureCustoms.showImageInNewWindow(conversions.transformVHSToRgb(picture,0.111,0.299));
             }
         });
-        draw.addActionListener(new ActionListener()
-        {
+        draw.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                ChessSizeDialog customDialog  = new ChessSizeDialog(picture,true,"Please provide Checker size: sizeOfBoardXsizeOfBlock");
+            public void actionPerformed(ActionEvent e) {
+                ChessSizeDialog customDialog = new ChessSizeDialog(picture, true, "Please provide Checker size: sizeOfBoardXsizeOfBlock");
                 customDialog.repaint();
 
             }

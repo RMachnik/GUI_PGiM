@@ -177,9 +177,12 @@ public class ConversionsCw1
         return conversionsCommon.colorToRGB(255, 255, 255);
     }
 
-    public  BufferedImage transformRGBToVHS(BufferedImage original, double kr, double kb)
+    public  BufferedImage[] transformRGBToVHS(BufferedImage original, double kr, double kb)
     {
         BufferedImage vhs = new BufferedImage(original.getWidth(), original.getHeight(), original.getType());
+        BufferedImage vhs1 = new BufferedImage(original.getWidth(), original.getHeight(), original.getType());
+        BufferedImage vhs2 = new BufferedImage(original.getWidth(), original.getHeight(), original.getType());
+        BufferedImage tab[] = new BufferedImage[3];
         double y, cb, cr;
         int red, green, blue;
         for (int i = 0; i < original.getWidth(); i++)
@@ -190,30 +193,43 @@ public class ConversionsCw1
                 green = new Color(original.getRGB(i, j)).getGreen();
                 blue = new Color(original.getRGB(i, j)).getBlue();
                 y = kr * red + (1 - kr - kb) * green + kb * blue;
-                cb = (0.5) * (blue - y) / (1 - kb);
-                cr = (0.5) * (red - y) / (1 - kr);
-                int newPixel = conversionsCommon.colorToRGB(y, cb, cr);
+                cb = (0.5) * ((blue - y) / (1 - kb));
+                cr = (0.5) * ((red - y) / (1 - kr));
+                int newPixel = conversionsCommon.colorToRGB(y, y, y);
                 vhs.setRGB(i, j, newPixel);
+                vhs1.setRGB(i,j,conversionsCommon.colorToRGB(cb,cb,cb));
+                vhs2.setRGB(i,j,conversionsCommon.colorToRGB(cr,cr,cr));
             }
         }
-        return vhs;
+        tab[0] =vhs;
+        tab[1] = vhs1;
+        tab[2] = vhs2;
+        return tab;
     }
 
-    public  BufferedImage transformVHSToRgb(BufferedImage original, double kr, double kb)
+    public  BufferedImage transformVHSToRgb(Picture picture, double kr, double kb)
     {
+       BufferedImage original = picture.getImage();
         BufferedImage rgb = new BufferedImage(original.getWidth(), original.getHeight(), original.getType());
         double y, cb, cr;
         int red, green, blue;
+        //todo do poprawy
         for (int i = 0; i < original.getWidth(); i++)
         {
             for (int j = 0; j < original.getHeight(); j++)
             {
-                y = new Color(original.getRGB(i, j)).getRed();
-                cb = new Color(original.getRGB(i, j)).getGreen();
-                cr = new Color(original.getRGB(i, j)).getBlue();
-                blue = (int) (2 * cb * (1 - kb) + y);
-                red = (int) (2 * cr * (1 - kr) + y);
-                green = (int) ((-(cr * red) - kb * blue) / (1 - kr - kb));
+                red = new Color(original.getRGB(i, j)).getRed();
+                green = new Color(original.getRGB(i, j)).getGreen();
+                blue = new Color(original.getRGB(i, j)).getBlue();
+                /*y = kr * red + (1 - kr - kb) * green + kb * blue;
+                cb = (0.5) * ((blue - y) / (1 - kb));
+                cr = (0.5) * ((red - y) / (1 - kr));*/
+                y = 16 + (65.481*red + 128.553 *green + 24.966*blue);
+                cb = 128+(-37.797*red - 74.203*green+112.0*blue);
+                cr = 128 + (112.0*red - 93.786*green-18.214*blue);
+                red = (int) ((298.082 * y)/256 + (408.583 * cr)/256 -222.921);
+                green = (int) ((298.082*y)/256 - (100291*cb)/256 - (208.120 * cr)/256 + 135.576);
+                blue = (int) ((298.082*y)/256 + (516.412*cb)/256 - 276.836);
                 int newPixel = conversionsCommon.colorToRGB(red, green, blue);
                 rgb.setRGB(i, j, newPixel);
             }

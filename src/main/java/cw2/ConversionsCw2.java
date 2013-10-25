@@ -47,14 +47,20 @@ public class ConversionsCw2 {
                 green = green + W;
                 blue -= 20;
 
-                // normalize if out of bounds
-                if (blue < 0) blue = 0;
-                if (blue > 255) blue = 255;
+                blue = normalise(blue);
+                red = normalise(red);
+                green = normalise(green);
                 newPixel = conversionsCommon.colorToRGB(red, green, blue);
                 filtered.setRGB(i, j, newPixel);
             }
         }
         return filtered;
+    }
+
+    private int normalise(int x) {
+        if (x < 0) x = 0;
+        if (x > 255) x = 255;
+        return x;
     }
 
     public BufferedImage transformUsingFunction(Picture picture, Function<Pair<Integer, Integer>, Integer> function, int argument) {
@@ -76,6 +82,7 @@ public class ConversionsCw2 {
         return filtered;
     }
 
+    //todo chwytanie za srodek obrazka
     public BufferedImage transformUsingAngle(Picture picture, double angle) {
         BufferedImage src = picture.getImage();
         BufferedImage filtered = new BufferedImage(src.getWidth() * 2, src.getHeight() * 2, src.getType());
