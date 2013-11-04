@@ -8,6 +8,9 @@ import java.awt.image.BufferedImage;
  * Date: 10/20/13
  */
 public class ConversionsCommon {
+    public static final int RBG_MAX = 255;
+    public static final double KR = 0.111;
+    public static final double KB = 0.299;
     public int colorToRGB(double red, double green, double blue) {
 
         int newPixel = 0;

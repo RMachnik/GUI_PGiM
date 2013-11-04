@@ -74,7 +74,7 @@ public class Cw1 {
         transformToVHS.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                BufferedImage tab[] = conversions.transformRGBToVHS(picture.getImage(), 0.111, 0.299);
+                BufferedImage tab[] = conversions.transformRGBToVHS(picture.getImage(), ConversionsCommon.KR,ConversionsCommon.KB);
                 for (BufferedImage img : tab) {
                     PictureCustoms.showImageInNewWindow(img);
                 }
@@ -83,7 +83,7 @@ public class Cw1 {
         transformVHSToRgb.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PictureCustoms.showImageInNewWindow(conversions.transformVHSToRgb(picture,0.111,0.299));
+                PictureCustoms.showImageInNewWindow(conversions.transformVHSToRgb(picture,ConversionsCommon.KR,ConversionsCommon.KB));
             }
         });
         draw.addActionListener(new ActionListener() {

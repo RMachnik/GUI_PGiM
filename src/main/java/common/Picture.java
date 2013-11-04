@@ -83,6 +83,16 @@ public final class Picture implements ActionListener {
                 image.setRGB(i, j, pic.get(i, j).getRGB());
     }
 
+    public Picture(BufferedImage pic){
+        width = pic.getWidth();
+        height = pic.getHeight();
+        image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+        filename = "fileName";
+        for (int i = 0; i < width(); i++)
+            for (int j = 0; j < height(); j++)
+                image.setRGB(i, j, pic.getRGB(i, j));
+    }
+
     /**
      * Create a picture by reading in a .png, .gif, or .jpg from
      * the given filename or URL name.

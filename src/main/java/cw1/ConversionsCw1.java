@@ -174,7 +174,7 @@ public class ConversionsCw1
 
     private  int white()
     {
-        return conversionsCommon.colorToRGB(255, 255, 255);
+        return conversionsCommon.colorToRGB(ConversionsCommon.RBG_MAX, ConversionsCommon.RBG_MAX, ConversionsCommon.RBG_MAX);
     }
 
     public  BufferedImage[] transformRGBToVHS(BufferedImage original, double kr, double kb)
