@@ -221,15 +221,18 @@ public class ConversionsCw1
                 red = new Color(original.getRGB(i, j)).getRed();
                 green = new Color(original.getRGB(i, j)).getGreen();
                 blue = new Color(original.getRGB(i, j)).getBlue();
-                /*y = kr * red + (1 - kr - kb) * green + kb * blue;
+                y = kr * red + (1 - kr - kb) * green + kb * blue;
                 cb = (0.5) * ((blue - y) / (1 - kb));
-                cr = (0.5) * ((red - y) / (1 - kr));*/
-                y = 16 + (65.481*red + 128.553 *green + 24.966*blue);
+                cr = (0.5) * ((red - y) / (1 - kr));
+               /* y = 16 + (65.481*red + 128.553 *green + 24.966*blue);
                 cb = 128+(-37.797*red - 74.203*green+112.0*blue);
-                cr = 128 + (112.0*red - 93.786*green-18.214*blue);
-                red = (int) ((298.082 * y)/256 + (408.583 * cr)/256 -222.921);
+                cr = 128 + (112.0*red - 93.786*green-18.214*blue);*/
+                red = (int) (((298.082 * y) + (408.583 * cr))/256 -222.921);
                 green = (int) ((298.082*y)/256 - (100291*cb)/256 - (208.120 * cr)/256 + 135.576);
                 blue = (int) ((298.082*y)/256 + (516.412*cb)/256 - 276.836);
+                red = (int) (y + 1.492*(cr -128));
+                green = (int) (y - 0.34414*(cb-128) - 0.71414*(cr -128));
+                blue = (int) (y + 1.772 * (cb -128));
                 int newPixel = conversionsCommon.colorToRGB(red, green, blue);
                 rgb.setRGB(i, j, newPixel);
             }

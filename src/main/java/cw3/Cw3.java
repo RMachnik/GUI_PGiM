@@ -2,6 +2,7 @@ package cw3;
 
 import common.ConversionsCommon;
 import common.Picture;
+import common.PictureCustoms;
 import cw1.ConversionsCw1;
 import cw2.ConversionsCw2;
 
@@ -48,7 +49,26 @@ public class Cw3 {
                 contrastArgDialog.repaint();
             }
         });
+
+        JMenuItem elongeHisto = new JMenuItem("Elonge histo RGB");
+        elongeHisto.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                PictureCustoms.showImageInNewWindow(conversionsCw3.elongateHistoRGB(picture));
+            }
+        });
+
+        JMenuItem elongeHistoY = new JMenuItem("Elonge histo Y");
+        elongeHistoY.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                PictureCustoms.showImageInNewWindow(conversionsCw3.elongateHistoY(picture));
+            }
+        });
+
         menuCw3.add(conversion);
         menuCw3.add(conversionY);
+        menuCw3.add(elongeHisto);
+        menuCw3.add(elongeHistoY);
     }
 }
