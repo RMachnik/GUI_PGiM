@@ -223,13 +223,9 @@ public class ConversionsCw3 {
         BufferedImage src = pic.getImage();
         BufferedImage result = new BufferedImage(src.getWidth(), src.getHeight(), src.getType());
         int red, green, blue;
-        int Dr[] = new int[ConversionsCommon.RBG_MAX];
-        int Dg[] = new int[ConversionsCommon.RBG_MAX];
-        int Db[] = new int[ConversionsCommon.RBG_MAX];
+        int Dr[], Dg[], Db[];
 
-        int sumR = 0;
-        int sumG = 0;
-        int sumB = 0;
+
         int numberOfPixels = src.getWidth() * src.getHeight();
         Map<String, Map<Integer, Integer>> histo = createHistogram(pic);
         Collection<Integer> r = histo.get(R).values();

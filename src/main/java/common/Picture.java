@@ -207,6 +207,7 @@ public final class Picture implements ActionListener {
             menu.add(menuItem1);
 
             frame.setJMenuBar(menuBar);
+            PictureCustoms.customMenu(this);
             frame.setContentPane(getJLabel(null));
             // f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -214,7 +215,7 @@ public final class Picture implements ActionListener {
             frame.setResizable(false);
             frame.pack();
             frame.setVisible(true);
-            PictureCustoms.customMenu(this);
+
         }
 
         // draw
