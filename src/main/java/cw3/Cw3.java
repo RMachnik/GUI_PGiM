@@ -66,9 +66,27 @@ public class Cw3 {
             }
         });
 
+        JMenuItem alignHisto = new JMenuItem("Align histo");
+        alignHisto.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                PictureCustoms.showImageInNewWindow(conversionsCw3.updateAlignmentHisto(picture));
+            }
+        });
+
+        JMenuItem writeHistoToFile = new JMenuItem("Write RGB histo to files");
+        writeHistoToFile.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                conversionsCw3.writeHistoToFiles(picture);
+            }
+        });
+
         menuCw3.add(conversion);
         menuCw3.add(conversionY);
         menuCw3.add(elongeHisto);
         menuCw3.add(elongeHistoY);
+        menuCw3.add(alignHisto);
+        menuCw3.add(writeHistoToFile);
     }
 }
