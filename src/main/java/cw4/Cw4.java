@@ -1,6 +1,7 @@
 package cw4;
 
 import common.Picture;
+import common.PictureCustoms;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,6 +13,7 @@ import java.awt.event.ActionListener;
  * Date: 11/9/13
  */
 public class Cw4 {
+    private ConversionsCw4 conversionsCw4 = new ConversionsCw4();
 
     public Cw4(Picture picture) {
         cw4(picture);
@@ -22,6 +24,7 @@ public class Cw4 {
         final Image image = picture.getImage();
         JMenu menuCw4 = new JMenu("CW4");
         menuBar.add(menuCw4);
+
 
         JMenuItem simpleBinaryConversion = new JMenuItem("Simple binary conversion");
         simpleBinaryConversion.addActionListener(new ActionListener() {
@@ -36,13 +39,42 @@ public class Cw4 {
         simpleRangeBinaryConversion.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                BinaryRangeDialog binaryRangeDialog = new BinaryRangeDialog(picture,false,"Pass correct binary range 'a,b': ");
+                BinaryRangeDialog binaryRangeDialog = new BinaryRangeDialog(picture, false, "Pass correct binary range 'a,b': ");
                 binaryRangeDialog.repaint();
+            }
+        });
+
+        JMenuItem otsu = new JMenuItem("Otsu binary conversion");
+        otsu.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                PictureCustoms.showImageInNewWindow(conversionsCw4.otsuBinaryConversion(picture));
+            }
+        });
+
+        JMenuItem bransen = new JMenuItem("Bransen binary conversion");
+        bransen.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                BransenArgDialog bransenArgDialog = new BransenArgDialog(picture, false, "Pass bransen arg: ");
+                bransenArgDialog.repaint();
+            }
+        });
+
+        JMenuItem bransenWithOtsu = new JMenuItem("Bransen with otsu conversion");
+        bransenWithOtsu.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                BransenWithOtsuDialog bransenWithOtsuDialog = new BransenWithOtsuDialog(picture, false, "Pass local and threshold values 'local,threshold': ");
+                bransenWithOtsuDialog.repaint();
             }
         });
 
 
         menuCw4.add(simpleBinaryConversion);
         menuCw4.add(simpleRangeBinaryConversion);
+        menuCw4.add(otsu);
+        menuCw4.add(bransen);
+        menuCw4.add(bransenWithOtsu);
     }
 }

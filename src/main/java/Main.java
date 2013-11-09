@@ -9,9 +9,11 @@ public class Main {
         Thread lena = new Thread(new PictureRunner("LENA_512.jpg"));
         Thread ship = new Thread(new PictureRunner("statek_640_505.jpg"));
         Thread wir = new Thread(new PictureRunner("WIR_360.jpg"));
+        Thread women = new Thread(new PictureRunner("kobieta.jpg"));
         lena.start();
         ship.start();
         wir.start();
+        women.start();
 
 
     }

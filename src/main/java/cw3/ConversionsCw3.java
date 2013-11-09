@@ -28,6 +28,7 @@ public class ConversionsCw3 {
     private final String R = "R";
     private final String G = "G";
     private final String B = "B";
+    private final String Y = "Y";
     private ConversionsCommon conversionsCommon = new ConversionsCommon();
 
     public Map<String, Map<Integer, Integer>> createHistogram(Picture p) {
@@ -35,12 +36,14 @@ public class ConversionsCw3 {
         Map<Integer, Integer> histoR = new HashMap<Integer, Integer>();
         Map<Integer, Integer> histoG = new HashMap<Integer, Integer>();
         Map<Integer, Integer> histoB = new HashMap<Integer, Integer>();
-        int red, green, blue;
+        Map<Integer, Integer> histoY = new HashMap<Integer, Integer>();
+        int red, green, blue, y;
         for (int i = 0; i < p.getImage().getWidth(); i++) {
             for (int j = 0; j < p.getImage().getHeight(); j++) {
                 red = new Color(p.getImage().getRGB(i, j)).getRed();
                 green = new Color(p.getImage().getRGB(i, j)).getGreen();
                 blue = new Color(p.getImage().getRGB(i, j)).getBlue();
+                y = (int) (ConversionsCommon.KR * red + (1 - ConversionsCommon.KR - ConversionsCommon.KB) * green + ConversionsCommon.KB * blue);
                 if (histoR.containsKey(red)) {
                     int s = histoR.get(red);
                     histoR.put(red, ++s);
@@ -59,11 +62,18 @@ public class ConversionsCw3 {
                 } else {
                     histoB.put(blue, 1);
                 }
+                if (histoY.containsKey(y)) {
+                    int s = histoY.get(y);
+                    histoY.put(y, ++s);
+                } else {
+                    histoY.put(y, 1);
+                }
             }
         }
         histogram.put(R, histoR);
         histogram.put(G, histoG);
         histogram.put(B, histoB);
+        histogram.put(Y, histoY);
         return histogram;
     }
 
