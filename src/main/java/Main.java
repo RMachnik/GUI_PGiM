@@ -10,10 +10,12 @@ public class Main {
         Thread ship = new Thread(new PictureRunner("statek_640_505.jpg"));
         Thread wir = new Thread(new PictureRunner("WIR_360.jpg"));
         Thread women = new Thread(new PictureRunner("kobieta.jpg"));
+        Thread peppers = new Thread(new PictureRunner("peppers.png"));
         lena.start();
         ship.start();
         wir.start();
         women.start();
+        peppers.start();
 
 
     }

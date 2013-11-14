@@ -238,8 +238,31 @@ public class ConversionsCw4 {
 
             }
         }
+        return filtered;
+    }
 
+    public BufferedImage greenPeppersEffect(Picture picture) {
+        BufferedImage src = picture.getImage();
+        BufferedImage filtered = new BufferedImage(src.getWidth(), src.getHeight(), src.getType());
+        int red, green, blue;
+        for (int i = 0; i < src.getWidth(); i++) {
+            for (int j = 0; j < src.getHeight(); j++) {
+                red = new Color(src.getRGB(i, j)).getRed();
+                green = new Color(src.getRGB(i, j)).getGreen();
+                blue = new Color(src.getRGB(i, j)).getBlue();
+                int newPixel;
+                if (green > red && green > blue) {
+                    newPixel = conversionsCommon.colorToRGB(red, green, blue);
+                    filtered.setRGB(i, j, newPixel);
 
+                } else {
+                    red = green = blue = 0;
+                    newPixel = conversionsCommon.colorToRGB(red, green, blue);
+                    filtered.setRGB(i, j, newPixel);
+                }
+
+            }
+        }
         return filtered;
     }
 

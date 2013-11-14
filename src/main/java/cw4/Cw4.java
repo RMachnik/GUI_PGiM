@@ -70,11 +70,20 @@ public class Cw4 {
             }
         });
 
+        JMenuItem greenPeppersEffect = new JMenuItem("Green pepper effect");
+        greenPeppersEffect.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                PictureCustoms.showImageInNewWindow(conversionsCw4.greenPeppersEffect(picture));
+            }
+        });
+
 
         menuCw4.add(simpleBinaryConversion);
         menuCw4.add(simpleRangeBinaryConversion);
         menuCw4.add(otsu);
         menuCw4.add(bransen);
         menuCw4.add(bransenWithOtsu);
+        menuCw4.add(greenPeppersEffect);
     }
 }
