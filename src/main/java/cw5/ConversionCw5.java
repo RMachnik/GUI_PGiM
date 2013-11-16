@@ -110,10 +110,11 @@ public class ConversionCw5 {
         return filtered;
     }
 
-    public int findDifferences(BufferedImage image1, BufferedImage image2) {
+    public BufferedImage findDifferences(BufferedImage image1, BufferedImage image2) {
         int red1, green1, blue1;
         int red2, green2, blue2;
         int differences = 0;
+        BufferedImage filtered = new BufferedImage(image1.getWidth(), image1.getHeight(), image1.getType());
         for (int i = 0; i < image1.getWidth(); i++) {
             for (int j = 0; j < image2.getHeight(); j++) {
                 red1 = new Color(image1.getRGB(i, j)).getRed();
@@ -123,13 +124,13 @@ public class ConversionCw5 {
                 red2 = new Color(image2.getRGB(i, j)).getRed();
                 green2 = new Color(image2.getRGB(i, j)).getGreen();
                 blue2 = new Color(image2.getRGB(i, j)).getBlue();
-                if (Math.sqrt((red1 - red2) ^ 2 + (green1 - green2) ^ 2 + (blue1 - blue2) ^ 2) > 0) {
-                    differences++;
+                if ((red1-red2) + (green1-green2) + (blue1 - blue2)  > 0) {
+                    filtered.setRGB(i,j,image2.getRGB(i,j));
                 }
 
             }
         }
-        return differences;
+        return filtered;
     }
 
     public BufferedImage multiplyImages(BufferedImage image1, BufferedImage image2, String multiDiv) {
@@ -176,5 +177,20 @@ public class ConversionCw5 {
         return filtered;
     }
 
+    public BufferedImage applyTextureToWhite(BufferedImage texture, BufferedImage whiteImage) {
+        BufferedImage filtered = new BufferedImage(whiteImage.getWidth(), whiteImage.getHeight(), whiteImage.getType());
+        int white = whiteImage.getRGB(0, 0);
+        for (int i = 0; i < whiteImage.getWidth(); i++) {
+            for (int j = 0; j < whiteImage.getHeight(); j++) {
+                if (whiteImage.getRGB(i, j) > white || whiteImage.getRGB(i, j) < white) {
+                    filtered.setRGB(i, j, texture.getRGB(i % texture.getTileWidth() - 1, j % texture.getHeight() - 1));
+                } else {
+                    filtered.setRGB(i, j, white);
+                }
+            }
+        }
+        return filtered;
+
+    }
 
 }

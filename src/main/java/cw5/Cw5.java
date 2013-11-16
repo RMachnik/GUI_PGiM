@@ -156,8 +156,24 @@ public class Cw5 {
             }
         });
 
-        JMenuItem findDifferences = new JMenuItem("Find differences");
+        JMenuItem findDifferences = new JMenuItem("Find differences in kings");
         findDifferences.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                File file1 = new File("krol1.png");
+                File file2 = new File("krol2.png");
+
+                try {
+                    Image image1 = ImageIO.read(file1);
+                    Image image2 = ImageIO.read(file2);
+                    PictureCustoms.showImageInNewWindow(conversionCw5.findDifferences((BufferedImage) image1, (BufferedImage) image2));
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        });
+        JMenuItem findDifferencesInBlackWhite = new JMenuItem("Find differences in maids");
+        findDifferencesInBlackWhite.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 File file1 = new File("s1.png");
@@ -166,7 +182,7 @@ public class Cw5 {
                 try {
                     Image image1 = ImageIO.read(file1);
                     Image image2 = ImageIO.read(file2);
-                    System.out.println((conversionCw5.findDifferences((BufferedImage) image1, (BufferedImage) image2)));
+                    PictureCustoms.showImageInNewWindow(conversionCw5.findDifferences((BufferedImage) image1, (BufferedImage) image2));
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
@@ -224,6 +240,22 @@ public class Cw5 {
             }
         });
 
+        JMenuItem putTextureInWhitePlace = new JMenuItem("Put texture in White");
+        putTextureInWhitePlace.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                File file1 = new File("texture.jpg");
+                File file2 = new File("kola.jpg");
+
+                try {
+                    Image image1 = ImageIO.read(file1);
+                    Image image2 = ImageIO.read(file2);
+                    PictureCustoms.showImageInNewWindow(conversionCw5.applyTextureToWhite((BufferedImage) image1, (BufferedImage) image2));
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        });
 
         menuCw5.add(addToPicture);
         menuCw5.add(addTwoPictures);
@@ -234,9 +266,11 @@ public class Cw5 {
         menuCw5.add(substractingTwoImagesMinMax);
         menuCw5.add(substractingTwoImagesWithCycleEffect);
         menuCw5.add(findDifferences);
+        menuCw5.add(findDifferencesInBlackWhite);
         menuCw5.add(multiplyTwoImages);
         menuCw5.add(multiplyImagesWithScale);
         menuCw5.add(division);
+        menuCw5.add(putTextureInWhitePlace);
 
     }
 }
