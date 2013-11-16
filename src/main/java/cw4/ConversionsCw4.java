@@ -71,7 +71,7 @@ public class ConversionsCw4 {
         int hG[] = fullRangeHisto(histo.get("G"));
         int hB[] = fullRangeHisto(histo.get("B"));
         int hY[] = fullRangeHisto(histo.get("Y"));
-        int otsu = otsu(hY, ConversionsCommon.RBG_MAX);
+        int otsu = otsu(hY, src.getHeight() * src.getWidth());
         for (int i = 0; i < src.getWidth(); i++) {
             for (int j = 0; j < src.getHeight(); j++) {
                 red = new Color(src.getRGB(i, j)).getRed();
@@ -102,52 +102,61 @@ public class ConversionsCw4 {
         return histogramFull;
     }
 
-    private int otsu(int[] histogram, int total) {
-        int sum = 0;
-        for (int i = 1; i < ConversionsCommon.RBG_MAX; ++i)
-            sum += i * histogram[i];
-        int sumB = 0;
+    private int otsu(int[] histData, int total) {
+        float sum = 0;
+        for (int t = 0; t < ConversionsCommon.RBG_MAX; t++) sum += t * histData[t];
+
+        float sumB = 0;
         int wB = 0;
         int wF = 0;
-        int mB;
-        int mF;
-        int max = 0;
-        int between;
-        int threshold = 0;
-        for (int i = 0; i < ConversionsCommon.RBG_MAX; ++i) {
-            wB += histogram[i];
-            if (wB == 0)
-                continue;
-            wF = total - wB;
-            if (wF == 0)
-                break;
-            sumB += i * histogram[i];
-            mB = sumB / wB;
-            mF = (sum - sumB) / wF;
-            between = (int) (wB * wF * Math.pow(mB - mF, 2));
-            if (between > max) {
-                max = between;
-                threshold = i;
+
+        float varMax = 0;
+        float threshold = 0;
+
+        for (int t = 0; t < ConversionsCommon.RBG_MAX; t++) {
+            wB += histData[t];               // Weight Background
+            if (wB == 0) continue;
+
+            wF = total - wB;                 // Weight Foreground
+            if (wF == 0) break;
+
+            sumB += (float) (t * histData[t]);
+
+            float mB = sumB / wB;            // Mean Background
+            float mF = (sum - sumB) / wF;    // Mean Foreground
+
+            // Calculate Between Class Variance
+            float varBetween = (float) wB * (float) wF * (mB - mF) * (mB - mF);
+
+            // Check if new maximum found
+            if (varBetween > varMax) {
+                varMax = varBetween;
+                threshold = t;
             }
         }
-        return threshold;
-
+        return (int) threshold;
     }
 
     private int getBrensenThreshold(int[][] y, int x0, int y0, int w, int h) {
-        int max = 1;
+        int max = 0;
         int min = ConversionsCommon.RBG_MAX;
         for (int i = x0; (i < w && i < y.length); i++) {
             for (int j = y0; (j < h && j < y[i].length); j++) {
-                if (max < y[i][j]) {
-                    max = y[i][j];
-                }
-                if (min > y[i][j]) {
-                    min = y[i][j];
-                }
+                max = Math.max(max, y[i][j]);
+                min = Math.min(min, y[i][j]);
             }
         }
-        return min + max / 2;
+        double localContrast = max - min;
+        double midGray = (max + min) / 2;
+        double output;
+
+        if (midGray >= ConversionsCommon.RBG_MAX / 2)
+            output = midGray;
+        else
+            output = localContrast;
+
+
+        return (int) output;
     }
 
     public BufferedImage brensenBinaryConversion(Picture picture, int arg) {
@@ -208,7 +217,7 @@ public class ConversionsCw4 {
         int x0, y0;
         x0 = y0 = 0;
         Map<String, Map<Integer, Integer>> histogram = conversionsCw3.createHistogram(picture);
-        int otsu = otsu(fullRangeHisto(histogram.get("Y")), ConversionsCommon.RBG_MAX);
+        int otsu = otsu(fullRangeHisto(histogram.get("Y")), src.getHeight() * src.getWidth());
         bransen = getBrensenThreshold(yTab, x0, y0, x0 + arg, y0 + arg);
         for (int i = 0; i < src.getWidth(); i++) {
             if (i % arg == 0 && i + arg < src.getWidth())
