@@ -34,7 +34,7 @@ public class Main {
         lena.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Thread lena = new Thread(new PictureRunner("LENA_512.jpg"));
+                Thread lena = new Thread(new PictureRunner("static/LENA_512.jpg"));
                 lena.start();
             }
         });
@@ -43,7 +43,7 @@ public class Main {
         ship.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Thread ship = new Thread(new PictureRunner("statek_640_505.jpg"));
+                Thread ship = new Thread(new PictureRunner("static/statek_640_505.jpg"));
                 ship.start();
             }
         });
@@ -52,7 +52,7 @@ public class Main {
         wir.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Thread wir = new Thread(new PictureRunner("WIR_360.jpg"));
+                Thread wir = new Thread(new PictureRunner("static/WIR_360.jpg"));
                 wir.start();
             }
         });
@@ -61,7 +61,7 @@ public class Main {
         women.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Thread women = new Thread(new PictureRunner("kobieta.jpg"));
+                Thread women = new Thread(new PictureRunner("static/kobieta.jpg"));
                 women.start();
             }
         });
@@ -70,7 +70,7 @@ public class Main {
         peppers.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Thread peppers = new Thread(new PictureRunner("peppers.png"));
+                Thread peppers = new Thread(new PictureRunner("static/peppers.png"));
                 peppers.start();
             }
         });

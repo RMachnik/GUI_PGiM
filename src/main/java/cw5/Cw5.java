@@ -40,8 +40,8 @@ public class Cw5 {
         addTwoPictures.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                File file1 = new File("eagle.jpg");
-                File file2 = new File("lake.jpg");
+                File file1 = new File("static/eagle.jpg");
+                File file2 = new File("static/lake.jpg");
 
                 try {
                     Image image1 = ImageIO.read(file1);
@@ -58,8 +58,8 @@ public class Cw5 {
         addTwoPicturesMinMax.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                File file1 = new File("eagle.jpg");
-                File file2 = new File("lake.jpg");
+                File file1 = new File("static/eagle.jpg");
+                File file2 = new File("static/lake.jpg");
 
                 try {
                     Image image1 = ImageIO.read(file1);
@@ -75,8 +75,8 @@ public class Cw5 {
         addTwoPictureInCycleEffect.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                File file1 = new File("eagle.jpg");
-                File file2 = new File("lake.jpg");
+                File file1 = new File("static/eagle.jpg");
+                File file2 = new File("static/lake.jpg");
 
                 try {
                     Image image1 = ImageIO.read(file1);
@@ -92,8 +92,8 @@ public class Cw5 {
         substractingTwoImages.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                File file1 = new File("eagle.jpg");
-                File file2 = new File("lake.jpg");
+                File file1 = new File("static/eagle.jpg");
+                File file2 = new File("static/lake.jpg");
 
                 try {
                     Image image1 = ImageIO.read(file1);
@@ -109,8 +109,8 @@ public class Cw5 {
         substractingTwoImagesMinMax.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                File file1 = new File("eagle.jpg");
-                File file2 = new File("lake.jpg");
+                File file1 = new File("static/eagle.jpg");
+                File file2 = new File("static/lake.jpg");
 
                 try {
                     Image image1 = ImageIO.read(file1);
@@ -126,8 +126,8 @@ public class Cw5 {
         substractingTwoImagesWithCycleEffect.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                File file1 = new File("eagle.jpg");
-                File file2 = new File("lake.jpg");
+                File file1 = new File("static/eagle.jpg");
+                File file2 = new File("static/lake.jpg");
 
                 try {
                     Image image1 = ImageIO.read(file1);
@@ -143,8 +143,8 @@ public class Cw5 {
         addTwoWithSpecifiedMethod.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                File file1 = new File("texture.jpg");
-                File file2 = new File("kola.jpg");
+                File file1 = new File("static/texture.jpg");
+                File file2 = new File("static/kola.jpg");
 
                 try {
                     Image image1 = ImageIO.read(file1);
@@ -160,8 +160,8 @@ public class Cw5 {
         findDifferences.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                File file1 = new File("krol1.png");
-                File file2 = new File("krol2.png");
+                File file1 = new File("static/krol1.png");
+                File file2 = new File("static/krol2.png");
 
                 try {
                     Image image1 = ImageIO.read(file1);
@@ -176,8 +176,8 @@ public class Cw5 {
         findDifferencesInBlackWhite.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                File file1 = new File("s1.png");
-                File file2 = new File("s2.png");
+                File file1 = new File("static/s1.png");
+                File file2 = new File("static/s2.png");
 
                 try {
                     Image image1 = ImageIO.read(file1);
@@ -193,8 +193,8 @@ public class Cw5 {
         multiplyTwoImages.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                File file1 = new File("lake.jpg");
-                File file2 = new File("eagle.jpg");
+                File file1 = new File("static/lake.jpg");
+                File file2 = new File("static/eagle.jpg");
 
                 try {
                     Image image1 = ImageIO.read(file1);
@@ -210,8 +210,8 @@ public class Cw5 {
         multiplyImagesWithScale.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                File file1 = new File("ok.jpg");
-                File file2 = new File("LENA_512.jpg");
+                File file1 = new File("static/ok.jpg");
+                File file2 = new File("static/LENA_512.jpg");
 
                 try {
                     Image image1 = ImageIO.read(file1);
@@ -227,8 +227,8 @@ public class Cw5 {
         division.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                File file1 = new File("eagle.jpg");
-                File file2 = new File("lake.jpg");
+                File file1 = new File("static/eagle.jpg");
+                File file2 = new File("static/lake.jpg");
 
                 try {
                     Image image1 = ImageIO.read(file1);
@@ -244,8 +244,8 @@ public class Cw5 {
         putTextureInWhitePlace.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                File file1 = new File("texture.jpg");
-                File file2 = new File("kola.jpg");
+                File file1 = new File("static/texture.jpg");
+                File file2 = new File("static/kola.jpg");
 
                 try {
                     Image image1 = ImageIO.read(file1);

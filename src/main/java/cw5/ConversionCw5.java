@@ -37,7 +37,7 @@ public class ConversionCw5 {
                 int newPixel = 0;
                 switch (plusMinus) {
                     case "+":
-                        newPixel = (image1.getWidth() * image1.getRGB(i, j) + (1 - image1.getWidth()) * image2.getRGB(i, j));
+                        newPixel = (int) ((0.5) * image1.getRGB(i, j) + (1 - (0.5) * image2.getRGB(i, j)));
                         break;
                     case "-":
                         newPixel = (image1.getWidth() * image1.getRGB(i, j) - (1 - image1.getWidth()) * image2.getRGB(i, j));
