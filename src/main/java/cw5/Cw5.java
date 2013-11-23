@@ -40,16 +40,8 @@ public class Cw5 {
         addTwoPictures.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                File file1 = new File("static/eagle.jpg");
-                File file2 = new File("static/lake.jpg");
-
-                try {
-                    Image image1 = ImageIO.read(file1);
-                    Image image2 = ImageIO.read(file2);
-                    PictureCustoms.showImageInNewWindow(conversionCw5.addTwoPicturesInTheSameScale((BufferedImage) image1, (BufferedImage) image2, "+"));
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
+                AddTwoPicturesDialog addTwoPicturesDialog = new AddTwoPicturesDialog(picture, false, "AddPictures pass arg ", "+");
+                addTwoPicturesDialog.repaint();
 
             }
         });
@@ -92,16 +84,8 @@ public class Cw5 {
         substractingTwoImages.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                File file1 = new File("static/eagle.jpg");
-                File file2 = new File("static/lake.jpg");
-
-                try {
-                    Image image1 = ImageIO.read(file1);
-                    Image image2 = ImageIO.read(file2);
-                    PictureCustoms.showImageInNewWindow(conversionCw5.addTwoPicturesInTheSameScale((BufferedImage) image1, (BufferedImage) image2, "-"));
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
+                AddTwoPicturesDialog addTwoPicturesDialog = new AddTwoPicturesDialog(picture, false, "Substracting images ", "-");
+                addTwoPicturesDialog.repaint();
             }
         });
 

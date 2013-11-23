@@ -29,7 +29,7 @@ public class ConversionCw5 {
         return filtered;
     }
 
-    public BufferedImage addTwoPicturesInTheSameScale(BufferedImage image1, BufferedImage image2, String plusMinus) {
+    public BufferedImage addTwoPicturesInTheSameScale(BufferedImage image1, BufferedImage image2,Double arg, String plusMinus) {
         BufferedImage filtered = new BufferedImage(Math.max(image1.getWidth(), image2.getWidth()), Math.max(image1.getHeight(), image2.getHeight()), image1.getType());
 
         for (int i = 0; i < filtered.getWidth(); i++) {
@@ -37,10 +37,10 @@ public class ConversionCw5 {
                 int newPixel = 0;
                 switch (plusMinus) {
                     case "+":
-                        newPixel = (int) ((0.5) * image1.getRGB(i, j) + (1 - (0.5) * image2.getRGB(i, j)));
+                        newPixel = (int) (arg * image1.getRGB(i, j) + (1 - arg * image2.getRGB(i, j)));
                         break;
                     case "-":
-                        newPixel = (image1.getWidth() * image1.getRGB(i, j) - (1 - image1.getWidth()) * image2.getRGB(i, j));
+                        newPixel = (int) (arg * image1.getRGB(i, j) - (1 - arg) * image2.getRGB(i, j));
                         break;
                     default:
                         System.out.println("pass correct value!");

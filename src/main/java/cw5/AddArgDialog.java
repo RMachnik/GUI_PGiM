@@ -19,15 +19,11 @@ public class AddArgDialog extends CommonArgDialog {
     public void actionPerformed(ActionEvent e) {
         if (getYesButton() == e.getSource()) {
             String arg = getTextField().getText();
-            String[] args = arg.split(",");
-            if (args.length == 2) {
-                int arg1 = Integer.parseInt(args[0]);
-                ConversionCw5 conversionCw5 = new ConversionCw5();
-                setVisible(false);
-                PictureCustoms.showImageInNewWindow(conversionCw5.addValueToColours(getPicture(), arg1));
-            } else {
-                throw new RuntimeException("Pass correct parameter");
-            }
+
+            ConversionCw5 conversionCw5 = new ConversionCw5();
+            setVisible(false);
+            PictureCustoms.showImageInNewWindow(conversionCw5.addValueToColours(getPicture(), Integer.parseInt(arg)));
+
         } else if (getNoButton() == e.getSource()) {
             System.err.println("User chose no.");
             setVisible(false);
