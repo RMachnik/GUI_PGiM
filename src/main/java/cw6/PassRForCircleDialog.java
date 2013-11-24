@@ -1,4 +1,4 @@
-package cw5;
+package cw6;
 
 import common.CommonArgDialog;
 import common.Picture;
@@ -7,11 +7,11 @@ import common.PictureCustoms;
 import java.awt.event.ActionEvent;
 
 /**
- * User: SG0219139
- * Date: 11/16/13
+ * rafik991@gmail.com
+ * 11/24/13
  */
-public class AddArgDialog extends CommonArgDialog {
-    public AddArgDialog(Picture picture, boolean modal, String myMessage) {
+public class PassRForCircleDialog extends CommonArgDialog {
+    public PassRForCircleDialog(Picture picture, boolean modal, String myMessage) {
         super(picture, modal, myMessage);
     }
 
@@ -20,13 +20,14 @@ public class AddArgDialog extends CommonArgDialog {
         if (getYesButton() == e.getSource()) {
             String arg = getTextField().getText();
 
-            ConversionsCw5 conversionsCw5 = new ConversionsCw5();
+            ConversionCw6 conversionCw6 = new ConversionCw6();
             setVisible(false);
-            PictureCustoms.showImageInNewWindow(conversionsCw5.addValueToColours(getPicture(), Integer.parseInt(arg)));
+            PictureCustoms.showImageInNewWindow(conversionCw6.circleErosion(getPicture(), Integer.parseInt(arg)));
 
         } else if (getNoButton() == e.getSource()) {
             System.err.println("User chose no.");
             setVisible(false);
         }
+
     }
 }

@@ -61,7 +61,7 @@ public class ConversionsCw4 {
         return filtered;
     }
 
-    BufferedImage otsuBinaryConversion(Picture picture) {
+    public BufferedImage otsuBinaryConversion(Picture picture) {
         BufferedImage src = picture.getImage();
         BufferedImage filtered = new BufferedImage(src.getWidth(), src.getHeight(), src.getType());
         int red, green, blue, y;

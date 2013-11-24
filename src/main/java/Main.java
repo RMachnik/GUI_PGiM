@@ -75,11 +75,21 @@ public class Main {
             }
         });
 
+        JButton figure = new JButton("FIGURE");
+        figure.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Thread figure = new Thread(new PictureRunner("static/figury.png"));
+                figure.start();
+            }
+        });
+
         panel.add(lena);
         panel.add(ship);
         panel.add(wir);
         panel.add(women);
         panel.add(peppers);
+        panel.add(figure);
     }
 
     /**

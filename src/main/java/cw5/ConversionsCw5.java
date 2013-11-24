@@ -10,7 +10,7 @@ import java.awt.image.BufferedImage;
  * User: SG0219139
  * Date: 11/16/13
  */
-public class ConversionCw5 {
+public class ConversionsCw5 {
     ConversionsCommon conversionsCommon = new ConversionsCommon();
 
     public BufferedImage addValueToColours(Picture picture, int a) {

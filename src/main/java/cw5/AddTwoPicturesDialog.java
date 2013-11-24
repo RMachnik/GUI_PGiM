@@ -27,7 +27,7 @@ public class AddTwoPicturesDialog extends CommonArgDialog {
         if (getYesButton() == e.getSource()) {
             String arg = getTextField().getText();
 
-            ConversionCw5 conversionCw5 = new ConversionCw5();
+            ConversionsCw5 conversionsCw5 = new ConversionsCw5();
             setVisible(false);
             File file1 = new File("static/eagle.jpg");
             File file2 = new File("static/lake.jpg");
@@ -35,7 +35,7 @@ public class AddTwoPicturesDialog extends CommonArgDialog {
             try {
                 Image image1 = ImageIO.read(file1);
                 Image image2 = ImageIO.read(file2);
-                PictureCustoms.showImageInNewWindow(conversionCw5.addTwoPicturesInTheSameScale((BufferedImage) image1, (BufferedImage) image2, Double.parseDouble(arg),method));
+                PictureCustoms.showImageInNewWindow(conversionsCw5.addTwoPicturesInTheSameScale((BufferedImage) image1, (BufferedImage) image2, Double.parseDouble(arg),method));
             } catch (IOException e1) {
                 e1.printStackTrace();
             }

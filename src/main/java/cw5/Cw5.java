@@ -22,7 +22,7 @@ public class Cw5 {
     }
 
     private void cw5(final Picture picture) {
-        final ConversionCw5 conversionCw5 = new ConversionCw5();
+        final ConversionsCw5 conversionsCw5 = new ConversionsCw5();
         JMenuBar menuBar = picture.getFrame().getJMenuBar();
         final Image image = picture.getImage();
         JMenu menuCw5 = new JMenu("CW5");
@@ -56,7 +56,7 @@ public class Cw5 {
                 try {
                     Image image1 = ImageIO.read(file1);
                     Image image2 = ImageIO.read(file2);
-                    PictureCustoms.showImageInNewWindow(conversionCw5.addTwoPicturesWithMinMax((BufferedImage) image1, (BufferedImage) image2, "+"));
+                    PictureCustoms.showImageInNewWindow(conversionsCw5.addTwoPicturesWithMinMax((BufferedImage) image1, (BufferedImage) image2, "+"));
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
@@ -73,7 +73,7 @@ public class Cw5 {
                 try {
                     Image image1 = ImageIO.read(file1);
                     Image image2 = ImageIO.read(file2);
-                    PictureCustoms.showImageInNewWindow(conversionCw5.addTwoPicturesWithCycleEffect((BufferedImage) image1, (BufferedImage) image2, "+"));
+                    PictureCustoms.showImageInNewWindow(conversionsCw5.addTwoPicturesWithCycleEffect((BufferedImage) image1, (BufferedImage) image2, "+"));
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
@@ -99,7 +99,7 @@ public class Cw5 {
                 try {
                     Image image1 = ImageIO.read(file1);
                     Image image2 = ImageIO.read(file2);
-                    PictureCustoms.showImageInNewWindow(conversionCw5.addTwoPicturesWithMinMax((BufferedImage) image1, (BufferedImage) image2, "-"));
+                    PictureCustoms.showImageInNewWindow(conversionsCw5.addTwoPicturesWithMinMax((BufferedImage) image1, (BufferedImage) image2, "-"));
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
@@ -116,7 +116,7 @@ public class Cw5 {
                 try {
                     Image image1 = ImageIO.read(file1);
                     Image image2 = ImageIO.read(file2);
-                    PictureCustoms.showImageInNewWindow(conversionCw5.addTwoPicturesWithCycleEffect((BufferedImage) image1, (BufferedImage) image2, "-"));
+                    PictureCustoms.showImageInNewWindow(conversionsCw5.addTwoPicturesWithCycleEffect((BufferedImage) image1, (BufferedImage) image2, "-"));
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
@@ -133,7 +133,7 @@ public class Cw5 {
                 try {
                     Image image1 = ImageIO.read(file1);
                     Image image2 = ImageIO.read(file2);
-                    PictureCustoms.showImageInNewWindow(conversionCw5.addTwoPicturesWithSpecyficMethod((BufferedImage) image1, (BufferedImage) image2));
+                    PictureCustoms.showImageInNewWindow(conversionsCw5.addTwoPicturesWithSpecyficMethod((BufferedImage) image1, (BufferedImage) image2));
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
@@ -150,7 +150,7 @@ public class Cw5 {
                 try {
                     Image image1 = ImageIO.read(file1);
                     Image image2 = ImageIO.read(file2);
-                    PictureCustoms.showImageInNewWindow(conversionCw5.findDifferences((BufferedImage) image1, (BufferedImage) image2));
+                    PictureCustoms.showImageInNewWindow(conversionsCw5.findDifferences((BufferedImage) image1, (BufferedImage) image2));
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
@@ -166,7 +166,7 @@ public class Cw5 {
                 try {
                     Image image1 = ImageIO.read(file1);
                     Image image2 = ImageIO.read(file2);
-                    PictureCustoms.showImageInNewWindow(conversionCw5.findDifferences((BufferedImage) image1, (BufferedImage) image2));
+                    PictureCustoms.showImageInNewWindow(conversionsCw5.findDifferences((BufferedImage) image1, (BufferedImage) image2));
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
@@ -183,7 +183,7 @@ public class Cw5 {
                 try {
                     Image image1 = ImageIO.read(file1);
                     Image image2 = ImageIO.read(file2);
-                    PictureCustoms.showImageInNewWindow(conversionCw5.multiplyImages((BufferedImage) image1, (BufferedImage) image2, "*"));
+                    PictureCustoms.showImageInNewWindow(conversionsCw5.multiplyImages((BufferedImage) image1, (BufferedImage) image2, "*"));
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
@@ -200,7 +200,7 @@ public class Cw5 {
                 try {
                     Image image1 = ImageIO.read(file1);
                     Image image2 = ImageIO.read(file2);
-                    PictureCustoms.showImageInNewWindow(conversionCw5.multiplyImagesWithScale((BufferedImage) image1, (BufferedImage) image2, "*"));
+                    PictureCustoms.showImageInNewWindow(conversionsCw5.multiplyImagesWithScale((BufferedImage) image1, (BufferedImage) image2, "*"));
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
@@ -217,7 +217,7 @@ public class Cw5 {
                 try {
                     Image image1 = ImageIO.read(file1);
                     Image image2 = ImageIO.read(file2);
-                    PictureCustoms.showImageInNewWindow(conversionCw5.multiplyImages((BufferedImage) image1, (BufferedImage) image2, "/"));
+                    PictureCustoms.showImageInNewWindow(conversionsCw5.multiplyImages((BufferedImage) image1, (BufferedImage) image2, "/"));
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
@@ -234,7 +234,7 @@ public class Cw5 {
                 try {
                     Image image1 = ImageIO.read(file1);
                     Image image2 = ImageIO.read(file2);
-                    PictureCustoms.showImageInNewWindow(conversionCw5.applyTextureToWhite((BufferedImage) image1, (BufferedImage) image2));
+                    PictureCustoms.showImageInNewWindow(conversionsCw5.applyTextureToWhite((BufferedImage) image1, (BufferedImage) image2));
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
