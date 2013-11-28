@@ -67,9 +67,6 @@ public class ConversionsCw4 {
         int red, green, blue, y;
 
         Map<String, Map<Integer, Integer>> histo = conversionsCw3.createHistogram(picture);
-        int hR[] = fullRangeHisto(histo.get("R"));
-        int hG[] = fullRangeHisto(histo.get("G"));
-        int hB[] = fullRangeHisto(histo.get("B"));
         int hY[] = fullRangeHisto(histo.get("Y"));
         int otsu = otsu(hY, src.getHeight() * src.getWidth());
         for (int i = 0; i < src.getWidth(); i++) {

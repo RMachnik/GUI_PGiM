@@ -20,9 +20,9 @@ public class PassRForCircleDialog extends CommonArgDialog {
         if (getYesButton() == e.getSource()) {
             String arg = getTextField().getText();
 
-            ConversionCw6 conversionCw6 = new ConversionCw6();
+            ConversionsCw6 conversionsCw6 = new ConversionsCw6();
             setVisible(false);
-            PictureCustoms.showImageInNewWindow(conversionCw6.circleErosion(getPicture(), Integer.parseInt(arg)));
+            PictureCustoms.showImageInNewWindow(conversionsCw6.circleErosion(getPicture(), Integer.parseInt(arg)));
 
         } else if (getNoButton() == e.getSource()) {
             System.err.println("User chose no.");

@@ -19,7 +19,7 @@ public class Cw6 {
     }
 
     private void cw6(final Picture picture) {
-        final ConversionCw6 conversionCw6 = new ConversionCw6();
+        final ConversionsCw6 conversionsCw6 = new ConversionsCw6();
         JMenuBar menuBar = picture.getFrame().getJMenuBar();
         final Image image = picture.getImage();
         JMenu menuCw6 = new JMenu("CW6");
@@ -30,7 +30,7 @@ public class Cw6 {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    PictureCustoms.showImageInNewWindow(conversionCw6.erosion(picture, "static/cw6_zad1a.txt"));
+                    PictureCustoms.showImageInNewWindow(conversionsCw6.erosion(picture, "static/cw6_zad1a.txt"));
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
@@ -42,7 +42,7 @@ public class Cw6 {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    PictureCustoms.showImageInNewWindow(conversionCw6.erosion(picture, "static/cw6_zad1b.txt"));
+                    PictureCustoms.showImageInNewWindow(conversionsCw6.erosion(picture, "static/cw6_zad1b.txt"));
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
@@ -54,7 +54,7 @@ public class Cw6 {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    PictureCustoms.showImageInNewWindow(conversionCw6.erosion(picture, "static/cw6_zad2a.txt"));
+                    PictureCustoms.showImageInNewWindow(conversionsCw6.erosion(picture, "static/cw6_zad2a.txt"));
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
@@ -66,7 +66,7 @@ public class Cw6 {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    PictureCustoms.showImageInNewWindow(conversionCw6.erosion(picture, "static/cw6_zad2b.txt"));
+                    PictureCustoms.showImageInNewWindow(conversionsCw6.erosion(picture, "static/cw6_zad2b.txt"));
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
@@ -87,7 +87,7 @@ public class Cw6 {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    PictureCustoms.showImageInNewWindow(conversionCw6.dilatation(picture, "static/cw6_zad1a.txt"));
+                    PictureCustoms.showImageInNewWindow(conversionsCw6.dilatation(picture, "static/cw6_zad1a.txt"));
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
@@ -99,7 +99,7 @@ public class Cw6 {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    PictureCustoms.showImageInNewWindow(conversionCw6.dilatation(picture, "static/cw6_zad1b.txt"));
+                    PictureCustoms.showImageInNewWindow(conversionsCw6.dilatation(picture, "static/cw6_zad1b.txt"));
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
@@ -111,7 +111,7 @@ public class Cw6 {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    PictureCustoms.showImageInNewWindow(conversionCw6.dilatation(picture, "static/cw6_zad2a.txt"));
+                    PictureCustoms.showImageInNewWindow(conversionsCw6.dilatation(picture, "static/cw6_zad2a.txt"));
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
@@ -123,7 +123,7 @@ public class Cw6 {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    PictureCustoms.showImageInNewWindow(conversionCw6.dilatation(picture, "static/cw6_zad2b.txt"));
+                    PictureCustoms.showImageInNewWindow(conversionsCw6.dilatation(picture, "static/cw6_zad2b.txt"));
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
@@ -134,12 +134,9 @@ public class Cw6 {
         zad10aErosion.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                RGBArgDialog rgbArgDialog = new RGBArgDialog(picture,false,"Pass R or G or B value",RGBArgDialog.ER,"static/cw6_zad2b.txt");
+                rgbArgDialog.repaint();
 
-                try {
-                    PictureCustoms.showImageInNewWindow(conversionCw6.erosionForRGB(picture, "static/cw6_zad2b"));
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
             }
         });
 
@@ -147,11 +144,9 @@ public class Cw6 {
         zad10bErosion.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    PictureCustoms.showImageInNewWindow(conversionCw6.erosionForRGB(picture, "static/cw6_zad2a"));
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
+                RGBArgDialog rgbArgDialog = new RGBArgDialog(picture,false,"Pass R or G or B value",RGBArgDialog.ER,"static/cw6_zad2a.txt");
+                rgbArgDialog.repaint();
+
             }
         });
 
@@ -159,11 +154,9 @@ public class Cw6 {
         zad10aDilation.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    PictureCustoms.showImageInNewWindow(conversionCw6.dilatationForRGB(picture, "static/cw6_zad2b"));
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
+                RGBArgDialog rgbArgDialog = new RGBArgDialog(picture,false,"Pass R or G or B value",RGBArgDialog.DYL,"static/cw6_zad2b.txt");
+                rgbArgDialog.repaint();
+
 
             }
         });
@@ -172,11 +165,9 @@ public class Cw6 {
         zad10bDilation.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    PictureCustoms.showImageInNewWindow(conversionCw6.dilatationForRGB(picture, "static/cw6_zad2a"));
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
+                RGBArgDialog rgbArgDialog = new RGBArgDialog(picture,false,"Pass R or G or B value",RGBArgDialog.DYL,"static/cw6_zad2a.txt");
+                rgbArgDialog.repaint();
+
             }
         });
 

@@ -11,6 +11,8 @@ import java.io.IOException;
  */
 public class ReaderUtil {
 
+    private static final String TAB_REG = "\\t";
+
     public int[][] getFileMatrix(String fileName) throws IOException {
         File file = new File(fileName);
         BufferedReader reader = new BufferedReader(new FileReader(file));
@@ -18,7 +20,7 @@ public class ReaderUtil {
         int result[][];
         int k = 0;
         if (line != null) {
-            String[] numbers = line.split("\\t");
+            String[] numbers = line.split(TAB_REG);
             result = new int[numbers.length][numbers.length];
         } else {
             System.out.println("Wrong file!");
