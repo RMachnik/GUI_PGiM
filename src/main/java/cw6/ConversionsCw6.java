@@ -21,7 +21,7 @@ public class ConversionsCw6 {
     private ReaderUtil readerUtil = new ReaderUtil();
 
     public BufferedImage erosion(Picture picture, String file) throws IOException {
-        BufferedImage src = conversionsCw4.otsuBinaryConversion(picture);
+        BufferedImage src = picture.getImage();
         int matrix[][] = readerUtil.getFileMatrix(file);
         int half = matrix.length / 2;
         int matrixSize = matrix.length * matrix[0].length;
@@ -33,7 +33,6 @@ public class ConversionsCw6 {
         for (int i = 2 * matrix.length; i < filtered.getWidth() - 2 * matrix.length; i++) {
             for (int j = 2 * matrix.length; j < filtered.getHeight() - 2 * matrix.length; j++) {
                 int passing = checkPassing(matrix, half, filtered, i, j);
-
                 if (passing == matrixSize) {
                     src.setRGB(i, j, 0);
                 } else {
@@ -41,14 +40,18 @@ public class ConversionsCw6 {
                 }
             }
         }
-        return filtered;
+        return src;
     }
 
     private int checkPassing(int[][] matrix, int half, BufferedImage filtered, int i, int j) {
         int passing = 0;
+        int red, green, blue;
         for (int s = 0; s < matrix.length; s++) {
             for (int c = 0; c < matrix[s].length; c++) {
-                if (filtered.getRGB(i - half + s, j - half + c) == matrix[s][c]) {
+                red = new Color(filtered.getRGB(i - half + s, j - half + c)).getRed();
+                green = new Color(filtered.getRGB(i - half + s, j - half + c)).getGreen();
+                blue = new Color(filtered.getRGB(i - half + s, j - half + c)).getBlue();
+                if (red == matrix[s][c]) {
                     passing++;
                 }
             }
@@ -114,16 +117,21 @@ public class ConversionsCw6 {
 
     public BufferedImage erosionForRGB(Picture picture, String file, String rgb) throws IOException {
         BufferedImage src = conversionsCw4.otsuBinaryConversion(picture);
-        BufferedImage filtered = new BufferedImage(src.getWidth(), src.getHeight(), src.getType());
         int matrix[][] = readerUtil.getFileMatrix(file);
-        int se[][] = readerUtil.multiplyMatrix(matrix, filtered.getWidth(), filtered.getHeight());
+        int half = matrix.length / 2;
+        int matrixSize = matrix.length * matrix[0].length;
+        BufferedImage filtered = new BufferedImage(src.getWidth() + 2 * matrix.length, src.getHeight() + 2 * matrix.length,
+                src.getType());
+        fillFilteredImage(src, matrix, filtered);
         int red, green, blue;
-        for (int i = 0; i < filtered.getWidth(); i++) {
-            for (int j = 0; j < filtered.getHeight(); j++) {
-                red = new Color(src.getRGB(i, j)).getRed();
-                green = new Color(src.getRGB(i, j)).getGreen();
-                blue = new Color(src.getRGB(i, j)).getBlue();
-                if (se[i][j] == 0) {
+        for (int i = 2 * matrix.length; i < filtered.getWidth() - 2 * matrix.length; i++) {
+            for (int j = 2 * matrix.length; j < filtered.getHeight() - 2 * matrix.length; j++) {
+
+                red = new Color(filtered.getRGB(i, j)).getRed();
+                green = new Color(filtered.getRGB(i, j)).getGreen();
+                blue = new Color(filtered.getRGB(i, j)).getBlue();
+                int passing = checkPassing(matrix, half, filtered, i, j);
+                if (passing == matrixSize) {
                     switch (rgb) {
                         case R:
                             red = 0;
@@ -147,16 +155,20 @@ public class ConversionsCw6 {
 
     public BufferedImage dilatationForRGB(Picture picture, String file, String rgb) throws IOException {
         BufferedImage src = conversionsCw4.otsuBinaryConversion(picture);
-        BufferedImage filtered = new BufferedImage(src.getWidth(), src.getHeight(), src.getType());
         int matrix[][] = readerUtil.getFileMatrix(file);
-        int se[][] = readerUtil.multiplyMatrix(matrix, filtered.getWidth(), filtered.getHeight());
+        int half = matrix.length / 2;
+        int matrixSize = matrix.length * matrix[0].length;
+        BufferedImage filtered = new BufferedImage(src.getWidth() + 2 * matrix.length, src.getHeight() + 2 * matrix.length,
+                src.getType());
+        fillFilteredImage(src, matrix, filtered);
         int red, green, blue;
-        for (int i = 0; i < filtered.getWidth(); i++) {
-            for (int j = 0; j < filtered.getHeight(); j++) {
-                red = new Color(src.getRGB(i, j)).getRed();
-                green = new Color(src.getRGB(i, j)).getGreen();
-                blue = new Color(src.getRGB(i, j)).getBlue();
-                if (se[i][j] == 1) {
+        for (int i = 2 * matrix.length; i < filtered.getWidth() - 2 * matrix.length; i++) {
+            for (int j = 2 * matrix.length; j < filtered.getHeight() - 2 * matrix.length; j++) {
+                red = new Color(filtered.getRGB(i, j)).getRed();
+                green = new Color(filtered.getRGB(i, j)).getGreen();
+                blue = new Color(filtered.getRGB(i, j)).getBlue();
+                int passing = checkPassing(matrix, half, filtered, i, j);
+                if (passing == matrixSize) {
                     switch (rgb) {
                         case R:
                             red = 0;
