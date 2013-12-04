@@ -21,7 +21,7 @@ public class ConversionsCw6 {
     private ReaderUtil readerUtil = new ReaderUtil();
 
     public BufferedImage erosion(Picture picture, String file) throws IOException {
-        BufferedImage src = picture.getImage();
+        BufferedImage src = conversionsCw4.otsuBinaryConversion(picture);
         int matrix[][] = readerUtil.getFileMatrix(file);
         int half = matrix.length / 2;
         int matrixSize = matrix.length * matrix[0].length;
@@ -32,19 +32,17 @@ public class ConversionsCw6 {
 
         for (int i = 2 * matrix.length; i < filtered.getWidth() - 2 * matrix.length; i++) {
             for (int j = 2 * matrix.length; j < filtered.getHeight() - 2 * matrix.length; j++) {
-                int passing = checkPassing(matrix, half, filtered, i, j);
-                if (passing == matrixSize) {
-                    src.setRGB(i, j, 0);
+                if (checkPassing(matrix, half, filtered, i, j)) {
+                    filtered.setRGB(i, j, 0);
                 } else {
                     //filtered.setRGB(i, j, src.getRGB(i, j));
                 }
             }
         }
-        return src;
+        return filtered;
     }
 
-    private int checkPassing(int[][] matrix, int half, BufferedImage filtered, int i, int j) {
-        int passing = 0;
+    private boolean checkPassing(int[][] matrix, int half, BufferedImage filtered, int i, int j) {
         int red, green, blue;
         for (int s = 0; s < matrix.length; s++) {
             for (int c = 0; c < matrix[s].length; c++) {
@@ -52,11 +50,11 @@ public class ConversionsCw6 {
                 green = new Color(filtered.getRGB(i - half + s, j - half + c)).getGreen();
                 blue = new Color(filtered.getRGB(i - half + s, j - half + c)).getBlue();
                 if (red == matrix[s][c]) {
-                    passing++;
+                    return true;
                 }
             }
         }
-        return passing;
+        return false;
     }
 
     private void fillFilteredImage(BufferedImage src, int[][] matrix, BufferedImage filtered) {
@@ -103,8 +101,7 @@ public class ConversionsCw6 {
         for (int i = 2 * matrix.length; i < filtered.getWidth() - 2 * matrix.length; i++) {
             for (int j = 2 * matrix.length; j < filtered.getHeight() - 2 * matrix.length; j++) {
 
-                int passing = checkPassing(matrix, half, filtered, i, j);
-                if (passing == matrixSize) {
+                if (checkPassing(matrix, half, filtered, i, j)) {
                     filtered.setRGB(i, j, 1);
                 } else {
                     // filtered.setRGB(i, j, src.getRGB(i, j));
@@ -130,8 +127,7 @@ public class ConversionsCw6 {
                 red = new Color(filtered.getRGB(i, j)).getRed();
                 green = new Color(filtered.getRGB(i, j)).getGreen();
                 blue = new Color(filtered.getRGB(i, j)).getBlue();
-                int passing = checkPassing(matrix, half, filtered, i, j);
-                if (passing == matrixSize) {
+                if (checkPassing(matrix, half, filtered, i, j)) {
                     switch (rgb) {
                         case R:
                             red = 0;
@@ -167,8 +163,8 @@ public class ConversionsCw6 {
                 red = new Color(filtered.getRGB(i, j)).getRed();
                 green = new Color(filtered.getRGB(i, j)).getGreen();
                 blue = new Color(filtered.getRGB(i, j)).getBlue();
-                int passing = checkPassing(matrix, half, filtered, i, j);
-                if (passing == matrixSize) {
+
+                if (checkPassing(matrix, half, filtered, i, j)) {
                     switch (rgb) {
                         case R:
                             red = 1;
