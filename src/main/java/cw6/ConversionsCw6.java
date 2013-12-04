@@ -171,13 +171,13 @@ public class ConversionsCw6 {
                 if (passing == matrixSize) {
                     switch (rgb) {
                         case R:
-                            red = 0;
+                            red = 1;
                             break;
                         case G:
-                            green = 0;
+                            green = 1;
                             break;
                         case B:
-                            blue = 0;
+                            blue = 1;
                             break;
                     }
                     filtered.setRGB(i, j, conversionsCommon.colorToRGB(red, green, blue));
