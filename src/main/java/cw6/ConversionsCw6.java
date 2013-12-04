@@ -22,20 +22,50 @@ public class ConversionsCw6 {
 
     public BufferedImage erosion(Picture picture, String file) throws IOException {
         BufferedImage src = conversionsCw4.otsuBinaryConversion(picture);
-        BufferedImage filtered = new BufferedImage(src.getWidth(), src.getHeight(), src.getType());
         int matrix[][] = readerUtil.getFileMatrix(file);
-        int se[][] = readerUtil.multiplyMatrix(matrix, filtered.getWidth(), filtered.getHeight());
+        int half = matrix.length / 2;
+        int matrixSize = matrix.length * matrix[0].length;
+        BufferedImage filtered = new BufferedImage(src.getWidth() + 2 * matrix.length, src.getHeight() + 2 * matrix.length,
+                src.getType());
 
-        for (int i = 0; i < filtered.getWidth(); i++) {
-            for (int j = 0; j < filtered.getHeight(); j++) {
-                if (se[i][j] == 0) {
-                    filtered.setRGB(i, j, 0);
+        fillFilteredImage(src, matrix, filtered);
+
+        for (int i = 2 * matrix.length; i < filtered.getWidth() - 2 * matrix.length; i++) {
+            for (int j = 2 * matrix.length; j < filtered.getHeight() - 2 * matrix.length; j++) {
+                int passing = checkPassing(matrix, half, filtered, i, j);
+
+                if (passing == matrixSize) {
+                    src.setRGB(i, j, 0);
                 } else {
-                    filtered.setRGB(i, j, src.getRGB(i, j));
+                    //filtered.setRGB(i, j, src.getRGB(i, j));
                 }
             }
         }
         return filtered;
+    }
+
+    private int checkPassing(int[][] matrix, int half, BufferedImage filtered, int i, int j) {
+        int passing = 0;
+        for (int s = 0; s < matrix.length; s++) {
+            for (int c = 0; c < matrix[s].length; c++) {
+                if (filtered.getRGB(i - half + s, j - half + c) == matrix[s][c]) {
+                    passing++;
+                }
+            }
+        }
+        return passing;
+    }
+
+    private void fillFilteredImage(BufferedImage src, int[][] matrix, BufferedImage filtered) {
+        for (int k = 0; k < filtered.getWidth(); k++) {
+            for (int w = 0; w < filtered.getHeight(); w++) {
+                if (k >= 2 * matrix.length && w >= 2 * matrix.length) {
+                    filtered.setRGB(k, w, src.getRGB(k - matrix.length * 2, w - matrix.length * 2));
+                } else {
+                    filtered.setRGB(k, w, -1);
+                }
+            }
+        }
     }
 
     public BufferedImage circleErosion(Picture picture, int r) {
@@ -61,19 +91,24 @@ public class ConversionsCw6 {
 
     public BufferedImage dilatation(Picture picture, String file) throws IOException {
         BufferedImage src = conversionsCw4.otsuBinaryConversion(picture);
-        BufferedImage filtered = new BufferedImage(src.getWidth(), src.getHeight(), src.getType());
         int matrix[][] = readerUtil.getFileMatrix(file);
-        int se[][] = readerUtil.multiplyMatrix(matrix, filtered.getWidth(), filtered.getHeight());
+        int half = matrix.length / 2;
+        int matrixSize = matrix.length * matrix[0].length;
+        BufferedImage filtered = new BufferedImage(src.getWidth() + 2 * matrix.length, src.getHeight() + 2 * matrix.length,
+                src.getType());
+        fillFilteredImage(src, matrix, filtered);
+        for (int i = 2 * matrix.length; i < filtered.getWidth() - 2 * matrix.length; i++) {
+            for (int j = 2 * matrix.length; j < filtered.getHeight() - 2 * matrix.length; j++) {
 
-        for (int i = 0; i < filtered.getWidth(); i++) {
-            for (int j = 0; j < filtered.getHeight(); j++) {
-                if (se[i][j] == 1) {
+                int passing = checkPassing(matrix, half, filtered, i, j);
+                if (passing == matrixSize) {
                     filtered.setRGB(i, j, 1);
                 } else {
-                    filtered.setRGB(i, j, src.getRGB(i, j));
+                    // filtered.setRGB(i, j, src.getRGB(i, j));
                 }
             }
         }
+
         return filtered;
     }
 
