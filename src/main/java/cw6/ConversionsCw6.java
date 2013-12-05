@@ -2,6 +2,7 @@ package cw6;
 
 import common.ConversionsCommon;
 import common.Picture;
+import common.ReaderUtil;
 import cw4.ConversionsCw4;
 
 import java.awt.*;
@@ -32,14 +33,14 @@ public class ConversionsCw6 {
 
         for (int i = 2 * matrix.length; i < filtered.getWidth() - 2 * matrix.length; i++) {
             for (int j = 2 * matrix.length; j < filtered.getHeight() - 2 * matrix.length; j++) {
-                if (checkPassing(matrix, half, filtered, i, j)) {
-                    filtered.setRGB(i, j, 0);
+                if (countPassing(matrix, half, filtered, i, j) == matrixSize) {
+                    src.setRGB(i, j, 0);
                 } else {
                     //filtered.setRGB(i, j, src.getRGB(i, j));
                 }
             }
         }
-        return filtered;
+        return src;
     }
 
     private boolean checkPassing(int[][] matrix, int half, BufferedImage filtered, int i, int j) {
@@ -57,6 +58,18 @@ public class ConversionsCw6 {
         return false;
     }
 
+    private int countPassing(int[][] matrix, int half, BufferedImage filtered, int i, int j) {
+        int passing = 0;
+        for (int s = 0; s < matrix.length; s++) {
+            for (int c = 0; c < matrix[s].length; c++) {
+                if (filtered.getRGB(i - half + s, j - half + c) == matrix[s][c]) {
+                    passing++;
+                }
+            }
+        }
+        return passing;
+    }
+
     private void fillFilteredImage(BufferedImage src, int[][] matrix, BufferedImage filtered) {
         for (int k = 0; k < filtered.getWidth(); k++) {
             for (int w = 0; w < filtered.getHeight(); w++) {
@@ -71,22 +84,27 @@ public class ConversionsCw6 {
 
     public BufferedImage circleErosion(Picture picture, int r) {
         BufferedImage src = conversionsCw4.otsuBinaryConversion(picture);
-        BufferedImage filtered = new BufferedImage(src.getWidth(), src.getHeight(), src.getType());
+
         if (r * 2 > src.getWidth() || r * 2 > src.getHeight()) {
             throw new RuntimeException("R is too large");
         }
         int[][] matrix = defineCircleMatrix(r, r + 10, r + 10);
-        int[][] se = readerUtil.multiplyMatrix(matrix, src.getWidth(), src.getHeight());
-        for (int i = 0; i < filtered.getWidth(); i++) {
-            for (int j = 0; j < filtered.getHeight(); j++) {
-                if (se[i][j] == 0) {
-                    filtered.setRGB(i, j, 0);
+        int half = matrix.length / 2;
+        int matrixSize = matrix.length * matrix[0].length;
+        BufferedImage filtered = new BufferedImage(src.getWidth() + 2 * matrix.length, src.getHeight() + 2 * matrix.length,
+                src.getType());
+
+        fillFilteredImage(src, matrix, filtered);
+        for (int i = 2 * matrix.length; i < filtered.getWidth() - 2 * matrix.length; i++) {
+            for (int j = 2 * matrix.length; j < filtered.getHeight() - 2 * matrix.length; j++) {
+                if (countPassing(matrix, half, filtered, i, j) == matrixSize) {
+                    src.setRGB(i, j, 0);
                 } else {
-                    filtered.setRGB(i, j, src.getRGB(i, j));
+                    //filtered.setRGB(i, j, src.getRGB(i, j));
                 }
             }
         }
-        return filtered;
+        return src;
 
     }
 
@@ -102,14 +120,14 @@ public class ConversionsCw6 {
             for (int j = 2 * matrix.length; j < filtered.getHeight() - 2 * matrix.length; j++) {
 
                 if (checkPassing(matrix, half, filtered, i, j)) {
-                    filtered.setRGB(i, j, 1);
+                    src.setRGB(i, j, 1);
                 } else {
                     // filtered.setRGB(i, j, src.getRGB(i, j));
                 }
             }
         }
 
-        return filtered;
+        return src;
     }
 
     public BufferedImage erosionForRGB(Picture picture, String file, String rgb) throws IOException {
@@ -140,13 +158,13 @@ public class ConversionsCw6 {
                             break;
                     }
 
-                    filtered.setRGB(i, j, conversionsCommon.colorToRGB(red, green, blue));
+                    src.setRGB(i, j, conversionsCommon.colorToRGB(red, green, blue));
                 } else {
-                    filtered.setRGB(i, j, src.getRGB(i, j));
+                    // filtered.setRGB(i, j, src.getRGB(i, j));
                 }
             }
         }
-        return filtered;
+        return src;
     }
 
     public BufferedImage dilatationForRGB(Picture picture, String file, String rgb) throws IOException {
@@ -176,13 +194,13 @@ public class ConversionsCw6 {
                             blue = 1;
                             break;
                     }
-                    filtered.setRGB(i, j, conversionsCommon.colorToRGB(red, green, blue));
+                    src.setRGB(i, j, conversionsCommon.colorToRGB(red, green, blue));
                 } else {
-                    filtered.setRGB(i, j, src.getRGB(i, j));
+                    // filtered.setRGB(i, j, src.getRGB(i, j));
                 }
             }
         }
-        return filtered;
+        return src;
     }
 
     private int[][] defineCircleMatrix(int r, int w, int h) {
@@ -190,7 +208,7 @@ public class ConversionsCw6 {
         for (int i = 0; i < w; i++) {
             for (int j = 0; j < h; j++) {
                 if (i * i + j * j < r * r) {
-                    matrix[i][j] = 1;
+                    matrix[i][j] = 0;
                 }
             }
         }

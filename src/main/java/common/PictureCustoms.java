@@ -7,6 +7,7 @@ import cw3.Cw3;
 import cw4.Cw4;
 import cw5.Cw5;
 import cw6.Cw6;
+import cw7.Cw7;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,6 +23,7 @@ public class PictureCustoms {
         Cw4 cw4 = new Cw4(picture);
         Cw5 cw5 = new Cw5(picture);
         Cw6 cw6 = new Cw6(picture);
+        Cw7 cw7 = new Cw7(picture);
 
     }
 

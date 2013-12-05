@@ -1,4 +1,4 @@
-package cw6;
+package common;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -29,7 +29,10 @@ public class ReaderUtil {
         while (line != null) {
             String numbers[] = line.split("\\t");
             for (int i = 0; i < numbers.length; i++) {
-                result[k][i] = Integer.parseInt(numbers[i]);
+                if (!numbers[i].equals("x"))
+                    result[k][i] = Integer.parseInt(numbers[i]);
+                else
+                    result[k][i] = Integer.MIN_VALUE;
             }
             k++;
             line = reader.readLine();

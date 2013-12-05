@@ -1,4 +1,4 @@
-import cw6.ReaderUtil;
+import common.ReaderUtil;
 import org.junit.Assert;
 import org.junit.Test;
 
