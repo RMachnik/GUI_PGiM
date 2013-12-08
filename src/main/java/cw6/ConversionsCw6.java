@@ -34,7 +34,7 @@ public class ConversionsCw6 {
         for (int i = 2 * matrix.length; i < filtered.getWidth() - 2 * matrix.length; i++) {
             for (int j = 2 * matrix.length; j < filtered.getHeight() - 2 * matrix.length; j++) {
                 if (checkPassing(matrix, half, filtered, i, j)) {
-                    src.setRGB(i, j, 0);
+                    src.setRGB(i-2 * matrix.length, j-2 * matrix.length, 0);
                 } else {
                     //filtered.setRGB(i, j, src.getRGB(i, j));
                 }
@@ -99,7 +99,7 @@ public class ConversionsCw6 {
         for (int i = 2 * matrix.length; i < filtered.getWidth() - 2 * matrix.length; i++) {
             for (int j = 2 * matrix.length; j < filtered.getHeight() - 2 * matrix.length; j++) {
                 if (countPassing(matrix, half, filtered, i, j) == matrixSize) {
-                    src.setRGB(i, j, 0);
+                    src.setRGB(i-2 * matrix.length, j-2 * matrix.length, 0);
                 } else {
                     //filtered.setRGB(i, j, src.getRGB(i, j));
                 }
@@ -126,7 +126,7 @@ public class ConversionsCw6 {
             for (int j = 2 * matrix.length; j < filtered.getHeight() - 2 * matrix.length; j++) {
 
                 if (checkPassing(matrix, half, filtered, i, j)) {
-                    src.setRGB(i, j, 1);
+                    src.setRGB(i-2 * matrix.length, j-2 * matrix.length, 1);
                 } else {
                     // filtered.setRGB(i, j, src.getRGB(i, j));
                 }
@@ -164,7 +164,7 @@ public class ConversionsCw6 {
                             break;
                     }
 
-                    src.setRGB(i, j, conversionsCommon.colorToRGB24Bits(red, green, blue));
+                    src.setRGB(i-2 * matrix.length, j-2 * matrix.length, conversionsCommon.colorToRGB24Bits(red, green, blue));
                 } else {
                     // filtered.setRGB(i, j, src.getRGB(i, j));
                 }
@@ -200,7 +200,7 @@ public class ConversionsCw6 {
                             blue = 1;
                             break;
                     }
-                    src.setRGB(i, j, conversionsCommon.colorToRGB24Bits(red, green, blue));
+                    src.setRGB(i-2 * matrix.length, j-2 * matrix.length, conversionsCommon.colorToRGB24Bits(red, green, blue));
                 } else {
                     // filtered.setRGB(i, j, src.getRGB(i, j));
                 }

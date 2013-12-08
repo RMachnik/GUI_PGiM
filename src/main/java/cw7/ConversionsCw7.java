@@ -29,7 +29,7 @@ public class ConversionsCw7 {
         for (int i = 2 * matrix.length; i < filtered.getWidth() - 2 * matrix.length; i++) {
             for (int j = 2 * matrix.length; j < filtered.getHeight() - 2 * matrix.length; j++) {
                 if (countPassing(matrix, half, filtered, i, j) == matrixSize) {
-                    src.setRGB(i, j, 0);
+                    src.setRGB(i - 2 * matrix.length, j - 2 * matrix.length, 0);
                 }
             }
         }
@@ -49,7 +49,7 @@ public class ConversionsCw7 {
         for (int i = 2 * matrix.length; i < filtered.getWidth() - 2 * matrix.length; i++) {
             for (int j = 2 * matrix.length; j < filtered.getHeight() - 2 * matrix.length; j++) {
                 if (checkPassing(matrix, half, filtered, i, j)) {
-                    src.setRGB(i, j, 0);
+                    src.setRGB(i - 2 * matrix.length, j - 2 * matrix.length, 0);
                 }
             }
         }
