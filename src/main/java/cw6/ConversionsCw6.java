@@ -33,7 +33,7 @@ public class ConversionsCw6 {
 
         for (int i = 2 * matrix.length; i < filtered.getWidth() - 2 * matrix.length; i++) {
             for (int j = 2 * matrix.length; j < filtered.getHeight() - 2 * matrix.length; j++) {
-                if (countPassing(matrix, half, filtered, i, j) == matrixSize) {
+                if (checkPassing(matrix, half, filtered, i, j)) {
                     src.setRGB(i, j, 0);
                 } else {
                     //filtered.setRGB(i, j, src.getRGB(i, j));
@@ -50,6 +50,7 @@ public class ConversionsCw6 {
                 red = new Color(filtered.getRGB(i - half + s, j - half + c)).getRed();
                 green = new Color(filtered.getRGB(i - half + s, j - half + c)).getGreen();
                 blue = new Color(filtered.getRGB(i - half + s, j - half + c)).getBlue();
+                // System.out.println(red);
                 if (red == matrix[s][c]) {
                     return true;
                 }
@@ -103,7 +104,12 @@ public class ConversionsCw6 {
                     //filtered.setRGB(i, j, src.getRGB(i, j));
                 }
             }
-        }
+        }/*
+        for (int i = 0; i < src.getWidth(); i++) {
+            for (int j = 0; j < src.getHeight(); j++) {
+                System.out.println(src.getRGB(i, j));
+            }
+        }*/
         return src;
 
     }
@@ -202,15 +208,17 @@ public class ConversionsCw6 {
         }
         return src;
     }
-
+    //Todo do poprawy element strukturalny
     private int[][] defineCircleMatrix(int r, int w, int h) {
         int[][] matrix = new int[w][h];
         for (int i = 0; i < w; i++) {
             for (int j = 0; j < h; j++) {
                 if (i * i + j * j < r * r) {
-                    matrix[i][j] = 0;
+                    matrix[i][j] = 1;
                 }
+                System.out.print(matrix[i][j]);
             }
+            System.out.println();
         }
         return matrix;
     }

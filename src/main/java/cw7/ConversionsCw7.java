@@ -17,7 +17,7 @@ public class ConversionsCw7 {
 
     public BufferedImage erosion(Picture picture, String file) throws IOException {
 
-        BufferedImage src = picture.getImage();
+        BufferedImage src = conversionsCw4.otsuBinaryConversion(picture);
         int matrix[][] = readerUtil.getFileMatrix(file);
         int half = matrix.length / 2;
         int matrixSize = getMatrixSizeWithoutEmptyFields(matrix);
@@ -29,13 +29,13 @@ public class ConversionsCw7 {
         for (int i = 2 * matrix.length; i < filtered.getWidth() - 2 * matrix.length; i++) {
             for (int j = 2 * matrix.length; j < filtered.getHeight() - 2 * matrix.length; j++) {
                 if (countPassing(matrix, half, filtered, i, j) == matrixSize) {
-                    filtered.setRGB(i, j, 0);
+                    src.setRGB(i, j, 0);
                 } else {
                     //filtered.setRGB(i, j, src.getRGB(i, j));
                 }
             }
         }
-        return filtered;
+        return src;
     }
 
     public BufferedImage erosion(BufferedImage srcPic, int matrix[][]) throws IOException {
@@ -51,13 +51,13 @@ public class ConversionsCw7 {
         for (int i = 2 * matrix.length; i < filtered.getWidth() - 2 * matrix.length; i++) {
             for (int j = 2 * matrix.length; j < filtered.getHeight() - 2 * matrix.length; j++) {
                 if (countPassing(matrix, half, filtered, i, j) == matrixSize) {
-                    filtered.setRGB(i, j, 0);
+                    src.setRGB(i, j, 0);
                 } else {
                     //filtered.setRGB(i, j, src.getRGB(i, j));
                 }
             }
         }
-        return filtered;
+        return src;
     }
 
     public BufferedImage iterativeMethod(Picture picture, String file) throws IOException {
