@@ -4,9 +4,7 @@ import common.ConversionsCommon;
 import common.Picture;
 
 import java.awt.*;
-import java.awt.color.ColorSpace;
 import java.awt.image.BufferedImage;
-import java.awt.image.ColorConvertOp;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -44,7 +42,7 @@ public class ConversionsCw1
                 int newval = pixel[color];
 
                 newPixelTab[color] = newval;
-                newPixel = conversionsCommon.colorToRGB(newPixelTab[0], newPixelTab[1], newPixelTab[2]);
+                newPixel = conversionsCommon.colorToRGB24Bits(newPixelTab[0], newPixelTab[1], newPixelTab[2]);
 
                 rgb.setRGB(i, j, newPixel);
             }
@@ -169,12 +167,12 @@ public class ConversionsCw1
 
     private  int black()
     {
-        return conversionsCommon.colorToRGB(0, 0, 0);
+        return conversionsCommon.colorToRGB24Bits(0, 0, 0);
     }
 
     private  int white()
     {
-        return conversionsCommon.colorToRGB(ConversionsCommon.RBG_MAX, ConversionsCommon.RBG_MAX, ConversionsCommon.RBG_MAX);
+        return conversionsCommon.colorToRGB24Bits(ConversionsCommon.RBG_MAX, ConversionsCommon.RBG_MAX, ConversionsCommon.RBG_MAX);
     }
 
     public  BufferedImage[] transformRGBToVHS(BufferedImage original, double kr, double kb)
@@ -195,10 +193,10 @@ public class ConversionsCw1
                 y = kr * red + (1 - kr - kb) * green + kb * blue;
                 cb = (0.5) * ((blue - y) / (1 - kb));
                 cr = (0.5) * ((red - y) / (1 - kr));
-                int newPixel = conversionsCommon.colorToRGB(y, y, y);
+                int newPixel = conversionsCommon.colorToRGB24Bits(y, y, y);
                 vhs.setRGB(i, j, newPixel);
-                vhs1.setRGB(i,j,conversionsCommon.colorToRGB(cb,cb,cb));
-                vhs2.setRGB(i,j,conversionsCommon.colorToRGB(cr,cr,cr));
+                vhs1.setRGB(i,j,conversionsCommon.colorToRGB24Bits(cb, cb, cb));
+                vhs2.setRGB(i,j,conversionsCommon.colorToRGB24Bits(cr, cr, cr));
             }
         }
         tab[0] =vhs;
@@ -213,7 +211,6 @@ public class ConversionsCw1
         BufferedImage rgb = new BufferedImage(original.getWidth(), original.getHeight(), original.getType());
         double y, cb, cr;
         int red, green, blue;
-        //todo do poprawy
         for (int i = 0; i < original.getWidth(); i++)
         {
             for (int j = 0; j < original.getHeight(); j++)
@@ -233,7 +230,7 @@ public class ConversionsCw1
                 red = (int) (y + 1.492*(cr -128));
                 green = (int) (y - 0.34414*(cb-128) - 0.71414*(cr -128));
                 blue = (int) (y + 1.772 * (cb -128));
-                int newPixel = conversionsCommon.colorToRGB(red, green, blue);
+                int newPixel = conversionsCommon.colorToRGB24Bits(red, green, blue);
                 rgb.setRGB(i, j, newPixel);
             }
         }
@@ -249,7 +246,7 @@ public class ConversionsCw1
                 red = new Color(src.getRGB(i, j)).getRed();
                 green = new Color(src.getRGB(i, j)).getGreen();
                 blue = new Color(src.getRGB(i, j)).getBlue();
-                filtered.setRGB(i,j,conversionsCommon.colorToRGB(0.2*red,0.7*green,0.1*blue));
+                filtered.setRGB(i,j,conversionsCommon.colorToRGB24Bits(0.2 * red, 0.7 * green, 0.1 * blue));
             }
         }
         return filtered;

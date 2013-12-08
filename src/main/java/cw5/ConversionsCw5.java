@@ -22,7 +22,7 @@ public class ConversionsCw5 {
                 red = new Color(src.getRGB(i, j)).getRed();
                 green = new Color(src.getRGB(i, j)).getGreen();
                 blue = new Color(src.getRGB(i, j)).getBlue();
-                int newPixel = conversionsCommon.colorToRGB(red + a, green + a, blue + a);
+                int newPixel = conversionsCommon.colorToRGB24Bits(red + a, green + a, blue + a);
                 filtered.setRGB(i, j, newPixel);
             }
         }

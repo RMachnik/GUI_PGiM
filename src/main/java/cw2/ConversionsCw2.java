@@ -50,7 +50,7 @@ public class ConversionsCw2 {
                 blue = normalise(blue);
                 red = normalise(red);
                 green = normalise(green);
-                newPixel = conversionsCommon.colorToRGB(red, green, blue);
+                newPixel = conversionsCommon.colorToRGB24Bits(red, green, blue);
                 filtered.setRGB(i, j, newPixel);
             }
         }
@@ -75,7 +75,7 @@ public class ConversionsCw2 {
                 red = function.apply(new Pair(argument, red));
                 blue = function.apply(new Pair(argument, blue));
                 green = function.apply(new Pair(argument, green));
-                newPixel = conversionsCommon.colorToRGB(red, green, blue);
+                newPixel = conversionsCommon.colorToRGB24Bits(red, green, blue);
                 filtered.setRGB(i, j, newPixel);
             }
         }
@@ -147,7 +147,7 @@ public class ConversionsCw2 {
                     }
                 }
                 y += h;
-                small.setRGB(i, j, conversionsCommon.colorToRGB(getAvg(r), getAvg(g), getAvg(b)));
+                small.setRGB(i, j, conversionsCommon.colorToRGB24Bits(getAvg(r), getAvg(g), getAvg(b)));
             }
             x += h;
             y = 0;

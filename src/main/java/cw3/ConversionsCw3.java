@@ -107,7 +107,7 @@ public class ConversionsCw3 {
                 red = new Color(src.getRGB(i, j)).getRed();
                 green = new Color(src.getRGB(i, j)).getGreen();
                 blue = new Color(src.getRGB(i, j)).getBlue();
-                int newPixel = conversionsCommon.colorToRGB(LUT[red % ConversionsCommon.RBG_MAX], LUT[green % ConversionsCommon.RBG_MAX], LUT[blue % ConversionsCommon.RBG_MAX]);
+                int newPixel = conversionsCommon.colorToRGB24Bits(LUT[red % ConversionsCommon.RBG_MAX], LUT[green % ConversionsCommon.RBG_MAX], LUT[blue % ConversionsCommon.RBG_MAX]);
                 result.setRGB(i, j, newPixel);
 
             }
@@ -175,7 +175,7 @@ public class ConversionsCw3 {
                 red = new Color(src.getRGB(i, j)).getRed();
                 green = new Color(src.getRGB(i, j)).getGreen();
                 blue = new Color(src.getRGB(i, j)).getBlue();
-                int newPixel = conversionsCommon.colorToRGB(LUTr[red % ConversionsCommon.RBG_MAX], LUTg[green % ConversionsCommon.RBG_MAX], LUTb[blue % ConversionsCommon.RBG_MAX]);
+                int newPixel = conversionsCommon.colorToRGB24Bits(LUTr[red % ConversionsCommon.RBG_MAX], LUTg[green % ConversionsCommon.RBG_MAX], LUTb[blue % ConversionsCommon.RBG_MAX]);
                 result.setRGB(i, j, newPixel);
             }
         }
@@ -211,7 +211,7 @@ public class ConversionsCw3 {
                 y = (int) (ConversionsCommon.KR * red + (1 - ConversionsCommon.KR - ConversionsCommon.KB) * green + ConversionsCommon.KB * blue);
                 cb = (int) ((0.5) * ((blue - y) / (1 - ConversionsCommon.KB)));
                 cr = (int) ((0.5) * ((red - y) / (1 - ConversionsCommon.KR)));
-                int newPixel = conversionsCommon.colorToRGB(LUTgray[y % ConversionsCommon.RBG_MAX], LUTgray[y % ConversionsCommon.RBG_MAX], LUTgray[y % ConversionsCommon.RBG_MAX]);
+                int newPixel = conversionsCommon.colorToRGB24Bits(LUTgray[y % ConversionsCommon.RBG_MAX], LUTgray[y % ConversionsCommon.RBG_MAX], LUTgray[y % ConversionsCommon.RBG_MAX]);
                 result.setRGB(i, j, newPixel);
             }
         }
@@ -254,7 +254,7 @@ public class ConversionsCw3 {
                 red = new Color(src.getRGB(i, j)).getRed();
                 green = new Color(src.getRGB(i, j)).getGreen();
                 blue = new Color(src.getRGB(i, j)).getBlue();
-                int newPixel = conversionsCommon.colorToRGB(LUTr[red % ConversionsCommon.RBG_MAX], LUTg[green % ConversionsCommon.RBG_MAX], LUTb[blue % ConversionsCommon.RBG_MAX]);
+                int newPixel = conversionsCommon.colorToRGB24Bits(LUTr[red % ConversionsCommon.RBG_MAX], LUTg[green % ConversionsCommon.RBG_MAX], LUTb[blue % ConversionsCommon.RBG_MAX]);
                 result.setRGB(i, j, newPixel);
             }
         }

@@ -31,7 +31,7 @@ public class ConversionsCw4 {
                 } else {
                     y = ConversionsCommon.RBG_MAX;
                 }
-                int newPixel = conversionsCommon.colorToRGB(y, y, y);
+                int newPixel = conversionsCommon.colorToRGB24Bits(y, y, y);
                 filtered.setRGB(i, j, newPixel);
             }
         }
@@ -54,7 +54,7 @@ public class ConversionsCw4 {
                 } else {
                     y = ConversionsCommon.RBG_MAX;
                 }
-                int newPixel = conversionsCommon.colorToRGB(y, y, y);
+                int newPixel = conversionsCommon.colorToRGB24Bits(y, y, y);
                 filtered.setRGB(i, j, newPixel);
             }
         }
@@ -63,7 +63,8 @@ public class ConversionsCw4 {
 
     public BufferedImage otsuBinaryConversion(Picture picture) {
         BufferedImage src = picture.getImage();
-        BufferedImage filtered = new BufferedImage(src.getWidth(), src.getHeight(), src.getType());
+        //little hack to convert image to 24bits
+        BufferedImage filtered = new BufferedImage(src.getWidth(), src.getHeight(), BufferedImage.TYPE_3BYTE_BGR);
         int red, green, blue, y;
 
         Map<String, Map<Integer, Integer>> histo = conversionsCw3.createHistogram(picture);
@@ -80,7 +81,7 @@ public class ConversionsCw4 {
                 } else {
                     y = ConversionsCommon.RBG_MAX;
                 }
-                int newPixel = conversionsCommon.colorToRGB(y, y, y);
+                int newPixel = conversionsCommon.colorToRGB24Bits(y, y, y);
                 filtered.setRGB(i, j, newPixel);
             }
         }
@@ -192,7 +193,7 @@ public class ConversionsCw4 {
                 } else {
                     y = ConversionsCommon.RBG_MAX;
                 }
-                int newPixel = conversionsCommon.colorToRGB(y, y, y);
+                int newPixel = conversionsCommon.colorToRGB24Bits(y, y, y);
                 filtered.setRGB(i, j, newPixel);
 
 
@@ -244,7 +245,7 @@ public class ConversionsCw4 {
                     }
                 }
 
-                int newPixel = conversionsCommon.colorToRGB(y, y, y);
+                int newPixel = conversionsCommon.colorToRGB24Bits(y, y, y);
                 filtered.setRGB(i, j, newPixel);
 
 
@@ -264,12 +265,12 @@ public class ConversionsCw4 {
                 blue = new Color(src.getRGB(i, j)).getBlue();
                 int newPixel;
                 if (green > red && green > blue) {
-                    newPixel = conversionsCommon.colorToRGB(red, green, blue);
+                    newPixel = conversionsCommon.colorToRGB24Bits(red, green, blue);
                     filtered.setRGB(i, j, newPixel);
 
                 } else {
                     red = green = blue = 0;
-                    newPixel = conversionsCommon.colorToRGB(red, green, blue);
+                    newPixel = conversionsCommon.colorToRGB24Bits(red, green, blue);
                     filtered.setRGB(i, j, newPixel);
                 }
 

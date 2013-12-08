@@ -37,36 +37,30 @@ public class Cw7 {
             }
         });
 
-        JMenuItem zad2a = new JMenuItem("zad2a");
-        zad2a.addActionListener(new ActionListener() {
+        JMenuItem zad2 = new JMenuItem("zad2a");
+        zad2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    PictureCustoms.showImageInNewWindow(conversionsCw7.iterativeMethod(picture,
-                            "static/cw7_zad2a.txt"));
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
+                IterationArgDialog iterationArgDialog = new IterationArgDialog(picture, false,
+                        "Pass number of iterations");
+                iterationArgDialog.repaint();
             }
         });
 
-        JMenuItem zad2b = new JMenuItem("zad2b");
-        zad2b.addActionListener(new ActionListener() {
+        JMenuItem zad3 = new JMenuItem("zad3b");
+        zad3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    PictureCustoms.showImageInNewWindow(conversionsCw7.iterativeMethod(picture,
-                            "static/cw7_zad2b.txt"));
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
+                IterationZad3ArgDialog iterationZad3ArgDialog = new IterationZad3ArgDialog(picture, false,
+                        "Pass number of iterations");
+                iterationZad3ArgDialog.repaint();
             }
         });
 
 
         menuCw7.add(zad1);
-        menuCw7.add(zad2a);
-        menuCw7.add(zad2b);
+        menuCw7.add(zad2);
+        menuCw7.add(zad3);
 
     }
 }

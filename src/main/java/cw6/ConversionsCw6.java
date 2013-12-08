@@ -164,7 +164,7 @@ public class ConversionsCw6 {
                             break;
                     }
 
-                    src.setRGB(i, j, conversionsCommon.colorToRGB(red, green, blue));
+                    src.setRGB(i, j, conversionsCommon.colorToRGB24Bits(red, green, blue));
                 } else {
                     // filtered.setRGB(i, j, src.getRGB(i, j));
                 }
@@ -200,7 +200,7 @@ public class ConversionsCw6 {
                             blue = 1;
                             break;
                     }
-                    src.setRGB(i, j, conversionsCommon.colorToRGB(red, green, blue));
+                    src.setRGB(i, j, conversionsCommon.colorToRGB24Bits(red, green, blue));
                 } else {
                     // filtered.setRGB(i, j, src.getRGB(i, j));
                 }
@@ -208,12 +208,13 @@ public class ConversionsCw6 {
         }
         return src;
     }
-    //Todo do poprawy element strukturalny
+
     private int[][] defineCircleMatrix(int r, int w, int h) {
         int[][] matrix = new int[w][h];
+        int half = w / 2;
         for (int i = 0; i < w; i++) {
             for (int j = 0; j < h; j++) {
-                if (i * i + j * j < r * r) {
+                if ((half - i) * (half - i) + (half - j) * (half - j) < r) {
                     matrix[i][j] = 1;
                 }
                 System.out.print(matrix[i][j]);

@@ -30,8 +30,6 @@ public class ConversionsCw7 {
             for (int j = 2 * matrix.length; j < filtered.getHeight() - 2 * matrix.length; j++) {
                 if (countPassing(matrix, half, filtered, i, j) == matrixSize) {
                     src.setRGB(i, j, 0);
-                } else {
-                    //filtered.setRGB(i, j, src.getRGB(i, j));
                 }
             }
         }
@@ -50,26 +48,31 @@ public class ConversionsCw7 {
 
         for (int i = 2 * matrix.length; i < filtered.getWidth() - 2 * matrix.length; i++) {
             for (int j = 2 * matrix.length; j < filtered.getHeight() - 2 * matrix.length; j++) {
-                if (countPassing(matrix, half, filtered, i, j) == matrixSize) {
+                if (checkPassing(matrix, half, filtered, i, j)) {
                     src.setRGB(i, j, 0);
-                } else {
-                    //filtered.setRGB(i, j, src.getRGB(i, j));
                 }
             }
         }
         return src;
     }
 
-    public BufferedImage iterativeMethod(Picture picture, String file) throws IOException {
-        BufferedImage first = erosion(picture, file);
-        int matrix[][] = readerUtil.getFileMatrix(file);
-        int[][] clock90 = rotateClockwise(matrix);
-        BufferedImage second = erosion(first, clock90);
-        int[][] clock180 = rotateClockwise(clock90);
-        BufferedImage three = erosion(second, clock180);
-        int[][] clock270 = rotateClockwise(clock180);
-        BufferedImage four = erosion(three, clock270);
-        return four;
+    public BufferedImage iterativeMethod(Picture picture, String file1, String file2,
+                                         int iterationSize) throws IOException {
+        BufferedImage first = conversionsCw4.otsuBinaryConversion(picture);
+        int matrix1[][] = readerUtil.getFileMatrix(file1);
+        int matrix2[][] = readerUtil.getFileMatrix(file2);
+        for (int k = 0; k < iterationSize; k++) {
+            for (int i = 0; i < 4; i++) {
+                matrix1 = rotateClockwise(matrix1);
+                first = erosion(first, matrix1);
+            }
+            for (int i = 0; i < 4; i++) {
+                matrix2 = rotateClockwise(matrix2);
+                first = erosion(first, matrix2);
+            }
+        }
+
+        return first;
     }
 
     private boolean checkPassing(int[][] matrix, int half, BufferedImage filtered, int i, int j) {
@@ -128,10 +131,14 @@ public class ConversionsCw7 {
         int[][] rotatedMatrix = new int[matrix.length][matrix[0].length];
         int ro = 0, co = 0;
         for (int i = rotatedMatrix.length - 1; i >= 0; i--) {
-            for (int j = 0; j < rotatedMatrix[i].length; j++)
+            for (int j = 0; j < rotatedMatrix[i].length; j++) {
                 rotatedMatrix[j][i] = matrix[ro][co++];
+                System.out.print(rotatedMatrix[i][j]);
+            }
+            System.out.println();
             co = 0;
             ro++;
+
         }
         return rotatedMatrix;
     }
