@@ -1,5 +1,6 @@
 package cw7;
 
+import common.ConversionsCommon;
 import common.Picture;
 import common.ReaderUtil;
 import cw4.ConversionsCw4;
@@ -12,8 +13,9 @@ import java.io.IOException;
  * Created by SG0219139 on 12/5/13.
  */
 public class ConversionsCw7 {
-    ConversionsCw4 conversionsCw4 = new ConversionsCw4();
-    ReaderUtil readerUtil = new ReaderUtil();
+    private ConversionsCw4 conversionsCw4 = new ConversionsCw4();
+    private ReaderUtil readerUtil = new ReaderUtil();
+    private ConversionsCommon conversionsCommon = new ConversionsCommon();
 
     public BufferedImage erosion(Picture picture, String file) throws IOException {
 
@@ -29,7 +31,12 @@ public class ConversionsCw7 {
         for (int i = 2 * matrix.length; i < filtered.getWidth() - 2 * matrix.length; i++) {
             for (int j = 2 * matrix.length; j < filtered.getHeight() - 2 * matrix.length; j++) {
                 if (countPassing(matrix, half, filtered, i, j) == matrixSize) {
-                    src.setRGB(i - 2 * matrix.length, j - 2 * matrix.length, 0);
+                    src.setRGB(i - 2 * matrix.length, j - 2 * matrix.length, conversionsCommon.colorToRGB24Bits(0, 0, 0
+                    ));
+                } else {
+                  /*  src.setRGB(i - 2 * matrix.length, j - 2 * matrix.length, conversionsCommon.colorToRGB24Bits(1,
+                            1, 1
+                    ));*/
                 }
             }
         }
@@ -48,8 +55,13 @@ public class ConversionsCw7 {
 
         for (int i = 2 * matrix.length; i < filtered.getWidth() - 2 * matrix.length; i++) {
             for (int j = 2 * matrix.length; j < filtered.getHeight() - 2 * matrix.length; j++) {
-                if (checkPassing(matrix, half, filtered, i, j)) {
-                    src.setRGB(i - 2 * matrix.length, j - 2 * matrix.length, 0);
+                if (countPassing(matrix, half, filtered, i, j) == matrixSize) {
+                    src.setRGB(i - 2 * matrix.length, j - 2 * matrix.length, conversionsCommon.colorToRGB24Bits(0, 0, 0
+                    ));
+                } else {
+                   /*src.setRGB(i - 2 * matrix.length, j - 2 * matrix.length, conversionsCommon.colorToRGB24Bits(1,
+                            1, 1
+                    ));*/
                 }
             }
         }
@@ -80,8 +92,6 @@ public class ConversionsCw7 {
         for (int s = 0; s < matrix.length; s++) {
             for (int c = 0; c < matrix[s].length; c++) {
                 red = new Color(filtered.getRGB(i - half + s, j - half + c)).getRed();
-                green = new Color(filtered.getRGB(i - half + s, j - half + c)).getGreen();
-                blue = new Color(filtered.getRGB(i - half + s, j - half + c)).getBlue();
                 if (red == matrix[s][c]) {
                     return true;
                 }
@@ -92,9 +102,11 @@ public class ConversionsCw7 {
 
     private int countPassing(int[][] matrix, int half, BufferedImage filtered, int i, int j) {
         int passing = 0;
+        int red;
         for (int s = 0; s < matrix.length; s++) {
             for (int c = 0; c < matrix[s].length; c++) {
-                if (filtered.getRGB(i - half + s, j - half + c) == matrix[s][c]) {
+                red = new Color(filtered.getRGB(i - half + s, j - half + c)).getRed();
+                if (red == matrix[s][c]) {
                     passing++;
                 }
             }
@@ -133,9 +145,8 @@ public class ConversionsCw7 {
         for (int i = rotatedMatrix.length - 1; i >= 0; i--) {
             for (int j = 0; j < rotatedMatrix[i].length; j++) {
                 rotatedMatrix[j][i] = matrix[ro][co++];
-                System.out.print(rotatedMatrix[i][j]);
+
             }
-            System.out.println();
             co = 0;
             ro++;
 

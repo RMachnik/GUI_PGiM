@@ -6,6 +6,9 @@ import cw4.ConversionsCw4;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * rafik991@gmai.com
@@ -15,6 +18,8 @@ public class ConversionsCw8 {
     public static final String R = "R";
     public static final String G = "G";
     public static final String B = "B";
+    final static int nSalt = 5;    // Percentage of salt
+    final static int nPepper = 5;
     private ConversionsCommon conversionsCommon = new ConversionsCommon();
     private ConversionsCw4 conversionsCw4 = new ConversionsCw4();
 
@@ -66,7 +71,7 @@ public class ConversionsCw8 {
         return filtered;
     }
 
-    public BufferedImage pepperSaltDysfunction(Picture picture, double prob) {
+    public BufferedImage saltAndPepperNoise(Picture picture, double prob) {
         BufferedImage src = picture.getImage();
         BufferedImage filtered = new BufferedImage(src.getWidth(), src.getHeight(), src.getType());
         int red, green, blue, newPixel;
@@ -78,14 +83,32 @@ public class ConversionsCw8 {
                 red = new Color(src.getRGB(i, j)).getRed();
                 green = new Color(src.getRGB(i, j)).getGreen();
                 blue = new Color(src.getRGB(i, j)).getBlue();
-                if (i * filtered.getWidth() + j % probability == 0) {
-                    red += randomLvl;
-                    green += randomLvl;
-                    blue += randomLvl;
-                }
                 newPixel = conversionsCommon.colorToRGB24Bits(red, green, blue);
                 filtered.setRGB(i, j, newPixel);
             }
+        }
+
+
+        int height = src.getHeight();
+        int width = src.getWidth();
+
+        int salt = height * width * nSalt / 100;    // Amount of salt
+        int pepper = height * width * nSalt / 100;  // Amount of pepper
+
+        for (int i = 0; i < salt; i++) {
+            int x = (int) (Math.random() * width);
+            int y = (int) (Math.random() * height);
+
+            filtered.setRGB(x, y, conversionsCommon.colorToRGB24Bits(ConversionsCommon.RBG_MAX,
+                    ConversionsCommon.RBG_MAX, ConversionsCommon.RBG_MAX));
+        }
+
+        for (int i = 0; i < pepper; i++) {
+            int x = (int) (Math.random() * width);
+            int y = (int) (Math.random() * height);
+
+            filtered.setRGB(x, y, conversionsCommon.colorToRGB24Bits(0,
+                    0, 0));
         }
         return filtered;
     }
@@ -111,6 +134,37 @@ public class ConversionsCw8 {
                         break;
                     case B:
                         blue = computeMean(windowSize, windowSize / 2, filtered, i, j, B);
+                        break;
+                }
+                newPixel = conversionsCommon.colorToRGB24Bits(red, green, blue);
+                src.setRGB(i - 2 * windowSize, j - 2 * windowSize, newPixel);
+
+            }
+        }
+        return src;
+    }
+
+    private BufferedImage medianFilter(Picture picture, int windowSize, String rgb) {
+        BufferedImage src = conversionsCw4.otsuBinaryConversion(picture);
+        BufferedImage filtered = new BufferedImage(src.getWidth() + 2 * windowSize,
+                src.getHeight() + 2 * windowSize,
+                src.getType());
+        fillFilteredImage(src, windowSize, filtered);
+        int red, green, blue, newPixel;
+        for (int i = 2 * windowSize; i < filtered.getWidth() - 2 * windowSize; i++) {
+            for (int j = 2 * windowSize; j < filtered.getHeight() - 2 * windowSize; j++) {
+                red = new Color(filtered.getRGB(i, j)).getRed();
+                green = new Color(filtered.getRGB(i, j)).getGreen();
+                blue = new Color(filtered.getRGB(i, j)).getBlue();
+                switch (rgb) {
+                    case R:
+                        red = computeMedian(windowSize, windowSize / 2, filtered, i, j, R);
+                        break;
+                    case G:
+                        green = computeMedian(windowSize, windowSize / 2, filtered, i, j, G);
+                        break;
+                    case B:
+                        blue = computeMedian(windowSize, windowSize / 2, filtered, i, j, B);
                         break;
                 }
                 newPixel = conversionsCommon.colorToRGB24Bits(red, green, blue);
@@ -158,4 +212,39 @@ public class ConversionsCw8 {
         }
         return count / windowSize * windowSize;
     }
+
+    private int computeMedian(int windowSize, int half, BufferedImage filtered, int i, int j, String rgb) {
+        int median = 0;
+        int red, green, blue;
+        List<Integer> array = new ArrayList<>();
+        for (int s = 0; s < windowSize; s++) {
+            for (int c = 0; c < windowSize; c++) {
+                if (filtered.getRGB(i - half + s, j - half + c) == windowSize) {
+                    red = new Color(filtered.getRGB(i, j)).getRed();
+                    green = new Color(filtered.getRGB(i, j)).getGreen();
+                    blue = new Color(filtered.getRGB(i, j)).getBlue();
+                    switch (rgb) {
+                        case R:
+                            array.add(red);
+                            break;
+                        case G:
+                            array.add(green);
+                            break;
+                        case B:
+                            array.add(blue);
+                            break;
+                    }
+                }
+            }
+        }
+        Collections.sort(array);
+
+        if (array.size() % 2 == 0) {
+            median = (array.get(array.size() - 1) + array.get(array.size())) / 2;
+        } else {
+            median = array.get(array.size() / 2);
+        }
+        return median;
+    }
 }
+

@@ -34,9 +34,7 @@ public class ConversionsCw6 {
         for (int i = 2 * matrix.length; i < filtered.getWidth() - 2 * matrix.length; i++) {
             for (int j = 2 * matrix.length; j < filtered.getHeight() - 2 * matrix.length; j++) {
                 if (checkPassing(matrix, half, filtered, i, j)) {
-                    src.setRGB(i-2 * matrix.length, j-2 * matrix.length, 0);
-                } else {
-                    //filtered.setRGB(i, j, src.getRGB(i, j));
+                    src.setRGB(i - 2 * matrix.length, j - 2 * matrix.length, 0);
                 }
             }
         }
@@ -48,9 +46,6 @@ public class ConversionsCw6 {
         for (int s = 0; s < matrix.length; s++) {
             for (int c = 0; c < matrix[s].length; c++) {
                 red = new Color(filtered.getRGB(i - half + s, j - half + c)).getRed();
-                green = new Color(filtered.getRGB(i - half + s, j - half + c)).getGreen();
-                blue = new Color(filtered.getRGB(i - half + s, j - half + c)).getBlue();
-                // System.out.println(red);
                 if (red == matrix[s][c]) {
                     return true;
                 }
@@ -61,9 +56,11 @@ public class ConversionsCw6 {
 
     private int countPassing(int[][] matrix, int half, BufferedImage filtered, int i, int j) {
         int passing = 0;
+        int red;
         for (int s = 0; s < matrix.length; s++) {
             for (int c = 0; c < matrix[s].length; c++) {
-                if (filtered.getRGB(i - half + s, j - half + c) == matrix[s][c]) {
+                red = new Color(filtered.getRGB(i - half + s, j - half + c)).getRed();
+                if (red == matrix[s][c]) {
                     passing++;
                 }
             }
@@ -98,18 +95,11 @@ public class ConversionsCw6 {
         fillFilteredImage(src, matrix, filtered);
         for (int i = 2 * matrix.length; i < filtered.getWidth() - 2 * matrix.length; i++) {
             for (int j = 2 * matrix.length; j < filtered.getHeight() - 2 * matrix.length; j++) {
-                if (countPassing(matrix, half, filtered, i, j) == matrixSize) {
-                    src.setRGB(i-2 * matrix.length, j-2 * matrix.length, 0);
-                } else {
-                    //filtered.setRGB(i, j, src.getRGB(i, j));
+                if (checkPassing(matrix, half, filtered, i, j)) {
+                    src.setRGB(i - 2 * matrix.length, j - 2 * matrix.length, 0);
                 }
             }
-        }/*
-        for (int i = 0; i < src.getWidth(); i++) {
-            for (int j = 0; j < src.getHeight(); j++) {
-                System.out.println(src.getRGB(i, j));
-            }
-        }*/
+        }
         return src;
 
     }
@@ -126,9 +116,7 @@ public class ConversionsCw6 {
             for (int j = 2 * matrix.length; j < filtered.getHeight() - 2 * matrix.length; j++) {
 
                 if (checkPassing(matrix, half, filtered, i, j)) {
-                    src.setRGB(i-2 * matrix.length, j-2 * matrix.length, 1);
-                } else {
-                    // filtered.setRGB(i, j, src.getRGB(i, j));
+                    src.setRGB(i - 2 * matrix.length, j - 2 * matrix.length, 1);
                 }
             }
         }
@@ -164,9 +152,7 @@ public class ConversionsCw6 {
                             break;
                     }
 
-                    src.setRGB(i-2 * matrix.length, j-2 * matrix.length, conversionsCommon.colorToRGB24Bits(red, green, blue));
-                } else {
-                    // filtered.setRGB(i, j, src.getRGB(i, j));
+                    src.setRGB(i - 2 * matrix.length, j - 2 * matrix.length, conversionsCommon.colorToRGB24Bits(red, green, blue));
                 }
             }
         }
@@ -200,9 +186,7 @@ public class ConversionsCw6 {
                             blue = 1;
                             break;
                     }
-                    src.setRGB(i-2 * matrix.length, j-2 * matrix.length, conversionsCommon.colorToRGB24Bits(red, green, blue));
-                } else {
-                    // filtered.setRGB(i, j, src.getRGB(i, j));
+                    src.setRGB(i - 2 * matrix.length, j - 2 * matrix.length, conversionsCommon.colorToRGB24Bits(red, green, blue));
                 }
             }
         }

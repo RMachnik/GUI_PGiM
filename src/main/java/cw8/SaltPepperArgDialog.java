@@ -26,7 +26,7 @@ public class SaltPepperArgDialog extends CommonArgDialog {
             if (arg.isEmpty()) {
                 throw new RuntimeException("Pass correct parameter!");
             }
-              setPicture(new Picture(conversionsCw8.pepperSaltDysfunction(getPicture(),
+              setPicture(new Picture(conversionsCw8.saltAndPepperNoise(getPicture(),
                       Double.parseDouble(arg)
               )));
             PictureCustoms.showImageInNewWindow(getPicture().getImage());
