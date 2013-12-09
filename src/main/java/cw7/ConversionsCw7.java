@@ -30,7 +30,7 @@ public class ConversionsCw7 {
 
         for (int i = 2 * matrix.length; i < filtered.getWidth() - 2 * matrix.length; i++) {
             for (int j = 2 * matrix.length; j < filtered.getHeight() - 2 * matrix.length; j++) {
-                if (countPassing(matrix, half, filtered, i, j) == matrixSize) {
+                if (conversionsCommon.countPassing(matrix, half, filtered, i, j) == matrixSize) {
                     src.setRGB(i - 2 * matrix.length, j - 2 * matrix.length, conversionsCommon.colorToRGB24Bits(0, 0, 0
                     ));
                 } else {
@@ -55,7 +55,7 @@ public class ConversionsCw7 {
 
         for (int i = 2 * matrix.length; i < filtered.getWidth() - 2 * matrix.length; i++) {
             for (int j = 2 * matrix.length; j < filtered.getHeight() - 2 * matrix.length; j++) {
-                if (countPassing(matrix, half, filtered, i, j) == matrixSize) {
+                if (conversionsCommon.countPassing(matrix, half, filtered, i, j) == matrixSize) {
                     src.setRGB(i - 2 * matrix.length, j - 2 * matrix.length, conversionsCommon.colorToRGB24Bits(0, 0, 0
                     ));
                 } else {
@@ -87,32 +87,7 @@ public class ConversionsCw7 {
         return first;
     }
 
-    private boolean checkPassing(int[][] matrix, int half, BufferedImage filtered, int i, int j) {
-        int red, green, blue;
-        for (int s = 0; s < matrix.length; s++) {
-            for (int c = 0; c < matrix[s].length; c++) {
-                red = new Color(filtered.getRGB(i - half + s, j - half + c)).getRed();
-                if (red == matrix[s][c]) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
 
-    private int countPassing(int[][] matrix, int half, BufferedImage filtered, int i, int j) {
-        int passing = 0;
-        int red;
-        for (int s = 0; s < matrix.length; s++) {
-            for (int c = 0; c < matrix[s].length; c++) {
-                red = new Color(filtered.getRGB(i - half + s, j - half + c)).getRed();
-                if (red == matrix[s][c]) {
-                    passing++;
-                }
-            }
-        }
-        return passing;
-    }
 
     private void fillFilteredImage(BufferedImage src, int[][] matrix, BufferedImage filtered) {
         for (int k = 0; k < filtered.getWidth(); k++) {

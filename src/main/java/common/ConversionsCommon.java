@@ -57,4 +57,31 @@ public class ConversionsCommon {
         }
         return gray;
     }
+
+    public boolean checkPassing(int[][] matrix, int half, BufferedImage filtered, int i, int j) {
+        int red, green, blue;
+        for (int s = 0; s < matrix.length; s++) {
+            for (int c = 0; c < matrix[s].length; c++) {
+                red = new Color(filtered.getRGB(i - half + s, j - half + c)).getRed();
+                if (red == matrix[s][c]) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public int countPassing(int[][] matrix, int half, BufferedImage filtered, int i, int j) {
+        int passing = 0;
+        int red;
+        for (int s = 0; s < matrix.length; s++) {
+            for (int c = 0; c < matrix[s].length; c++) {
+                red = new Color(filtered.getRGB(i - half + s, j - half + c)).getRed();
+                if (red == matrix[s][c]) {
+                    passing++;
+                }
+            }
+        }
+        return passing;
+    }
 }
