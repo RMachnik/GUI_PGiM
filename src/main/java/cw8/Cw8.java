@@ -94,16 +94,43 @@ public class Cw8 {
         zad4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                SaltPepperArgDialog saltPepperArgDialog = new SaltPepperArgDialog(new Picture(conversionsCw4
-                        .otsuBinaryConversion(picture)),
-                        false,
-                        "Pass probability ");
-                saltPepperArgDialog.repaint();
-                PassRGBArgDialog passRGBArgDialog = new PassRGBArgDialog(saltPepperArgDialog.getPicture(), false,
-                        "Pass windowSize,R|G|B", saltPepperArgDialog);
-                passRGBArgDialog.repaint();
+                MovingMeanArgDialog movingMeanArgDialog = new MovingMeanArgDialog(picture, false, "Pass S|N|SP," +
+                        "R|G|B and other parameters");
+                movingMeanArgDialog.repaint();
             }
         });
+
+        JMenuItem zad5 = new JMenuItem("zad5");
+        zad5.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MedianArgDialog medianArgDialog = new MedianArgDialog(picture, false, "Pass S|N|SP," +
+                        "R|G|B and other parameters");
+                medianArgDialog.repaint();
+            }
+        });
+
+        JMenuItem zad7 = new JMenuItem("zad7a");
+        zad7.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Zad7aMovingMeanArgDialog movingMeanArgDialog = new Zad7aMovingMeanArgDialog(picture, false, "Pass S|N|SP," +
+                        "R|G|B and other parameters");
+                movingMeanArgDialog.repaint();
+            }
+        });
+
+        JMenuItem zad7b = new JMenuItem("zad7b");
+        zad7b.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Zad7bMedianArgDialog medianArgDialog = new Zad7bMedianArgDialog(picture, false, "Pass S|N|SP,\" +\n" +
+                        "                        \"R|G|B and other parameters");
+                medianArgDialog.repaint();
+            }
+
+        });
+
 
         cw8.add(zad1);
         cw8.add(zad1b);
@@ -112,5 +139,8 @@ public class Cw8 {
         cw8.add(zad3);
         cw8.add(zad3b);
         cw8.add(zad4);
+        cw8.add(zad5);
+        cw8.add(zad7);
+        cw8.add(zad7b);
     }
 }

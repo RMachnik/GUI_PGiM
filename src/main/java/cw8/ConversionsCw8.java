@@ -27,7 +27,7 @@ public class ConversionsCw8 {
         BufferedImage src = picture.getImage();
         BufferedImage filtered = new BufferedImage(src.getWidth(), src.getHeight(), src.getType());
         int red, green, blue, newPixel;
-        int probability = (int) (src.getWidth() * src.getHeight() * prob);
+        int probability = (int) (src.getWidth() * src.getHeight() * prob) & 20;
         for (int i = 0; i < filtered.getWidth(); i++) {
             for (int j = 0; j < filtered.getHeight(); j++) {
                 int randomLvl = -lvl + (int) (Math.random() * ((lvl - (-lvl)) + 1));
@@ -35,7 +35,7 @@ public class ConversionsCw8 {
                 red = new Color(src.getRGB(i, j)).getRed();
                 green = new Color(src.getRGB(i, j)).getGreen();
                 blue = new Color(src.getRGB(i, j)).getBlue();
-                if (i * filtered.getWidth() + j % probability == 0) {
+                if ((i * filtered.getWidth() + j % probability) == 0) {
                     red += randomLvl;
                     green += randomLvl;
                     blue += randomLvl;
@@ -51,15 +51,14 @@ public class ConversionsCw8 {
         BufferedImage src = picture.getImage();
         BufferedImage filtered = new BufferedImage(src.getWidth(), src.getHeight(), src.getType());
         int red, green, blue, newPixel;
-        int probability = (int) (src.getWidth() * src.getHeight() * prob);
+        int probability = (int) (src.getWidth() * src.getHeight() * prob) % 100;
         for (int i = 0; i < filtered.getWidth(); i++) {
             for (int j = 0; j < filtered.getHeight(); j++) {
                 int randomLvl = -mean + (int) (Math.random() * ((mean - (-mean)) + 1));
-
                 red = new Color(src.getRGB(i, j)).getRed();
                 green = new Color(src.getRGB(i, j)).getGreen();
                 blue = new Color(src.getRGB(i, j)).getBlue();
-                if (i * filtered.getWidth() + j % probability == 0) {
+                if ((i * filtered.getWidth() + j) % probability == 0) {
                     red += randomLvl;
                     green += randomLvl;
                     blue += randomLvl;
@@ -125,16 +124,22 @@ public class ConversionsCw8 {
                 red = new Color(filtered.getRGB(i, j)).getRed();
                 green = new Color(filtered.getRGB(i, j)).getGreen();
                 blue = new Color(filtered.getRGB(i, j)).getBlue();
-                switch (rgb) {
-                    case R:
-                        red = computeMean(windowSize, windowSize / 2, filtered, i, j, R);
-                        break;
-                    case G:
-                        green = computeMean(windowSize, windowSize / 2, filtered, i, j, G);
-                        break;
-                    case B:
-                        blue = computeMean(windowSize, windowSize / 2, filtered, i, j, B);
-                        break;
+                if (!rgb.isEmpty()) {
+                    switch (rgb) {
+                        case R:
+                            red = computeMean(windowSize, windowSize / 2, filtered, i, j, R);
+                            break;
+                        case G:
+                            green = computeMean(windowSize, windowSize / 2, filtered, i, j, G);
+                            break;
+                        case B:
+                            blue = computeMean(windowSize, windowSize / 2, filtered, i, j, B);
+                            break;
+                    }
+                } else {
+                    red = computeMean(windowSize, windowSize / 2, filtered, i, j, R);
+                    green = computeMean(windowSize, windowSize / 2, filtered, i, j, G);
+                    blue = computeMean(windowSize, windowSize / 2, filtered, i, j, B);
                 }
                 newPixel = conversionsCommon.colorToRGB24Bits(red, green, blue);
                 src.setRGB(i - 2 * windowSize, j - 2 * windowSize, newPixel);
@@ -144,7 +149,7 @@ public class ConversionsCw8 {
         return src;
     }
 
-    private BufferedImage medianFilter(Picture picture, int windowSize, String rgb) {
+    public BufferedImage medianFilter(Picture picture, int windowSize, String rgb) {
         BufferedImage src = conversionsCw4.otsuBinaryConversion(picture);
         BufferedImage filtered = new BufferedImage(src.getWidth() + 2 * windowSize,
                 src.getHeight() + 2 * windowSize,
@@ -156,16 +161,22 @@ public class ConversionsCw8 {
                 red = new Color(filtered.getRGB(i, j)).getRed();
                 green = new Color(filtered.getRGB(i, j)).getGreen();
                 blue = new Color(filtered.getRGB(i, j)).getBlue();
-                switch (rgb) {
-                    case R:
-                        red = computeMedian(windowSize, windowSize / 2, filtered, i, j, R);
-                        break;
-                    case G:
-                        green = computeMedian(windowSize, windowSize / 2, filtered, i, j, G);
-                        break;
-                    case B:
-                        blue = computeMedian(windowSize, windowSize / 2, filtered, i, j, B);
-                        break;
+                if (!rgb.isEmpty()) {
+                    switch (rgb) {
+                        case R:
+                            red = computeMedian(windowSize, windowSize / 2, filtered, i, j, R);
+                            break;
+                        case G:
+                            green = computeMedian(windowSize, windowSize / 2, filtered, i, j, G);
+                            break;
+                        case B:
+                            blue = computeMedian(windowSize, windowSize / 2, filtered, i, j, B);
+                            break;
+                    }
+                } else {
+                    red = computeMedian(windowSize, windowSize / 2, filtered, i, j, R);
+                    green = computeMedian(windowSize, windowSize / 2, filtered, i, j, G);
+                    blue = computeMedian(windowSize, windowSize / 2, filtered, i, j, B);
                 }
                 newPixel = conversionsCommon.colorToRGB24Bits(red, green, blue);
                 src.setRGB(i - 2 * windowSize, j - 2 * windowSize, newPixel);
