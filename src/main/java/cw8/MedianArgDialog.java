@@ -1,9 +1,11 @@
 package cw8;
 
 import common.CommonArgDialog;
+import common.ConversionsCommon;
 import common.Picture;
 import common.PictureCustoms;
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 
@@ -14,20 +16,24 @@ import java.awt.image.BufferedImage;
 public class MedianArgDialog extends CommonArgDialog {
 
     private BufferedImage filtered;
-     private String argTab[];
-    public MedianArgDialog(Picture picture, boolean modal, String myMessage) {
+    private String argTab[];
+    private Picture srcPicture;
+
+    public MedianArgDialog(final Picture picture, boolean modal, String myMessage) {
         super(picture, modal, myMessage);
+        srcPicture = picture;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         ConversionsCw8 conversionsCw8 = new ConversionsCw8();
+        ConversionsCommon conversionsCommon = new ConversionsCommon();
         String args = getTextField().getText();
         if (getYesButton() == e.getSource()) {
             if (args.isEmpty()) {
                 throw new RuntimeException("Pass correct parameter!");
             }
-          argTab = args.split(",");
+            argTab = args.split(",");
 
             switch (argTab[0]) {
                 case ("S"):
@@ -46,14 +52,37 @@ public class MedianArgDialog extends CommonArgDialog {
                 default:
                     throw new RuntimeException("pass correct value!");
             }
-            PictureCustoms.showImageInNewWindow(conversionsCw8.medianFilter(new Picture(filtered),
-                    Integer.parseInt(argTab[1]), argTab[2]));
+            setPicture(new Picture(conversionsCw8.medianFilter(new Picture(filtered),
+                    Integer.parseInt(argTab[1]), argTab[2])));
+            PictureCustoms.showImageInNewWindow(getPicture().getImage());
+            BufferedImage src = srcPicture.getImage();
+            BufferedImage filtered = this.getPicture().getImage();
+            BufferedImage result = new BufferedImage(src.getWidth(), src.getHeight(), src.getType());
+            for (int i = 0; i < srcPicture.getImage().getWidth(); i++) {
+                for (int j = 0; j < srcPicture.getImage().getHeight(); j++) {
+
+                    int red, green, blue, newPixel;
+
+
+                    red = new Color(src.getRGB(i, j)).getRed();
+                    green = new Color(src.getRGB(i, j)).getGreen();
+                    blue = new Color(src.getRGB(i, j)).getBlue();
+                    red -= new Color(filtered.getRGB(i, j)).getRed();
+                    green -= new Color(filtered.getRGB(i, j)).getGreen();
+                    blue -= new Color(filtered.getRGB(i, j)).getBlue();
+                    newPixel = conversionsCommon.colorToRGB24Bits(red, green, blue);
+                    result.setRGB(i, j, newPixel);
+
+                }
+            }
+            PictureCustoms.showImageInNewWindow(result);
 
         } else if (getNoButton() == e.getSource()) {
             System.err.println("User chose no.");
             setVisible(false);
         }
     }
+
     public BufferedImage getFiltered() {
         return filtered;
     }

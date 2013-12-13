@@ -1,12 +1,15 @@
 package cw8;
 
+import common.ConversionsCommon;
 import common.Picture;
+import common.PictureCustoms;
 import cw4.ConversionsCw4;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 
 /**
  * rafik991@gmai.com
@@ -20,6 +23,7 @@ public class Cw8 {
     private void cw8(final Picture picture) {
         final ConversionsCw8 conversionsCw8 = new ConversionsCw8();
         final ConversionsCw4 conversionsCw4 = new ConversionsCw4();
+        final ConversionsCommon conversionsCommon = new ConversionsCommon();
         JMenuBar bar = picture.getFrame().getJMenuBar();
         final Image image = picture.getImage();
         JMenu cw8 = new JMenu("CW8");
@@ -96,7 +100,9 @@ public class Cw8 {
             public void actionPerformed(ActionEvent e) {
                 MovingMeanArgDialog movingMeanArgDialog = new MovingMeanArgDialog(picture, false, "Pass S|N|SP," +
                         "R|G|B and other parameters");
+
                 movingMeanArgDialog.repaint();
+
             }
         });
 
@@ -107,6 +113,7 @@ public class Cw8 {
                 MedianArgDialog medianArgDialog = new MedianArgDialog(picture, false, "Pass S|N|SP," +
                         "R|G|B and other parameters");
                 medianArgDialog.repaint();
+
             }
         });
 

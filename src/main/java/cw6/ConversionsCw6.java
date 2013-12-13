@@ -171,7 +171,7 @@ public class ConversionsCw6 {
         int half = w / 2;
         for (int i = 0; i < w; i++) {
             for (int j = 0; j < h; j++) {
-                if ((half - i) * (half - i) + (half - j) * (half - j) < r) {
+                if ((half - i) * (half - i) + (half - j) * (half - j) < r*r) {
                     matrix[i][j] = 1;
                 }
                 System.out.print(matrix[i][j]);
