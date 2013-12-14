@@ -132,7 +132,7 @@ public class ConversionsCw4 {
                 threshold = t;
             }
         }
-        if ((int) threshold == 0) {
+        if ((int) threshold <30) {
             threshold = ConversionsCommon.RBG_MAX / 2;
         } else if ((int) threshold == ConversionsCommon.RBG_MAX) {
             threshold = ConversionsCommon.RBG_MAX / 2;

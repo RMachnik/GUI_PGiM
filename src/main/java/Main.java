@@ -1,4 +1,4 @@
-import common.Picture;
+import common.PictureRunner;
 
 import javax.swing.*;
 import java.awt.*;
@@ -160,21 +160,4 @@ public class Main {
 
     }
 
-    /**
-     * User: SG0219139
-     * Date: 10/20/13
-     */
-    private static class PictureRunner implements Runnable {
-        private String pictureName;
-
-        public PictureRunner(String picName) {
-            pictureName = picName;
-        }
-
-        @Override
-        public void run() {
-            Picture picture = new Picture(pictureName);
-            picture.show();
-        }
-    }
 }

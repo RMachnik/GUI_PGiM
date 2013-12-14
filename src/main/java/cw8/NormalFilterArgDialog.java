@@ -2,7 +2,7 @@ package cw8;
 
 import common.CommonArgDialog;
 import common.Picture;
-import common.PictureCustoms;
+import common.PictureRunner;
 
 import java.awt.event.ActionEvent;
 
@@ -29,8 +29,8 @@ public class NormalFilterArgDialog extends CommonArgDialog {
             setPicture(new Picture(conversionsCw8.normalDysfunction(getPicture(),
                     Integer.parseInt(args[0]),
                     Integer.parseInt(args[1]), Double.parseDouble(args[2]))));
-            PictureCustoms.showImageInNewWindow(getPicture().getImage());
-
+            Thread pic = new Thread(new PictureRunner(getPicture().getImage()));
+            pic.start();
 
 
         } else if (getNoButton() == e.getSource()) {

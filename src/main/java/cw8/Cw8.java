@@ -98,7 +98,7 @@ public class Cw8 {
         zad4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                MovingMeanArgDialog movingMeanArgDialog = new MovingMeanArgDialog(picture, false, "Pass S|N|SP," +
+                MovingMeanArgDialog movingMeanArgDialog = new MovingMeanArgDialog(picture, false, "Pass " +
                         "R|G|B and other parameters");
 
                 movingMeanArgDialog.repaint();
@@ -110,7 +110,7 @@ public class Cw8 {
         zad5.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                MedianArgDialog medianArgDialog = new MedianArgDialog(picture, false, "Pass S|N|SP," +
+                MedianArgDialog medianArgDialog = new MedianArgDialog(picture, false, "Pass " +
                         "R|G|B and other parameters");
                 medianArgDialog.repaint();
 
@@ -121,7 +121,7 @@ public class Cw8 {
         zad7.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Zad7aMovingMeanArgDialog movingMeanArgDialog = new Zad7aMovingMeanArgDialog(picture, false, "Pass S|N|SP," +
+                Zad7aMovingMeanArgDialog movingMeanArgDialog = new Zad7aMovingMeanArgDialog(picture, false, "Pass " +
                         "R|G|B and other parameters");
                 movingMeanArgDialog.repaint();
             }

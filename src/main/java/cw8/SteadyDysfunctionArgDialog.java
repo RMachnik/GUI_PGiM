@@ -3,6 +3,7 @@ package cw8;
 import common.CommonArgDialog;
 import common.Picture;
 import common.PictureCustoms;
+import common.PictureRunner;
 
 import java.awt.event.ActionEvent;
 
@@ -29,8 +30,8 @@ public class SteadyDysfunctionArgDialog extends CommonArgDialog {
             setPicture(new Picture(conversionsCw8.steadyDysfunction(getPicture(),
                     Integer.parseInt(args[0]),
                     Double.parseDouble(args[1]))));
-            PictureCustoms.showImageInNewWindow(getPicture().getImage());
-
+            Thread pic = new Thread(new PictureRunner(getPicture().getImage()));
+            pic.start();
 
         } else if (getNoButton() == e.getSource()) {
             System.err.println("User chose no.");

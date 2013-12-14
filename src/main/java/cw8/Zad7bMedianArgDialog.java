@@ -19,13 +19,24 @@ public class Zad7bMedianArgDialog extends MedianArgDialog {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        super.actionPerformed(e);
-        super.actionPerformed(e);
         ConversionsCw1 conversionsCw1 = new ConversionsCw1();
         ConversionsCw8 conversionsCw8 = new ConversionsCw8();
-        BufferedImage y = conversionsCw1.transformRGBToVHS(getFiltered(), ConversionsCommon.KR,
+        BufferedImage y = conversionsCw1.transformRGBToVHS(getPicture().getImage(), ConversionsCommon.KR,
                 ConversionsCommon.KB)[0];
-        PictureCustoms.showImageInNewWindow(conversionsCw8.medianFilter(new Picture(y), Integer.parseInt(getArgTab()[2]),
-                ""));
+
+        if (getYesButton() == e.getSource()) {
+            String arg = getTextField().getText();
+            String[] args = arg.split(",");
+            if (args.length != 1) {
+                throw new RuntimeException("Pass correct parameters!");
+            }
+            PictureCustoms.showImageInNewWindow(conversionsCw8.medianFilter(new Picture(y),
+                    Integer.parseInt(args[0]), ""));
+
+
+        } else if (getNoButton() == e.getSource()) {
+            System.err.println("User chose no.");
+            setVisible(false);
+        }
     }
 }
