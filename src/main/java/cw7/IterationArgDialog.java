@@ -28,6 +28,7 @@ public class IterationArgDialog extends CommonArgDialog {
             try {
                 PictureCustoms.showImageInNewWindow(conversionsCw7.iterativeMethod(getPicture(),
                         "static/cw7_zad2a.txt", "static/cw7_zad2b.txt", Integer.parseInt(arg)));
+                setVisible(false);
             } catch (IOException e1) {
                 e1.printStackTrace();
             }

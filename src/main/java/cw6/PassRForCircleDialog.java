@@ -23,7 +23,7 @@ public class PassRForCircleDialog extends CommonArgDialog {
             ConversionsCw6 conversionsCw6 = new ConversionsCw6();
             setVisible(false);
             PictureCustoms.showImageInNewWindow(conversionsCw6.circleErosion(getPicture(), Integer.parseInt(arg)));
-
+            setVisible(false);
         } else if (getNoButton() == e.getSource()) {
             System.err.println("User chose no.");
             setVisible(false);

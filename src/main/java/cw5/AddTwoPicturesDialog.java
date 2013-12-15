@@ -36,6 +36,7 @@ public class AddTwoPicturesDialog extends CommonArgDialog {
                 Image image1 = ImageIO.read(file1);
                 Image image2 = ImageIO.read(file2);
                 PictureCustoms.showImageInNewWindow(conversionsCw5.addTwoPicturesInTheSameScale((BufferedImage) image1, (BufferedImage) image2, Double.parseDouble(arg),method));
+                setVisible(false);
             } catch (IOException e1) {
                 e1.printStackTrace();
             }

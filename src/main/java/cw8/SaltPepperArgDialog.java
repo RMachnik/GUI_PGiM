@@ -32,7 +32,7 @@ public class SaltPepperArgDialog extends CommonArgDialog {
               )));
             Thread pic = new Thread(new PictureRunner(getPicture().getImage()));
             pic.start();
-
+            setVisible(false);
 
         } else if (getNoButton() == e.getSource()) {
             System.err.println("User chose no.");

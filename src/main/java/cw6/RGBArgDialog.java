@@ -34,6 +34,7 @@ public class RGBArgDialog extends CommonArgDialog {
                 case DYL:
                     try {
                         PictureCustoms.showImageInNewWindow(conversionsCw6.dilatationForRGB(getPicture(), matrixFile, arg));
+                        setVisible(false);
                     } catch (IOException e1) {
                         e1.printStackTrace();
                     }
@@ -41,6 +42,7 @@ public class RGBArgDialog extends CommonArgDialog {
                 case ER:
                     try {
                         PictureCustoms.showImageInNewWindow(conversionsCw6.erosionForRGB(getPicture(), matrixFile, arg));
+                        setVisible(false);
                     } catch (IOException e1) {
                         e1.printStackTrace();
                     }

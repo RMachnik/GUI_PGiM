@@ -30,7 +30,7 @@ public class MovingMeanArgDialog extends CommonArgDialog {
 
             PictureCustoms.showImageInNewWindow(conversionsCw8.meanFilter(new Picture(filtered),
                     Integer.parseInt(argTab[0]), argTab[1]));
-
+            setVisible(false);
         } else if (getNoButton() == e.getSource()) {
             System.err.println("User chose no.");
             setVisible(false);

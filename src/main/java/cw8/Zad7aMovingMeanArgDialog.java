@@ -33,7 +33,7 @@ public class Zad7aMovingMeanArgDialog extends CommonArgDialog {
             }
             PictureCustoms.showImageInNewWindow(conversionsCw8.meanFilter(new Picture(y),
                     Integer.parseInt(args[0]), ""));
-
+            setVisible(false);
 
         } else if (getNoButton() == e.getSource()) {
             System.err.println("User chose no.");

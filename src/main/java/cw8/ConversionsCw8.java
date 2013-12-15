@@ -9,6 +9,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 /**
  * rafik991@gmai.com
@@ -18,8 +19,6 @@ public class ConversionsCw8 {
     public static final String R = "R";
     public static final String G = "G";
     public static final String B = "B";
-    final static int nSalt = 5;    // Percentage of salt
-    final static int nPepper = 5;
     private ConversionsCommon conversionsCommon = new ConversionsCommon();
     private ConversionsCw4 conversionsCw4 = new ConversionsCw4();
 
@@ -27,18 +26,21 @@ public class ConversionsCw8 {
         BufferedImage src = picture.getImage();
         BufferedImage filtered = new BufferedImage(src.getWidth(), src.getHeight(), src.getType());
         int red, green, blue, newPixel;
-        int probability = (int) (src.getWidth() * src.getHeight() * prob) & 20;
+        int probability = (int) (src.getWidth() * src.getHeight() * prob);
+        Random rand = new Random(probability);
+
         for (int i = 0; i < filtered.getWidth(); i++) {
             for (int j = 0; j < filtered.getHeight(); j++) {
                 int randomLvl = -lvl + (int) (Math.random() * ((lvl - (-lvl)) + 1));
-
                 red = new Color(src.getRGB(i, j)).getRed();
                 green = new Color(src.getRGB(i, j)).getGreen();
                 blue = new Color(src.getRGB(i, j)).getBlue();
-                if ((i * filtered.getWidth() + j % probability) == 0) {
+                boolean val = rand.nextInt() == 0;
+                if (val == false) {
                     red += randomLvl;
                     green += randomLvl;
                     blue += randomLvl;
+                    probability--;
                 }
                 newPixel = conversionsCommon.colorToRGB24Bits(red, green, blue);
                 filtered.setRGB(i, j, newPixel);
@@ -51,17 +53,20 @@ public class ConversionsCw8 {
         BufferedImage src = picture.getImage();
         BufferedImage filtered = new BufferedImage(src.getWidth(), src.getHeight(), src.getType());
         int red, green, blue, newPixel;
-        int probability = (int) (src.getWidth() * src.getHeight() * prob) % 100;
+        int probability = (int) (src.getWidth() * src.getHeight() * prob);
+        Random random = new Random(probability);
         for (int i = 0; i < filtered.getWidth(); i++) {
             for (int j = 0; j < filtered.getHeight(); j++) {
                 int randomLvl = -mean + (int) (Math.random() * ((mean - (-mean)) + 1));
                 red = new Color(src.getRGB(i, j)).getRed();
                 green = new Color(src.getRGB(i, j)).getGreen();
                 blue = new Color(src.getRGB(i, j)).getBlue();
-                if ((i * filtered.getWidth() + j) % probability == 0) {
+                boolean val = random.nextInt() == 0;
+                if (val == false) {
                     red += randomLvl;
                     green += randomLvl;
                     blue += randomLvl;
+
                 }
                 newPixel = conversionsCommon.colorToRGB24Bits(red, green, blue);
                 filtered.setRGB(i, j, newPixel);
@@ -74,7 +79,7 @@ public class ConversionsCw8 {
         BufferedImage src = picture.getImage();
         BufferedImage filtered = new BufferedImage(src.getWidth(), src.getHeight(), src.getType());
         int red, green, blue, newPixel;
-        int probability = (int) (src.getWidth() * src.getHeight() * prob);
+        int probability = (int) (prob * 100);
         for (int i = 0; i < filtered.getWidth(); i++) {
             for (int j = 0; j < filtered.getHeight(); j++) {
                 int randomLvl = 0 + (int) (Math.random() * ((255 - (0)) + 1));
@@ -90,7 +95,7 @@ public class ConversionsCw8 {
 
         int height = src.getHeight();
         int width = src.getWidth();
-
+        int nSalt = probability;
         int salt = height * width * nSalt / 100;    // Amount of salt
         int pepper = height * width * nSalt / 100;  // Amount of pepper
 

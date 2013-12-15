@@ -32,7 +32,7 @@ public class IterationZad3ArgDialog extends CommonArgDialog {
                 e1.printStackTrace();
             }
 
-
+            setVisible(false);
         } else if (getNoButton() == e.getSource()) {
             System.err.println("User chose no.");
             setVisible(false);

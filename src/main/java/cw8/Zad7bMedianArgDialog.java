@@ -33,7 +33,7 @@ public class Zad7bMedianArgDialog extends MedianArgDialog {
             PictureCustoms.showImageInNewWindow(conversionsCw8.medianFilter(new Picture(y),
                     Integer.parseInt(args[0]), ""));
 
-
+            setVisible(false);
         } else if (getNoButton() == e.getSource()) {
             System.err.println("User chose no.");
             setVisible(false);
