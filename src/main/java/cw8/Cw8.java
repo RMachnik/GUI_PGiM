@@ -120,8 +120,7 @@ public class Cw8 {
         zad7.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Zad7aMovingMeanArgDialog movingMeanArgDialog = new Zad7aMovingMeanArgDialog(picture, false, "Pass " +
-                        "R|G|B and window size");
+                Zad7aMovingMeanArgDialog movingMeanArgDialog = new Zad7aMovingMeanArgDialog(picture, false, "Pass window size");
                 movingMeanArgDialog.repaint();
             }
         });
@@ -130,8 +129,7 @@ public class Cw8 {
         zad7b.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Zad7bMedianArgDialog medianArgDialog = new Zad7bMedianArgDialog(picture, false, "Pass ,\" +\n" +
-                        "                        \"R|G|B and window size");
+                Zad7bMedianArgDialog medianArgDialog = new Zad7bMedianArgDialog(picture, false, "Pass window size");
                 medianArgDialog.repaint();
             }
 

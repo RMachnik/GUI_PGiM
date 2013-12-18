@@ -226,7 +226,7 @@ public class ConversionsCw8 {
                 }
             }
         }
-        return count / windowSize * windowSize;
+        return count / (windowSize * windowSize);
     }
 
     private int computeMedian(int windowSize, int half, BufferedImage filtered, int i, int j, String rgb) {

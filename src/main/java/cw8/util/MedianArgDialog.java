@@ -28,7 +28,7 @@ public class MedianArgDialog extends CommonArgDialog {
           argTab = args.split(",");
             PictureCustoms.showImageInNewWindow(conversionsCw8.medianFilter(getPicture(),
                     Integer.parseInt(argTab[1]), argTab[0]));
-
+            setVisible(false);
         } else if (getNoButton() == e.getSource()) {
             System.err.println("User chose no.");
             setVisible(false);
