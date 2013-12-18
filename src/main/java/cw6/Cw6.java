@@ -2,6 +2,9 @@ package cw6;
 
 import common.Picture;
 import common.PictureCustoms;
+import cw6.util.ConversionsCw6;
+import cw6.util.PassRForCircleDialog;
+import cw6.util.RGBArgDialog;
 
 import javax.swing.*;
 import java.awt.*;

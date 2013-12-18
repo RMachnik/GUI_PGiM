@@ -2,6 +2,9 @@ package cw5;
 
 import common.Picture;
 import common.PictureCustoms;
+import cw5.util.AddArgDialog;
+import cw5.util.AddTwoPicturesDialog;
+import cw5.util.ConversionsCw5;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

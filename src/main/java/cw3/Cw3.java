@@ -3,8 +3,10 @@ package cw3;
 import common.ConversionsCommon;
 import common.Picture;
 import common.PictureCustoms;
-import cw1.ConversionsCw1;
-import cw2.ConversionsCw2;
+import cw1.util.ConversionsCw1;
+import cw2.util.ConversionsCw2;
+import cw3.util.ContrastArgDialog;
+import cw3.util.ConversionsCw3;
 
 import javax.swing.*;
 import java.awt.*;

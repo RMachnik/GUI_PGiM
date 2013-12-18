@@ -2,6 +2,9 @@ package cw7;
 
 import common.Picture;
 import common.PictureCustoms;
+import cw7.util.ConversionsCw7;
+import cw7.util.IterationArgDialog;
+import cw7.util.IterationZad3ArgDialog;
 
 import javax.swing.*;
 import java.awt.*;

@@ -3,6 +3,8 @@ package cw1;
 import common.ConversionsCommon;
 import common.Picture;
 import common.PictureCustoms;
+import cw1.util.ChessSizeDialog;
+import cw1.util.ConversionsCw1;
 
 import javax.swing.*;
 import java.awt.*;

@@ -2,14 +2,13 @@ package cw8;
 
 import common.ConversionsCommon;
 import common.Picture;
-import common.PictureCustoms;
-import cw4.ConversionsCw4;
+import cw4.util.ConversionsCw4;
+import cw8.util.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 
 /**
  * rafik991@gmai.com
@@ -99,7 +98,7 @@ public class Cw8 {
             @Override
             public void actionPerformed(ActionEvent e) {
                 MovingMeanArgDialog movingMeanArgDialog = new MovingMeanArgDialog(picture, false, "Pass " +
-                        "R|G|B and other parameters");
+                        "R|G|B and window size");
 
                 movingMeanArgDialog.repaint();
 
@@ -111,7 +110,7 @@ public class Cw8 {
             @Override
             public void actionPerformed(ActionEvent e) {
                 MedianArgDialog medianArgDialog = new MedianArgDialog(picture, false, "Pass " +
-                        "R|G|B and other parameters");
+                        "R|G|B and window size");
                 medianArgDialog.repaint();
 
             }
@@ -122,7 +121,7 @@ public class Cw8 {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Zad7aMovingMeanArgDialog movingMeanArgDialog = new Zad7aMovingMeanArgDialog(picture, false, "Pass " +
-                        "R|G|B and other parameters");
+                        "R|G|B and window size");
                 movingMeanArgDialog.repaint();
             }
         });
@@ -131,8 +130,8 @@ public class Cw8 {
         zad7b.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Zad7bMedianArgDialog medianArgDialog = new Zad7bMedianArgDialog(picture, false, "Pass S|N|SP,\" +\n" +
-                        "                        \"R|G|B and other parameters");
+                Zad7bMedianArgDialog medianArgDialog = new Zad7bMedianArgDialog(picture, false, "Pass ,\" +\n" +
+                        "                        \"R|G|B and window size");
                 medianArgDialog.repaint();
             }
 

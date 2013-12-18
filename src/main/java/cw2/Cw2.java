@@ -3,7 +3,8 @@ package cw2;
 import common.ConversionsCommon;
 import common.Picture;
 import common.PictureCustoms;
-import cw1.ConversionsCw1;
+import cw1.util.ConversionsCw1;
+import cw2.util.*;
 
 import javax.swing.*;
 import java.awt.*;
