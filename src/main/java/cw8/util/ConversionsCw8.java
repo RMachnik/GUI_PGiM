@@ -208,21 +208,19 @@ public class ConversionsCw8 {
         int red, green, blue;
         for (int s = 0; s < windowSize; s++) {
             for (int c = 0; c < windowSize; c++) {
-                if (filtered.getRGB(i - half + s, j - half + c) == windowSize) {
-                    red = new Color(filtered.getRGB(i, j)).getRed();
-                    green = new Color(filtered.getRGB(i, j)).getGreen();
-                    blue = new Color(filtered.getRGB(i, j)).getBlue();
-                    switch (rgb) {
-                        case R:
-                            count += red;
-                            break;
-                        case G:
-                            count += green;
-                            break;
-                        case B:
-                            count += blue;
-                            break;
-                    }
+                red = new Color(filtered.getRGB(i, j)).getRed();
+                green = new Color(filtered.getRGB(i, j)).getGreen();
+                blue = new Color(filtered.getRGB(i, j)).getBlue();
+                switch (rgb) {
+                    case R:
+                        count += red;
+                        break;
+                    case G:
+                        count += green;
+                        break;
+                    case B:
+                        count += blue;
+                        break;
                 }
             }
         }
@@ -255,9 +253,9 @@ public class ConversionsCw8 {
 
         if (!array.isEmpty() && array.size() > 2) {
             if (array.size() % 2 == 0) {
-                median = (array.get((array.size()/2) - 1) + array.get(array.size()/2)) / 2;
+                median = (array.get((array.size() / 2) - 1) + array.get(array.size() / 2)) / 2;
             } else {
-                median = array.get(array.size()/2);
+                median = array.get(array.size() / 2);
             }
         }
         return median;
