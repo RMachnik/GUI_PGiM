@@ -227,6 +227,31 @@ public class ConversionsCw8 {
         return count / (windowSize * windowSize);
     }
 
+    public BufferedImage gaussianFilter(Picture picture, int r) {
+        // source channel, target channel, width, height, radius
+        BufferedImage src = conversionsCw4.otsuBinaryConversion(picture);
+        BufferedImage filtered = new BufferedImage(src.getWidth() + 2 * 0,
+                src.getHeight() + 2 * 0,
+                src.getType());
+        int w = src.getWidth();
+        int h = src.getHeight();
+        double gr = r * 0.41;
+        for (int i = 0; i < src.getHeight(); i++)
+            for (int j = 0; j < src.getWidth(); j++) {
+                int fx = Math.max(j - r, 0), fy = Math.max(i - r, 0);
+                int tx = Math.min(j + r + 1, w), ty = Math.min(i + r + 1, h);
+                int val = 0;
+                for (int y = fy; y < ty; y++)
+                    for (int x = fx; x < tx; x++) {
+                        int dsq = (x - j) * (x - j) + (y - i) * (y - i);
+                        int wght = (int) (Math.exp(-dsq / (2 * gr * gr)) / (Math.PI * 2 * gr * gr));
+                        val += src.getRGB(x, y) * wght;
+                    }
+                filtered.setRGB(i, j, val);
+            }
+        return filtered;
+    }
+
     private int computeMedian(int windowSize, int half, BufferedImage filtered, int i, int j, String rgb) {
         int median = 0;
         int red, green, blue;
@@ -260,5 +285,7 @@ public class ConversionsCw8 {
         }
         return median;
     }
+
+
 }
 

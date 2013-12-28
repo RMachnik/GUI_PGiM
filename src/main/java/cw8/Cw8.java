@@ -2,6 +2,7 @@ package cw8;
 
 import common.ConversionsCommon;
 import common.Picture;
+import common.PictureCustoms;
 import cw4.util.ConversionsCw4;
 import cw8.util.*;
 
@@ -135,6 +136,14 @@ public class Cw8 {
 
         });
 
+        JMenuItem gauss = new JMenuItem("gauss");
+        gauss.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                PictureCustoms.showImageInNewWindow(conversionsCw8.gaussianFilter(picture, 20));
+            }
+        });
+
 
         cw8.add(zad1);
         cw8.add(zad1b);
@@ -146,5 +155,6 @@ public class Cw8 {
         cw8.add(zad5);
         cw8.add(zad7);
         cw8.add(zad7b);
+        cw8.add(gauss);
     }
 }
