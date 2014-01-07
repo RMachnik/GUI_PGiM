@@ -9,6 +9,7 @@ import java.awt.image.BufferedImage;
  */
 public class ConversionsCommon {
     public static final int RBG_MAX = 255;
+    public static final int RGB_MIN = 0;
     public static final double KR = 0.111;
     public static final double KB = 0.299;
 
@@ -64,6 +65,19 @@ public class ConversionsCommon {
             for (int c = 0; c < matrix[s].length; c++) {
                 red = new Color(filtered.getRGB(i - half + s, j - half + c)).getRed();
                 if (red == matrix[s][c]) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    public boolean checkPassingErosion(int[][] matrix, int half, BufferedImage filtered, int i, int j) {
+        int red, green, blue;
+        for (int s = 0; s < matrix.length; s++) {
+            for (int c = 0; c < matrix[s].length; c++) {
+                red = new Color(filtered.getRGB(i - half + s, j - half + c)).getRed();
+                int ms = matrix[s][c] == 1 ? ConversionsCommon.RBG_MAX : matrix[s][c];
+                if (red == ms) {
                     return true;
                 }
             }

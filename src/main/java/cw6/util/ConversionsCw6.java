@@ -33,8 +33,9 @@ public class ConversionsCw6 {
 
         for (int i = 2 * matrix.length; i < filtered.getWidth() - 2 * matrix.length; i++) {
             for (int j = 2 * matrix.length; j < filtered.getHeight() - 2 * matrix.length; j++) {
-                if (conversionsCommon.checkPassing(matrix, half, filtered, i, j)) {
-                    src.setRGB(i - 2 * matrix.length, j - 2 * matrix.length, 0);
+                if (conversionsCommon.checkPassingErosion(matrix, half, filtered, i, j)) {
+                    int newPixel = conversionsCommon.colorToRGB24Bits(ConversionsCommon.RBG_MAX, ConversionsCommon.RBG_MAX, ConversionsCommon.RBG_MAX);
+                    src.setRGB(i - 2 * matrix.length, j - 2 * matrix.length, newPixel);
                 }
             }
         }
@@ -68,8 +69,9 @@ public class ConversionsCw6 {
         fillFilteredImage(src, matrix, filtered);
         for (int i = 2 * matrix.length; i < filtered.getWidth() - 2 * matrix.length; i++) {
             for (int j = 2 * matrix.length; j < filtered.getHeight() - 2 * matrix.length; j++) {
-                if (conversionsCommon.checkPassing(matrix, half, filtered, i, j)) {
-                    src.setRGB(i - 2 * matrix.length, j - 2 * matrix.length, 0);
+                if (conversionsCommon.checkPassingErosion(matrix, half, filtered, i, j)) {
+                    int newPixel = conversionsCommon.colorToRGB24Bits(ConversionsCommon.RBG_MAX, ConversionsCommon.RBG_MAX, ConversionsCommon.RBG_MAX);
+                    src.setRGB(i - 2 * matrix.length, j - 2 * matrix.length, newPixel);
                 }
             }
         }
@@ -87,9 +89,8 @@ public class ConversionsCw6 {
         fillFilteredImage(src, matrix, filtered);
         for (int i = 2 * matrix.length; i < filtered.getWidth() - 2 * matrix.length; i++) {
             for (int j = 2 * matrix.length; j < filtered.getHeight() - 2 * matrix.length; j++) {
-
                 if (conversionsCommon.checkPassing(matrix, half, filtered, i, j)) {
-                    src.setRGB(i - 2 * matrix.length, j - 2 * matrix.length, 1);
+                    src.setRGB(i - 2 * matrix.length, j - 2 * matrix.length, 0);
                 }
             }
         }
@@ -171,7 +172,7 @@ public class ConversionsCw6 {
         int half = w / 2;
         for (int i = 0; i < w; i++) {
             for (int j = 0; j < h; j++) {
-                if ((half - i) * (half - i) + (half - j) * (half - j) < r*r) {
+                if ((half - i) * (half - i) + (half - j) * (half - j) < r * r) {
                     matrix[i][j] = 1;
                 }
                 System.out.print(matrix[i][j]);
