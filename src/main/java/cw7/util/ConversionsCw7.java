@@ -30,12 +30,8 @@ public class ConversionsCw7 {
         for (int i = 2 * matrix.length; i < filtered.getWidth() - 2 * matrix.length; i++) {
             for (int j = 2 * matrix.length; j < filtered.getHeight() - 2 * matrix.length; j++) {
                 if (conversionsCommon.countPassing(matrix, half, filtered, i, j) == matrixSize) {
-                    src.setRGB(i - 2 * matrix.length, j - 2 * matrix.length, conversionsCommon.colorToRGB24Bits(1, 1, 1
-                    ));
-                } else {
-                  /*  src.setRGB(i - 2 * matrix.length, j - 2 * matrix.length, conversionsCommon.colorToRGB24Bits(1,
-                            1, 1
-                    ));*/
+                    int newPixel = conversionsCommon.colorToRGB24Bits(ConversionsCommon.RBG_MAX, ConversionsCommon.RBG_MAX, ConversionsCommon.RBG_MAX);
+                    src.setRGB(i - 2 * matrix.length, j - 2 * matrix.length, newPixel);
                 }
             }
         }
@@ -54,13 +50,9 @@ public class ConversionsCw7 {
 
         for (int i = 2 * matrix.length; i < filtered.getWidth() - 2 * matrix.length; i++) {
             for (int j = 2 * matrix.length; j < filtered.getHeight() - 2 * matrix.length; j++) {
-                if (conversionsCommon.countPassing(matrix, half, filtered, i, j) == matrixSize) {
-                    src.setRGB(i - 2 * matrix.length, j - 2 * matrix.length, conversionsCommon.colorToRGB24Bits(1, 1, 1
-                    ));
-                } else {
-                   /*src.setRGB(i - 2 * matrix.length, j - 2 * matrix.length, conversionsCommon.colorToRGB24Bits(1,
-                            1, 1
-                    ));*/
+                if (conversionsCommon.countPassing(matrix, half, filtered, i, j)==matrixSize) {
+                    int newPixel = conversionsCommon.colorToRGB24Bits(ConversionsCommon.RBG_MAX, ConversionsCommon.RBG_MAX, ConversionsCommon.RBG_MAX);
+                    src.setRGB(i - 2 * matrix.length, j - 2 * matrix.length, newPixel);
                 }
             }
         }

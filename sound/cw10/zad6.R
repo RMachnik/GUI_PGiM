@@ -1,0 +1,10 @@
+#install.packages('seewave')
+#library(seewave)
+#library(tuneR)
+#library(audio) 
+s1<-readWave("...")
+play(s1)
+print(s1)
+oscillo(s1,f=8000)
+data1 = s1@left
+plot(data1, type='l', lwd=2, col="black")
