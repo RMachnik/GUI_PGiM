@@ -26,10 +26,10 @@ public class SteadyDysfunctionArgDialog extends CommonArgDialog {
             if (args.length != 2) {
                 throw new RuntimeException("Pass correct parameters!");
             }
-            setPicture(new Picture(conversionsCw8.steadyDysfunction(getPicture(),
+
+            Thread pic = new Thread(new PictureRunner(new Picture(conversionsCw8.steadyDysfunction(getPicture(),
                     Integer.parseInt(args[0]),
-                    Double.parseDouble(args[1]))));
-            Thread pic = new Thread(new PictureRunner(getPicture().getImage()));
+                    Double.parseDouble(args[1]))).getImage()));
             pic.start();
             setVisible(false);
         } else if (getNoButton() == e.getSource()) {

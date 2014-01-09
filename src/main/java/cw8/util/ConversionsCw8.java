@@ -6,6 +6,9 @@ import cw4.util.ConversionsCw4;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.awt.image.BufferedImageOp;
+import java.awt.image.ConvolveOp;
+import java.awt.image.Kernel;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -233,6 +236,19 @@ public class ConversionsCw8 {
         BufferedImage filtered = new BufferedImage(src.getWidth() + 2 * 0,
                 src.getHeight() + 2 * 0,
                 src.getType());
+      /*  float[] matrix = {
+                1, 0, -1,
+                0, 0, 0,
+                -1, 0, 1
+        };*/
+        float[] matrix = {
+                1f / 273, 4f / 273, 7f / 273, 4f / 273, 1f / 273,
+                4f / 273, 16f / 273, 26f / 273, 16f / 273, 4f / 273,
+                7f / 273, 26f / 273, 41f / 273, 26f / 273, 7f / 273,
+                4f / 273, 16f / 273, 26f / 273, 16f / 273, 4f / 273,
+                1f / 273, 4f / 273, 7f / 273, 4f / 273, 1f / 273
+        };
+        BufferedImage dest = prepareImage(picture, matrix);
         int w = src.getWidth();
         int h = src.getHeight();
         double gr = r * 0.41;
@@ -249,8 +265,11 @@ public class ConversionsCw8 {
                     }
                 filtered.setRGB(i, j, val);
             }
+        filtered = getBufferedImage(dest);
         return filtered;
     }
+
+
 
     private int computeMedian(int windowSize, int half, BufferedImage filtered, int i, int j, String rgb) {
         int median = 0;
@@ -284,6 +303,19 @@ public class ConversionsCw8 {
             }
         }
         return median;
+    }
+
+    private BufferedImage getBufferedImage(BufferedImage dest) {
+        BufferedImage filtered;
+        filtered = dest;
+        return filtered;
+    }
+
+    private BufferedImage prepareImage(Picture picture, float[] matrix) {
+        BufferedImageOp op = new ConvolveOp(new Kernel(3, 3, matrix));
+        BufferedImage dest = new BufferedImage(picture.getImage().getWidth(), picture.getImage().getHeight(), picture.getImage().getType());
+        op.filter(picture.getImage(), dest);
+        return dest;
     }
 
 
