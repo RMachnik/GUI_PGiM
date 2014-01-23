@@ -144,6 +144,34 @@ public class Main {
             }
         });
 
+        JButton people = new JButton("people");
+        people.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Thread people = new Thread(new PictureRunner("static/people.jpg"));
+                people.start();
+            }
+        });
+
+        JButton peopleWithNoise = new JButton("people_noise");
+        peopleWithNoise.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Thread peopleWithNoise = new Thread(new PictureRunner("static/people_noise.jpg"));
+                peopleWithNoise.start();
+            }
+        });
+
+        JButton puzle = new JButton("puzle");
+        puzle.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Thread puzle = new Thread(new PictureRunner("static/puzle.png"));
+                puzle.start();
+            }
+        });
+
+
         panel.add(lena);
         panel.add(ship);
         panel.add(wir);
@@ -157,6 +185,9 @@ public class Main {
         panel.add(template4);
         panel.add(template5);
         panel.add(template6);
+        panel.add(people);
+        panel.add(peopleWithNoise);
+        panel.add(puzle);
 
     }
 

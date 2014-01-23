@@ -9,6 +9,7 @@ import cw5.Cw5;
 import cw6.Cw6;
 import cw7.Cw7;
 import cw8.Cw8;
+import templateMatching.TemplateMatching;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,6 +27,8 @@ public class PictureCustoms {
         Cw6 cw6 = new Cw6(picture);
         Cw7 cw7 = new Cw7(picture);
         Cw8 cw8 = new Cw8(picture);
+        TemplateMatching templateMatching = new TemplateMatching(picture);
+
 
     }
 
